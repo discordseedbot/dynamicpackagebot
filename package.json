@@ -1,0 +1,25 @@
+{
+  "name": "dynamicpackagebot",
+  "version": "1.0.0",
+  "description": "A Discord Bot that Auto-Detects New Modules without editing any core files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/discordseedbot/dynamicpackagebot.git"
+  },
+  "author": "SeedBot Contributers [seedbot@cock.li]",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/discordseedbot/dynamicpackagebot/issues"
+  },
+  "homepage": "https://github.com/discordseedbot/dynamicpackagebot#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "signale": "^1.4.0"
+  }
+}
