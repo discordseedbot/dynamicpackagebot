@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/discordseedbot/dynamicpackagebot#readme",
   "dependencies": {
-    "discord.js": "^12.2.0",
+    "discord.js": "^11.6.4",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
     "signale": "^1.4.0"
