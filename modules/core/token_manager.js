@@ -55,14 +55,14 @@ module.exports.ck = function(tokenToGet) {
 }
 
 module.exports.discord = function() {
-	return require("./tokenman.js").ck("discord");
+	return require("./token_manager.js").ck("discord");
 }
 module.exports.youtube = function() {
-	return require("./tokenman.js").ck("youtube");
+	return require("./token_manager.js").ck("youtube");
 }
 module.exports.apiToken = function() {
-	return require("./tokenman.js").ck("apiToken");
+	return require("./token_manager.js").ck("apiToken");
 }
 module.exports.apiURL = function() {
-	return require("./tokenman.js").ck("apiURL");
+	return require("./token_manager.js").ck("apiURL");
 }
