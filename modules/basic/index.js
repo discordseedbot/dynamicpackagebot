@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
-const client = new Discord.Client();
-var token = require("./../tokenman.js");
 const prefix = require("./../../prefix.json").default;
+const signale = require("signale");
 
-module.exports.init = function(client) {
+module.exports = function(client,token) {
+	console.log("Test")
 	client.on('message',async message => {
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
@@ -42,12 +42,13 @@ module.exports.init = function(client) {
 					break;
 			}
 		} catch(err) {
-			require("./../functions/developer_alert_handle.js").userspaceError(client,message,err);
+			//require("./../functions/developer_alert_handle.js").userspaceError(client,message,err);
+			console.error(err)
 		}
 	})
 
 	client.on('ready', () => {
-		require("./../functions/console.js").modloaded("Basic Commands");
+		signale.info("[BotModule] Loaded Basic Commands");
 	})
 
 
