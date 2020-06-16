@@ -1,0 +1,26 @@
+{
+	"help": {
+		"title": "Command Directory",
+		"desc": "The Command Dictionary have been *permanently* moved to ***http://seedbot.xyz/?commands***"
+	},
+	"invite": {
+		"title": "invite",
+		"desc": "Invite me to your *own* Discord Server!\nhttp://seedbot.xyz/?invite"
+	},
+	"patreon": {
+		"title": "Patreon",
+		"desc": "It's not free to run a discord bot and since more people are starting to use SeedBot I made a patreon page \n so people can give me money to run my discord bot so it can handle more people at once (which is what it is struggling at), also so when we get more money I can hire someone to make modules for the bot and in the future make a dashboard so you have a better experience.\n\n If you want all of these good things that other bots have then Donate to our patreon page at:\n https://patreon.com/jyles_coadward"
+	},
+	"support": {
+		"title": "Bot Support",
+		"desc": "If you need help with the bot join our discord `http://seedbot.xyz/?discord`\n Or you can email us at `contact@dariox.club`"
+	},
+	"roadmap": {
+		"title": "Roadmap",
+		"desc": "You can see how the development of SeedBot is going by checking out our roadmap [here!](https://seedbot.xyz?roadmap)"
+	},
+	"guide": {
+		"title": "SeedBot Install Guide",
+		"desc": "If you want to install SeedBot with your own Bot Token and have your own bot then click [here!](https://seedbot.xyz?docs)"
+	}
+}
