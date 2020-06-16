@@ -50,20 +50,24 @@ for (j = 0; j < viableModules.length; j++) {
 }
 
 //			Check if any of the modules are libraries and if they are, remove them from the viableModules array.
-var botModulesToLoad = [];var genericModulesToLoad = [];var libraries = [];
+var botModulesToLoad = [];var genericModulesToLoad = [];var libraries = []; let tmparr;
 for (k=0;k<viableModules.length;k++) {
 	try {
 		let jsontemp = require(`./${viableModules[k]}/manifest.json`);
 		let filepush = `${viableModules[k]}/${jsontemp.main}`;
 		switch (jsontemp.type) {
 			case "botmod":
-				botModulesToLoad.push(filepush);
+				 tmparr = JSON.parse(`{"name": "${viableModules[k].replace("modules/","")}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
+				botModulesToLoad.push(tmparr);
+				delete(tmparr);
 				break;
 			case "generic":
-				genericModulesToLoad.push(filepush);
+				 tmparr = JSON.parse(`{"name": "${viableModules[k].replace("modules/","")}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
+				genericModulesToLoad.push(tmparr);
+				delete(tmparr);
 				break;
 			case "library":
-				let tmparr = JSON.parse(`{"name": "${viableModules[k].replace("modules/","")}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
+				 tmparr = JSON.parse(`{"name": "${viableModules[k].replace("modules/","")}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
 				libraries.push(tmparr);
 				delete(tmparr);
 				break;
@@ -76,15 +80,43 @@ for (k=0;k<viableModules.length;k++) {
 		console.error(e);
 	}
 }
-console.log(libraries);
+
+
+
 //			Load Discord Bot Modules
-const Discord = require('discord.js');
-const client = new Discord.Client();
+var token;
 for (l=0;l<libraries.length;l++) {
 	if (libraries[l].name === "core") {
-		const token = require(`./${libraries[l].location}/${libraries[l].main}`).tokenManager()
+		token = require(`./${libraries[l].location}/${libraries[l].main}`).tokenManager()
 	}
 }
-for (m=0;m<botModulesToLoad.length;m++) {
 
-}
+//			Discord Setup Stuff
+const Discord = require('discord.js');
+const client = new Discord.Client();
+botModulesToLoad.forEach(async (m) => {
+	console.log(m)
+	var runDiscordModule = require(`./${m.location}/${m.main}`)
+	runDiscordModule(client,token);
+
+
+	client.on('ready', () => {
+		signale.info("[BotModule] Loaded Screenshare");
+	})
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// fucking poggers aye.
