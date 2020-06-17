@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
 const prefix = require("./../../prefix.json").default;
+const signale = require("signale");
 
 module.exports = function(client,token) {
 	client.on('message',async message => {
