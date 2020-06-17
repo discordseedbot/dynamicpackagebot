@@ -95,28 +95,10 @@ for (l=0;l<libraries.length;l++) {
 const Discord = require('discord.js');
 const client = new Discord.Client();
 botModulesToLoad.forEach(async (m) => {
-	console.log(m)
 	var runDiscordModule = require(`./${m.location}/${m.main}`)
 	runDiscordModule(client,token);
-
-
-	client.on('ready', () => {
-		signale.info("[BotModule] Loaded Screenshare");
-	})
+});
+genericModulesToLoad.forEach(async (m) => {
+    var runDiscordModule = require(`./${m.location}/${m.main}`);
+    runDiscordModule(client,token);
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// fucking poggers aye.
