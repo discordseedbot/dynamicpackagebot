@@ -95,10 +95,12 @@ for (l=0;l<libraries.length;l++) {
 const Discord = require('discord.js');
 const client = new Discord.Client();
 botModulesToLoad.forEach(async (m) => {
+    signale.info(`[BotModule] Loaded ${m.name}`);
 	var runDiscordModule = require(`./${m.location}/${m.main}`)
 	runDiscordModule(client,token);
 });
 genericModulesToLoad.forEach(async (m) => {
+    signale.info(`[GenModule] Loaded ${m.name}`);
     var runDiscordModule = require(`./${m.location}/${m.main}`);
     runDiscordModule(client,token);
 })
