@@ -41,15 +41,21 @@ module.exports = function (client,token) {
                     break;
             }
 
+            if (rpcTYPE === "STREAMING") {
+                if (config.activity.stream_url.startsWith("https://twitch.tv/") || config.activity.stream_url.startsWith("https://youtube.com/")) {
+                    typeurl = config.activity.stream_url;
+                } else {
+                    typeurl = undefined;
+                    console.error("Activity URL is invalid/unsupported in modules/startup/config.json");
+                }
+            }
+
             // Check if there is a suffix. And if there is add it to the end of the message.
             if (config.activity.suffix !== undefined) {
                 msg += ` - ${config.activity.suffix}`;
             }
 
             // Check if url is a "valid" twitch url and the type is "STREAMING".
-            if (config.activity.stream_url.startsWith("https://twitch.tv/") && type === "STREAMING") {
-                typeurl = config.activity.stream_url;
-            } else { typeurl = undefined; console.error("Activity URL is invalid/unsupported in modules/startup/config.json"); }
 
             switch (config.activity.status.toUpperCase()) {
                 case 'ONLINE':
