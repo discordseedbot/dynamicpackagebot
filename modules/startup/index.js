@@ -7,6 +7,7 @@ module.exports = function (client,token) {
 			signale.debug(`Logged in as '${client.user.username}' ('@${client.user.username}#${client.user.discriminator}', ID: ${client.user.id})`)
 			signale.debug(`Invite Codes;\n		Full Admin:   https://seedbot.xyz/inv.php?a=${client.user.id}&b=8\n		Normal Perms: https://seedbot.xyz/inv.php?a=${client.user.id}&b=3329088\n`)
 
+
                 // Start Rich Presence Detection
             var config;
             try {
@@ -51,7 +52,7 @@ module.exports = function (client,token) {
             }
 
             // Check if there is a suffix. And if there is add it to the end of the message.
-            if (config.activity.suffix !== undefined) {
+            if (config.activity.suffix.length < 1 || config.activity.suffix !== undefined) {
                 msg += ` - ${config.activity.suffix}`;
             }
 
@@ -73,5 +74,12 @@ module.exports = function (client,token) {
 
             client.user.setPresence({game: { name: msg, type: rpcTYPE, url: typeurl}});
 			client.user.setStatus(status);
+
+            // To avoid memory leaks in the future.
+            delete(msg);
+            delete(rpcTYPE);
+            delete(typeurl);
+            delete(status);
+            delete(config);
 		});
 }
