@@ -4,7 +4,6 @@ const prefix = require("./../../prefix.json").default;
 const signale = require("signale");
 
 module.exports = function(client,token) {
-	console.log("Test")
 	client.on('message',async message => {
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
