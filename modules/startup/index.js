@@ -25,7 +25,7 @@ module.exports = function (client,token) {
             }
 
             //  Message
-            if (config.activity.message !== undefined) {
+            if (config.activity.message.length < 1 || config.activity.message !== undefined) {
                 var msg = config.activity.message;
             } else {return;}
 
@@ -52,7 +52,7 @@ module.exports = function (client,token) {
             }
 
             // Check if there is a suffix. And if there is add it to the end of the message.
-            if (config.activity.suffix.length < 1 || config.activity.suffix !== undefined) {
+            if (config.activity.suffix.length > 1 || config.activity.suffix !== undefined) {
                 msg += ` - ${config.activity.suffix}`;
             }
 
