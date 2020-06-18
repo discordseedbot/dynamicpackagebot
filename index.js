@@ -16,7 +16,7 @@ var viableModules = [];
 for (i = 0; i < moduleArray.length; i++) {
 	let tmpManiLoc = `modules/${moduleArray[i]}/manifest.json`;
 	if (!fs.existsSync(tmpManiLoc)) {
-		signale.error(`[modman] module cannot be loaded, manifest not found for module "${moduleArray[i]}" in "${tmpManiLoc}"`);
+		signale.note(`[modman] no manifest found for "${moduleArray[i]}" in "${tmpManiLoc}"`);
 	} else {
 		viableModules.push(`modules/${moduleArray[i]}`);
 	}
@@ -57,17 +57,17 @@ for (k=0;k<viableModules.length;k++) {
 		let filepush = `${viableModules[k]}/${jsontemp.main}`;
 		switch (jsontemp.type) {
 			case "botmod":
-				 tmparr = JSON.parse(`{"name": "${viableModules[k].replace("modules/","")}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
+				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
 				botModulesToLoad.push(tmparr);
 				delete(tmparr);
 				break;
 			case "generic":
-				 tmparr = JSON.parse(`{"name": "${viableModules[k].replace("modules/","")}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
+				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
 				genericModulesToLoad.push(tmparr);
 				delete(tmparr);
 				break;
 			case "library":
-				 tmparr = JSON.parse(`{"name": "${viableModules[k].replace("modules/","")}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
+				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
 				libraries.push(tmparr);
 				delete(tmparr);
 				break;
@@ -94,13 +94,18 @@ for (l=0;l<libraries.length;l++) {
 //			Discord Setup Stuff
 const Discord = require('discord.js');
 const client = new Discord.Client();
+	client.login(token.discord()).catch(function () {
+		signale.error("Invalid Token");
+		process.exit(1);
+	});
+
 botModulesToLoad.forEach(async (m) => {
-    signale.info(`[BotModule] Loaded ${m.name}`);
+    signale.wait(`[BotModule] Attempting to load ${m.name}`);
 	var runDiscordModule = require(`./${m.location}/${m.main}`)
-	runDiscordModule(client,token);
+	runDiscordModule(client,token,libraries);
 });
 genericModulesToLoad.forEach(async (m) => {
-    signale.info(`[GenModule] Loaded ${m.name}`);
+    signale.wait(`[GenModule] Attempting to load ${m.name}`);
     var runDiscordModule = require(`./${m.location}/${m.main}`);
-    runDiscordModule(client,token);
-})
+    runDiscordModule(client,token,libraries);
+});
