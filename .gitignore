@@ -106,3 +106,4 @@ dist
 # SeedBot Specific Stuff
 .DS_Store
 **token.json
+token.json
