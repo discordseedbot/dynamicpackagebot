@@ -13,14 +13,15 @@ var moduleArray = getDirectories("modules/");
 var viableModules = [];
 
 //			Check each of the directories in "modules/" if they have a "manifest.json" file.
-for (i = 0; i < moduleArray.length; i++) {
-	let tmpManiLoc = `modules/${moduleArray[i]}/manifest.json`;
+moduleArray.forEach(async (m) => {
+	let tmpManiLoc = `modules/${m}/manifest.json`;
 	if (!fs.existsSync(tmpManiLoc)) {
-		signale.note(`[modman] no manifest found for "${moduleArray[i]}" in "${tmpManiLoc}"`);
+		signale.note(`[modman] no manifest found for "${m}" in "${tmpManiLoc}"`);
 	} else {
-		viableModules.push(`modules/${moduleArray[i]}`);
+		viableModules.push(`modules/${m}`);
 	}
-}
+
+})
 
 //			If there are no valid modules quit process.
 if (viableModules.length < 1) {
@@ -29,9 +30,9 @@ if (viableModules.length < 1) {
 }
 
 //			Check if manifest for the module is valid
-for (j = 0; j < viableModules.length; j++) {
+viableModules.forEach(async (m) => {
 	try {
-		var json = require(`./${viableModules[j]}/manifest.json`).name;
+		var json = require(`./${m}/manifest.json`).name;
 	} catch (e) {
 		// JSON Invalid
 		switch (e.code) {
@@ -40,65 +41,69 @@ for (j = 0; j < viableModules.length; j++) {
 				process.exit(69);
 				break;
 			default:
-				signale.fatal(`[modman] Manifest is invalid at "${viableModules[j]}/manifest.json"`);
+				signale.fatal(`[modman] Manifest is invalid at "${m}/manifest.json"`);
 				viableModules.splice(j);
 				break;
 		}
 		console.error(e)
 	}
 	delete(jsontemp);
-}
+
+})
 
 //			Check if any of the modules are libraries and if they are, remove them from the viableModules array.
 var botModulesToLoad = [];var genericModulesToLoad = [];var libraries = []; let tmparr;
-for (k=0;k<viableModules.length;k++) {
+viableModules.forEach(async (m) => {
 	try {
-		let jsontemp = require(`./${viableModules[k]}/manifest.json`);
-		let filepush = `${viableModules[k]}/${jsontemp.main}`;
+		let jsontemp = require(`./${m}/manifest.json`);
+		let filepush = `${m}/${jsontemp.main}`;
 		switch (jsontemp.type) {
 			case "botmod":
-				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
+				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
 				botModulesToLoad.push(tmparr);
 				delete(tmparr);
 				break;
 			case "generic":
-				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
+				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
 				genericModulesToLoad.push(tmparr);
 				delete(tmparr);
 				break;
 			case "library":
-				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${viableModules[k]}"}`);
+				//libLoaded(m);
+				tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
 				libraries.push(tmparr);
 				delete(tmparr);
 				break;
 			default:
-				signale.warn(`[modman] Unknown Module type at "${viableModules[k]}/manifest.json"`);
+				signale.warn(`[modman] Unknown Module type at "${m}/manifest.json"`);
 				break;
 		}
 	} catch(e) {
 		signale.error("[modman] An Error Occoured while sorting modules.");
 		console.error(e);
 	}
-}
+})
 
 
 
 //			Load Discord Bot Modules
 var token;
-for (l=0;l<libraries.length;l++) {
-	if (libraries[l].name === "core") {
-		token = require(`./${libraries[l].location}/${libraries[l].main}`).tokenManager()
+libraries.forEach(async (m) => {
+	if (m.name === "core") {
+		// Setup the token varaible for the modules (if they are needed, in most cases they are.)
+		token = require(`./${m.location}/${m.main}`).tokenManager()
 	}
-}
+})
 
 //			Discord Setup Stuff
 const Discord = require('discord.js');
 const client = new Discord.Client();
 	client.login(token.discord()).catch(function () {
-		signale.error("Invalid Token");
+		signale.error("Invalid Token, have you changed it in token.json?");
 		process.exit(1);
 	});
 
+//			yay, we're finally at this point where if something fucks up its the module developers fault!
 botModulesToLoad.forEach(async (m) => {
     signale.wait(`[BotModule] Attempting to load ${m.name}`);
 	var runDiscordModule = require(`./${m.location}/${m.main}`)
