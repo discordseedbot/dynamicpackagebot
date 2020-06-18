@@ -3,9 +3,9 @@ const { RichEmbed } = require("discord.js");
 const client = new Discord.Client();
 const response = require("./response.json");
 
-module.exports.cmd = function(message) {
+module.exports.cmd = function(message,lib) {
 	let evalEmbed = new Discord.RichEmbed()
-		.setColor(require("./../functions/main.js").randomhexcolor())
+		.setColor(lib.misc_randHex())
 		.setTitle(response.roadmap.title)
 		.setDescription(response.roadmap.desc)
 		.setTimestamp()
