@@ -1,11 +1,12 @@
 module.exports = function (client,token) {
     const signale = require("signale");
+	const package = require("./../../package.json");
 
     client.on('ready', async () => {
 			signale.debug("Bot has started at " + new Date());
 			signale.debug(`Bot has started, with ` + client.users.size + ` users, in ` + client.channels.size + ` channels of ` + client.guilds.size + ` guilds.`);
 			signale.debug(`Logged in as '${client.user.username}' ('@${client.user.username}#${client.user.discriminator}', ID: ${client.user.id})`)
-			signale.debug(`Invite Codes;\n		Full Admin:   https://seedbot.xyz/inv.php?a=${client.user.id}&b=8\n		Normal Perms: https://seedbot.xyz/inv.php?a=${client.user.id}&b=3329088\n`)
+			signale.debug(`Invite Codes;\n		Full Admin:   https://seedbot.xyz/inv.php?br=${package.branch}&b=8\n		Normal Perms: https://seedbot.xyz/inv.php?br=${package.branch}&b=3329088\n`)
 
 
                 // Start Rich Presence Detection

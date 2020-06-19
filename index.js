@@ -1,8 +1,18 @@
-console.clear();
+/*
+	Copyright 2018-2020 DARiOX					https://dariox.club
+	Copyright 2019-2020 SeedBot Contributers	https://seedbot.xyz
+*/
 
+
+//			Check if node mdoules are installed
 const fs = require("fs");
-const signale = require("signale");
+if (!fs.existsSync("node_modules/")) {
+	console.log("Node Modules were not installed, try `npm i`");
+	process.exit(1);
+}
 
+const signale = require("signale");
+console.clear();
 function getDirectories(path) {
   return fs.readdirSync(path).filter(function (file) {
     return fs.statSync(path+'/'+file).isDirectory();
