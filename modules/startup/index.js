@@ -53,8 +53,10 @@ module.exports = function (client,token) {
             }
 
             // Check if there is a suffix. And if there is add it to the end of the message.
-            if (config.activity.suffix.length > 1 || config.activity.suffix !== undefined) {
-                msg += ` - ${config.activity.suffix}`;
+            if (config.activity.suffix !== undefined) {
+                if (config.activity.suffix.length > 1) {
+                    msg += ` - ${config.activity.suffix}`;
+                }
             }
 
             // Check if url is a "valid" twitch url and the type is "STREAMING".
