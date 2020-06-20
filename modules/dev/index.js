@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
 const client = new Discord.Client();
-var token = require("./../tokenman.js");
 const package = require('./../../package.json');
 const prefix = require("./../../prefix.json").dev;
 const devAlert = require("./alert_handle.js");
+const signale = require("signale");
 
-module.exports.init = function(client) {
+module.exports = function(client,token,libraw) {
 	client.on('message',async message => {
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
@@ -109,7 +109,7 @@ module.exports.init = function(client) {
 	})
 
 	client.on('ready', () => {
-		require("./../functions/console.js").modloaded("Developer Commands");
+		signale.info("[BotModule] Developer Commands and Utilities");
 	})
 
 

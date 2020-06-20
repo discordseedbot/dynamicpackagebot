@@ -1,6 +1,5 @@
 const prefixJSON = require("./../../prefix.json");
-const errorDataJSON = require("./error_handle.json");
-var token = require("./../tokenman.js");
+const errorDataJSON = require("./alert_handle_channels.json");
 const Discord = require("discord.js");
 
 module.exports.developerError = function (client,message,error) {
@@ -13,7 +12,7 @@ module.exports.developerError = function (client,message,error) {
 			.setDescription(error)
 			.addField("Guild Info",`ID: ${message.member.guild.id}\nName: ${message.member.guild.name}`)
 			.addField("User Info",`ID: ${message.author.id}\nUName: @${message.author.username}#${message.author.discriminator}`)
-			.addField("Message Info":, "Content: `"+message.content+"`\n"+`Channel Name: ${message.channel.name}\nChannel ID: ${message.channel.id}`)
+			.addField("Message Info", "Content: `"+message.content+"`\n"+`Channel Name: ${message.channel.name}\nChannel ID: ${message.channel.id}`)
 		client.channels.get(errorDataJSON.developer.error).send(devErrorSend);
 }
 module.exports.userspaceError = function (client,message,error) {
@@ -26,7 +25,7 @@ module.exports.userspaceError = function (client,message,error) {
 			.setDescription(error)
 			.addField("Guild Info",`ID: ${message.member.guild.id}\nName: ${message.member.guild.name}`)
 			.addField("User Info",`ID: ${message.author.id}\nUName: @${message.author.username}#${message.author.discriminator}`)
-			.addField("Message Info":, "Content: `"+message.content+"`\n"+`Channel Name: ${message.channel.name}\nChannel ID: ${message.channel.id}`)
+			.addField("Message Info", "Content: `"+message.content+"`\n"+`Channel Name: ${message.channel.name}\nChannel ID: ${message.channel.id}`)
 		client.channels.get(errorDataJSON.userspaceError.error).send(usrErrorSend);
 }
 
@@ -40,7 +39,7 @@ module.exports.developerUnauthAccess = function(client,message) {
 		.setTimestamp()
 		.addField("Guild Info",`ID: ${message.member.guild.id}\nName: ${message.member.guild.name}`)
 		.addField("User Info",`ID: ${message.author.id}\nUName: @${message.author.username}#${message.author.discriminator}`)
-		.addField("Message Info":, "Content: `"+message.content+"`\n"+`Channel Name: ${message.channel.name}\nChannel ID: ${message.channel.id}`)
+		.addField("Message Info", "Content: `"+message.content+"`\n"+`Channel Name: ${message.channel.name}\nChannel ID: ${message.channel.id}`)
 		.setAuthor(message.contents)
 	client.channels.get(errorDataJSON.developer.unauthAccess).send(developerUnauthAccessMSG);
 }
