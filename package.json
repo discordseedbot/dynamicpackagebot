@@ -1,6 +1,10 @@
 {
   "name": "dynamicpackagebot",
   "version": "1.0.0",
+  "build": [
+    "23.06.2020",
+    "37"
+  ],
   "branch": "canary",
   "description": "A Discord Bot that Auto-Detects New Modules without editing any core files.",
   "main": "index.js",

@@ -30,7 +30,6 @@ moduleArray.forEach(async (m) => {
 	} else {
 		viableModules.push(`modules/${m}`);
 	}
-
 })
 
 //			If there are no valid modules quit process.
@@ -47,10 +46,11 @@ viableModules.forEach(async (m) => {
 		// JSON Invalid
 		switch (e.code) {
 			case "MODULE_NOT_FOUND":
-				signale.fatal("invalid location? but we checked that in lines 16 to 23, huh. probably should tell the developers that.");
+				signale.fatal("invalid location? but we checked that in lines 26 to 33, huh. you probably should tell the developers that.");
 				process.exit(69);
 				break;
 			default:
+				console.log(e);
 				signale.fatal(`[modman] Manifest is invalid at "${m}/manifest.json"`);
 				viableModules.splice(j);
 				break;

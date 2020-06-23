@@ -91,20 +91,14 @@ module.exports = function(client,token,libraw) {
 						.addField("Command Executed","```"+message.content+"```")
 						.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
 						.setTimestamp();
-					devAlert.notifDeveloper(client,tmpNotifContent);
+					devAlert.developerNotifCustom(client,tmpNotifContent);
 				} catch (err) {
 					devAlert.developerError(client,message,err);
 					console.log("\n\n\n\n")
 					console.error(err)
 				}
 			} else {
-				let invalidAuthor = new Discord.RichEmbed()
-	                .setColor('#ff0000')
-	                .setTitle('You are not a developer')
-	                .setTimestamp()
-	                .setDescription("Sorry, You cannot access this command because you are not the maintainer of this project or your ownerID has been setup incorrectly in token.json.");
-				message.channel.send(invalidAuthor)
-				devAlert.developerUnauthAccess(client,message);
+				devAlert.developerUnauthAccess(client,token,libraw);
 			}
 	})
 
