@@ -1,0 +1,11 @@
+{
+    "commands": [
+        "list",
+        "get",
+        "print",
+        "set",
+        "eval",
+        "run",
+        "help"
+    ]
+}
