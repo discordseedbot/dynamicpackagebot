@@ -105,6 +105,8 @@ libraries.forEach(async (m) => {
 	}
 })
 
+require('events').EventEmitter.defaultMaxListeners = 255
+
 //			Discord Setup Stuff
 const Discord = require('discord.js');
 const client = new Discord.Client();
