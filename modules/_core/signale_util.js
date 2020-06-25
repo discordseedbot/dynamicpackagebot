@@ -41,4 +41,38 @@ module.exports = async function() {
             }
         }
     });
+    global.botModuleConsole = new Signale({
+        disabled: false,
+        interactive: false,
+        logLevel: 'info',
+        scope: 'BotModule',
+        stream: process.stdout,
+        types: {
+            attemptLoad: {
+                label: "Loading Bot Module:",
+                color: 'yellow'
+            },
+            loaded: {
+                label: "Loaded Bot Module:",
+                color: 'green'
+            }
+        }
+    })
+    global.genericModuleConsole = new Signale({
+        disabled: false,
+        interactive: false,
+        logLevel: 'info',
+        scope: 'GenModule',
+        stream: process.stdout,
+        types: {
+            attemptLoad: {
+                label: "Loading Generic Module:",
+                color: 'yellow'
+            },
+            loaded: {
+                label: "Loaded Generic Module:",
+                color: 'green'
+            }
+        }
+    })
 }
