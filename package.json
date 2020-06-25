@@ -1,11 +1,16 @@
 {
   "name": "dynamicpackagebot",
   "version": "1.0.0",
+  "build": [
+    "23.06.2020",
+    "37"
+  ],
   "branch": "canary",
   "description": "A Discord Bot that Auto-Detects New Modules without editing any core files.",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "start": "node .",
+    "test": "node . --debug"
   },
   "repository": {
     "type": "git",
@@ -20,6 +25,7 @@
   "dependencies": {
     "discord.js": "^11.6.4",
     "fs": "0.0.1-security",
+    "inquirer": "^7.2.0",
     "path": "^0.12.7",
     "signale": "^1.4.0"
   }

@@ -1,11 +1,11 @@
-module.exports = function (client,token) {
+module.exports = function () {
     const signale = require("signale");
 	const package = require("./../../package.json");
 
-    client.on('ready', async () => {
+    SB_Client.on('ready', async () => {
 			signale.debug("Bot has started at " + new Date());
-			signale.debug(`Bot has started, with ` + client.users.size + ` users, in ` + client.channels.size + ` channels of ` + client.guilds.size + ` guilds.`);
-			signale.debug(`Logged in as '${client.user.username}' ('@${client.user.username}#${client.user.discriminator}', ID: ${client.user.id})`)
+			signale.debug(`Bot has started, with ` + SB_Client.users.size + ` users, in ` + SB_Client.channels.size + ` channels of ` + SB_Client.guilds.size + ` guilds.`);
+			signale.debug(`Logged in as '${SB_Client.user.username}' ('@${SB_Client.user.username}#${SB_Client.user.discriminator}', ID: ${SB_Client.user.id})`)
 			signale.debug(`Invite Codes;\n		Full Admin:   https://seedbot.xyz/inv.php?br=${package.branch}&b=8\n		Normal Perms: https://seedbot.xyz/inv.php?br=${package.branch}&b=3329088\n`)
 
 
@@ -75,8 +75,8 @@ module.exports = function (client,token) {
             }
 
 
-            client.user.setPresence({game: { name: msg, type: rpcTYPE, url: typeurl}});
-			client.user.setStatus(status);
+            SB_Client.user.setPresence({game: { name: msg, type: rpcTYPE, url: typeurl}});
+			SB_Client.user.setStatus(status);
 
             // To avoid memory leaks in the future.
             delete(msg);

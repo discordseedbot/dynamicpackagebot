@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
-const client = new Discord.Client();
+const SB_Client = new Discord.Client();
 const package = require('./../../package.json');
 const prefix = require("./../../prefix.json").dev;
 const devAlert = require("./alert_handle.js");
 const signale = require("signale");
 
-module.exports = function(client,token,libraw) {
-	client.on('message',async message => {
+module.exports = function() {
+	SB_Client.on('message',async message => {
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
 		var args = message.content.slice(prefix.length).trim().split( / +/g);
@@ -18,28 +18,28 @@ module.exports = function(client,token,libraw) {
 					switch (command) {
 						case 'api':
 							if (token.api !== "seedbot-api-token") {
-								require('./api.js').cmd(message, client, args);
+								require('./api.js').cmd(message, args);
 							} else {
 								message.reply("API Token has not been changed, not executing.");
 							}
 							break;
 						case 'channelsend':
-							require('./channelsend.js').cmd(message, client, args);
+							require('./channelsend.js').cmd(message, args);
 							break;
 						case 'createinvitefromid':
-							require('./createinvitefromid.js').cmd(message, client, args);
+							require('./createinvitefromid.js').cmd(message, args);
 							break;
 						case 'getallserverinvite':
-							require('./getallserverinvite.js').cmd(message, client, prefix, command);
+							require('./getallserverinvite.js').cmd(message);
 							break;
 						case 'eval':
-							require('./eval.js').cmd(message, args, client);
+							require('./eval.js').cmd(message, args);
 							break;
 						case 'getip':
 							require('./getip.js').cmd(message, args);
 							break;
 						case 'rpc':
-							require('./rpc.js').cmd(message, client, args);
+							require('./rpc.js').cmd(message, args);
 							break;
 						case 'shell':
 							require('./shell.js').cmd(message, args);
@@ -48,13 +48,13 @@ module.exports = function(client,token,libraw) {
 							require('./role.js').list(message);
 							break;
 						case 'role_create':
-							require('./role.js').create(message,client,args);
+							require('./role.js').create(message,args);
 							break;
 						case 'role_give':
-							require('./role.js').give(message,client,args);
+							require('./role.js').give(message,args);
 							break;
 						case 'stats':
-							require('./stats.js').work(message,client,args);
+							require('./stats.js').work(message,args);
 							break;
 						case 'spam':
 							require('./spam.js').cmd(message,args);
@@ -63,22 +63,22 @@ module.exports = function(client,token,libraw) {
 							require("./pin.js").cmd(message,args);
 							break;
 						case 'mute':
-							require('./hear.js').mute(message,client,args,command);
+							require('./hear.js').mute(message,args);
 							break;
 						case 'defan':
-							require('./hear.js').defan(message,client,args,command);
+							require('./hear.js').defan(message);
 							break;
 						//case 'disconnect':
-						//	require('./voice_chat.js').disconnect(message,client,args,command);
+						//	require('./voice_chat.js').disconnect(message,SB_Client,args,command);
 						//	break;
 						case 'kick':
-							require("./mod.js").kick(message,client,args)
+							require("./mod.js").kick(message,args)
 							break;
 						case 'ban':
-							require("./mod.js").ban(message,client,args)
+							require("./mod.js").ban(message,args)
 							break;
 						case 'purge':
-							require("./mod.js").purge(message,client,args)
+							require("./mod.js").purge(message,args)
 							break;
 						default:
 							sendNotif = false;
@@ -91,27 +91,21 @@ module.exports = function(client,token,libraw) {
 						.addField("Command Executed","```"+message.content+"```")
 						.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
 						.setTimestamp();
-					devAlert.notifDeveloper(client,tmpNotifContent);
+					devAlert.developerNotifCustom(tmpNotifContent);
 				} catch (err) {
-					devAlert.developerError(client,message,err);
+					devAlert.developerError(message,err);
 					console.log("\n\n\n\n")
 					console.error(err)
 				}
 			} else {
-				let invalidAuthor = new Discord.RichEmbed()
-	                .setColor('#ff0000')
-	                .setTitle('You are not a developer')
-	                .setTimestamp()
-	                .setDescription("Sorry, You cannot access this command because you are not the maintainer of this project or your ownerID has been setup incorrectly in token.json.");
-				message.channel.send(invalidAuthor)
-				devAlert.developerUnauthAccess(client,message);
+				devAlert.developerUnauthAccess();
 			}
 	})
 
-	client.on('ready', () => {
-		signale.info("[BotModule] Developer Commands and Utilities");
+	SB_Client.on('ready', () => {
+		botModuleConsole.loaded("Developer Utilities");
 	})
 
 
-	client.login(token.discord());
+	SB_Client.login(SB_Token.discord());
 }

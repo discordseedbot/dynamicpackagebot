@@ -13,7 +13,7 @@ function evaluate(input) {
 	return result;
 }
 
-module.exports.cmd = function(message, args, client) {
+module.exports.cmd = function(message, args) {
 	if (message.author.id === package.ownerID) {
 		const code = args.join(" ");
 		let evaled = evaluate(code);

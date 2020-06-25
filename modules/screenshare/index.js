@@ -3,8 +3,8 @@ const { RichEmbed } = require("discord.js");
 const prefix = require("./../../prefix.json").default;
 const signale = require("signale");
 
-module.exports = function(client,token) {
-	client.on('message',async message => {
+module.exports = function() {
+	SB_Client.on('message',async message => {
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
 		var args = message.content.slice(prefix.length).trim().split( / +/g);
@@ -17,15 +17,15 @@ module.exports = function(client,token) {
 					break;
 			}
 		} catch(err){
-			//require("./../functions/developer_alert_handle.js").userspaceError(client,message,err);
+			//require("./../functions/developer_alert_handle.js").userspaceError(SB_Client,message,err);
 			console.error(err);
 		}
 	})
 
-	client.on('ready', () => {
-		signale.info("[BotModule] Loaded Screenshare");
+	SB_Client.on('ready', () => {
+		botModuleConsole.loaded("Screenshare")
 	})
 
 
-	client.login(token.discord());
+	SB_Client.login(SB_Token.discord());
 }

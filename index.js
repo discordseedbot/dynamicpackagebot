@@ -30,7 +30,6 @@ moduleArray.forEach(async (m) => {
 	} else {
 		viableModules.push(`modules/${m}`);
 	}
-
 })
 
 //			If there are no valid modules quit process.
@@ -47,10 +46,11 @@ viableModules.forEach(async (m) => {
 		// JSON Invalid
 		switch (e.code) {
 			case "MODULE_NOT_FOUND":
-				signale.fatal("invalid location? but we checked that in lines 16 to 23, huh. probably should tell the developers that.");
+				signale.fatal("invalid location? but we checked that in lines 26 to 33, huh. you probably should tell the developers that.");
 				process.exit(69);
 				break;
 			default:
+				console.log(e);
 				signale.fatal(`[modman] Manifest is invalid at "${m}/manifest.json"`);
 				viableModules.splice(j);
 				break;
@@ -101,26 +101,44 @@ var token;
 libraries.forEach(async (m) => {
 	if (m.name === "core") {
 		// Setup the token varaible for the modules (if they are needed, in most cases they are.)
-		token = require(`./${m.location}/${m.main}`).tokenManager()
+		var corelib = require(`./${m.location}/${m.main}`)
+		token = corelib.tokenManager()
+		global.SB_TokenFunction = corelib.tokenManager();
+		global.SB_Token = corelib.tokenManager();
+		global.SB_Libraries = libraries;
+		corelib.consoleInit()
 	}
 })
+
+require('events').EventEmitter.defaultMaxListeners = 255
 
 //			Discord Setup Stuff
 const Discord = require('discord.js');
 const client = new Discord.Client();
-	client.login(token.discord()).catch(function () {
-		signale.error("Invalid Token, have you changed it in token.json?");
-		process.exit(1);
-	});
+client.login(token.discord()).catch(async function (e) {
+	switch(e.code) {
+		case "SELF_SIGNED_CERT_IN_CHAIN":
+			signale.error("Self-Signed certificate found in chain.");
+			process.exit(1);
+			break;
+		default:
+			console.log(e);
+			process.exit(1);
+			break;
+	}
+});
+
+
 
 //			yay, we're finally at this point where if something fucks up its the module developers fault!
+global.SB_Client = client;
 botModulesToLoad.forEach(async (m) => {
-    signale.wait(`[BotModule] Attempting to load ${m.name}`);
+	botModuleConsole.attemptLoad(m.name);
 	var runDiscordModule = require(`./${m.location}/${m.main}`)
-	runDiscordModule(client,token,libraries);
+	runDiscordModule();
 });
 genericModulesToLoad.forEach(async (m) => {
-    signale.wait(`[GenModule] Attempting to load ${m.name}`);
+	genericModuleConsole.attemptLoad(m.name)
     var runDiscordModule = require(`./${m.location}/${m.main}`);
-    runDiscordModule(client,token,libraries);
+	runDiscordModule();
 });
