@@ -9,7 +9,7 @@
   "description": "A Discord Bot that Auto-Detects New Modules without editing any core files.",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "start": "node ."
   },
   "repository": {
     "type": "git",
