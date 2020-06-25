@@ -3,8 +3,8 @@ const { RichEmbed } = require("discord.js");
 const signale = require("signale");
 const prefix = require("./../../prefix.json").dmoj;
 
-module.exports = function(client,token,libr) {
-	client.on('message',async message => {
+module.exports = function() {
+	SB_Client.on('message',async message => {
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
 		var args = message.content.slice(prefix.length).trim().split( / +/g);
@@ -58,15 +58,15 @@ module.exports = function(client,token,libr) {
 				}
 			};
 		} catch(err) {
-			require("./../functions/developer_alert_handle.js").userspaceError(client,message,err);
+			require("./../functions/developer_alert_handle.js").userspaceError(SB_Client,message,err);
 		}
 
 	})
 
-	client.on('ready', () => {
+	SB_Client.on('ready', () => {
 		signale.info("DMOJ Module Loaded");
 	})
 
 
-	client.login(token.discord());
+	SB_Client.login(SB_Token.discord());
 }

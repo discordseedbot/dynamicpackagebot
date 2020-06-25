@@ -104,6 +104,7 @@ libraries.forEach(async (m) => {
 		var corelib = require(`./${m.location}/${m.main}`)
 		token = corelib.tokenManager()
 		global.SB_TokenFunction = corelib.tokenManager();
+		global.SB_Token = corelib.tokenManager();
 		global.SB_Libraries = libraries;
 		corelib.consoleInit()
 	}

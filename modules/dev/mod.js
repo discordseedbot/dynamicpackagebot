@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.kick = function(message, client, args) {
+module.exports.kick = function(message, args) {
 	let reason = args.slice(1).join(' ');
 	let userToKick = message.mentions.users.first();
 	if (reason.length < 1) { message.reply('You must supply a reason for the kick.'); return false; }
@@ -23,7 +23,7 @@ module.exports.kick = function(message, client, args) {
 			text: 'Kicked by ' + message.author.username,
 		}
 	}});
-	client.channels.get(userToKick).send({embed: {
+	SB_Client.channels.get(userToKick).send({embed: {
 		color: 770000,
 		author: {name:'Kicked User'},
 		fields: [{
@@ -37,7 +37,7 @@ module.exports.kick = function(message, client, args) {
 	}});
 }
 
-module.exports.ban = function(message,client,args) {
+module.exports.ban = function(message,args) {
 	let reason = args.slice(1).join(' ');
 	let userToKick = message.mentions.users.first();
 	if (reason.length < 1) { message.reply('You must supply a reason for the ban.'); return false; }
@@ -60,7 +60,7 @@ module.exports.ban = function(message,client,args) {
 			text: 'Banned by ' + message.author.username,
 		}
 	}});
-	client.channels.get(userToKick).send({embed: {
+	SB_Client.channels.get(userToKick).send({embed: {
 		color: 770000,
 		author: {name:'Banned User'},
 		fields: [{
@@ -74,7 +74,7 @@ module.exports.ban = function(message,client,args) {
 	}});
 }
 
-module.exports.purge = function(message,client,args) {
+module.exports.purge = function(message,args) {
 	let arglimit = args.slice(0).join(' ');
 	const user = message.mentions.users.first();
 	// Parse Amount

@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
-const client = new Discord.Client();
+const SB_Client = new Discord.Client();
 const package = require('./../../package.json');
 const prefix = require("./../../prefix.json").dev;
 const devAlert = require("./alert_handle.js");
 const signale = require("signale");
 
-module.exports = function(client,token,libraw) {
-	client.on('message',async message => {
+module.exports = function() {
+	SB_Client.on('message',async message => {
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
 		var args = message.content.slice(prefix.length).trim().split( / +/g);
@@ -18,28 +18,28 @@ module.exports = function(client,token,libraw) {
 					switch (command) {
 						case 'api':
 							if (token.api !== "seedbot-api-token") {
-								require('./api.js').cmd(message, client, args);
+								require('./api.js').cmd(message, SB_Client, args);
 							} else {
 								message.reply("API Token has not been changed, not executing.");
 							}
 							break;
 						case 'channelsend':
-							require('./channelsend.js').cmd(message, client, args);
+							require('./channelsend.js').cmd(message, SB_Client, args);
 							break;
 						case 'createinvitefromid':
-							require('./createinvitefromid.js').cmd(message, client, args);
+							require('./createinvitefromid.js').cmd(message, SB_Client, args);
 							break;
 						case 'getallserverinvite':
-							require('./getallserverinvite.js').cmd(message, client, prefix, command);
+							require('./getallserverinvite.js').cmd(message, SB_Client, prefix, command);
 							break;
 						case 'eval':
-							require('./eval.js').cmd(message, args, client);
+							require('./eval.js').cmd(message, args, SB_Client);
 							break;
 						case 'getip':
 							require('./getip.js').cmd(message, args);
 							break;
 						case 'rpc':
-							require('./rpc.js').cmd(message, client, args);
+							require('./rpc.js').cmd(message, SB_Client, args);
 							break;
 						case 'shell':
 							require('./shell.js').cmd(message, args);
@@ -48,13 +48,13 @@ module.exports = function(client,token,libraw) {
 							require('./role.js').list(message);
 							break;
 						case 'role_create':
-							require('./role.js').create(message,client,args);
+							require('./role.js').create(message,SB_Client,args);
 							break;
 						case 'role_give':
-							require('./role.js').give(message,client,args);
+							require('./role.js').give(message,SB_Client,args);
 							break;
 						case 'stats':
-							require('./stats.js').work(message,client,args);
+							require('./stats.js').work(message,SB_Client,args);
 							break;
 						case 'spam':
 							require('./spam.js').cmd(message,args);
@@ -63,22 +63,22 @@ module.exports = function(client,token,libraw) {
 							require("./pin.js").cmd(message,args);
 							break;
 						case 'mute':
-							require('./hear.js').mute(message,client,args,command);
+							require('./hear.js').mute(message,SB_Client,args,command);
 							break;
 						case 'defan':
-							require('./hear.js').defan(message,client,args,command);
+							require('./hear.js').defan(message,SB_Client,args,command);
 							break;
 						//case 'disconnect':
-						//	require('./voice_chat.js').disconnect(message,client,args,command);
+						//	require('./voice_chat.js').disconnect(message,SB_Client,args,command);
 						//	break;
 						case 'kick':
-							require("./mod.js").kick(message,client,args)
+							require("./mod.js").kick(message,SB_Client,args)
 							break;
 						case 'ban':
-							require("./mod.js").ban(message,client,args)
+							require("./mod.js").ban(message,SB_Client,args)
 							break;
 						case 'purge':
-							require("./mod.js").purge(message,client,args)
+							require("./mod.js").purge(message,SB_Client,args)
 							break;
 						default:
 							sendNotif = false;
@@ -91,21 +91,21 @@ module.exports = function(client,token,libraw) {
 						.addField("Command Executed","```"+message.content+"```")
 						.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
 						.setTimestamp();
-					devAlert.developerNotifCustom(client,tmpNotifContent);
+					devAlert.developerNotifCustom(SB_Client,tmpNotifContent);
 				} catch (err) {
-					devAlert.developerError(client,message,err);
+					devAlert.developerError(SB_Client,message,err);
 					console.log("\n\n\n\n")
 					console.error(err)
 				}
 			} else {
-				devAlert.developerUnauthAccess(client,token,libraw);
+				devAlert.developerUnauthAccess(SB_Client,token,libraw);
 			}
 	})
 
-	client.on('ready', () => {
+	SB_Client.on('ready', () => {
 		signale.info("[BotModule] Developer Commands and Utilities");
 	})
 
 
-	client.login(token.discord());
+	SB_Client.login(SB_Token.discord());
 }

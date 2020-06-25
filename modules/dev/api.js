@@ -1,15 +1,15 @@
 const package = require("./../../package.json");
 
-module.exports.cmd = function(message, client, args) {
+module.exports.cmd = function(message, SB_Client, args) {
 	if (message.author.id === package.ownerID){
 		var request = args.slice(0).join(" ");
 		var apiFUNC = require("./../api/function.js");
 		switch (request) {
 			case 'updateAll':
 				message.channel.send("Force Updated All API Fields");
-				apiFUNC.apiReqSend("userCount", client.users.size);
-				apiFUNC.apiReqSend("guildCount", client.guilds.size);
-				apiFUNC.apiReqSend("channelCount", client.channels.size);
+				apiFUNC.apiReqSend("userCount", SB_Client.users.size);
+				apiFUNC.apiReqSend("guildCount", SB_Client.guilds.size);
+				apiFUNC.apiReqSend("channelCount", SB_Client.channels.size);
 				apiFUNC.apiReqSend("botVersion", package.version);
 				apiFUNC.apiReqSend("botBuild", package.build[0]);
 				apiFUNC.apiReqSend("botBuildDate", package.build[1]);
@@ -21,13 +21,13 @@ module.exports.cmd = function(message, client, args) {
 				require('./../functions/console.js').apiSent();
 				break;
 			case 'update-userCount':
-				apiFUNC.apiReqSend("userCount", client.users.size);
+				apiFUNC.apiReqSend("userCount", SB_Client.users.size);
 				break;
 			case 'update-guildCount':
-				apiFUNC.apiReqSend("guildCount", client.guilds.size);
+				apiFUNC.apiReqSend("guildCount", SB_Client.guilds.size);
 				break;
 			case 'update-channelCount':
-				apiFUNC.apiReqSend("channelCount", client.channels.size);
+				apiFUNC.apiReqSend("channelCount", SB_Client.channels.size);
 				break;
 			case 'update-botVersion':
 				apiFUNC.apiReqSend("botVersion", package.version);

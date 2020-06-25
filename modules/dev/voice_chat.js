@@ -13,9 +13,9 @@ const toolbox = require("./toolbox.js");
 
 /* Depricated and moved to "module.exports.hear"
 
-module.exports.defan = function(message, client, args, command) {
+module.exports.defan = function(message, SB_Client, args, command) {
 	var status = args[0];
-	let curGuild = client.guilds.get(message.guild.id).id;
+	let curGuild = SB_Client.guilds.get(message.guild.id).id;
 	let usrmention = message.mentions.members.first();
 
 		//To make our life easier for the future.
@@ -43,9 +43,9 @@ module.exports.defan = function(message, client, args, command) {
 		}
 	}
 }
-module.exports.mute = function(message, client, args, command) {
+module.exports.mute = function(message, SB_Client, args, command) {
 	var status = args[0];
-	let curGuild = client.guilds.get(message.guild.id).id;
+	let curGuild = SB_Client.guilds.get(message.guild.id).id;
 	let usrmention = message.mentions.members.first();
 
 		//To make our life easier for the future.
@@ -76,9 +76,9 @@ module.exports.mute = function(message, client, args, command) {
 */
 
 
-module.exports.hear = function(message, client, args, command) {
+module.exports.hear = function(message,args, command) {
 	var status = args[0];
-	let curGuild = client.guilds.get(message.guild.id).id;
+	let curGuild = SB_Client.guilds.get(message.guild.id).id;
 	let usrMention = message.mentions.members.first();
 
 		//To make our life easier for the future.
@@ -121,8 +121,8 @@ module.exports.hear = function(message, client, args, command) {
 	}
 }
 
-module.exports.disconnect = function(message, client, args, command) {
-	let curGuild = client.guilds.get(message.guild.id).id;
+module.exports.disconnect = function(message) {
+	let curGuild = SB_Client.guilds.get(message.guild.id).id;
 	let usrmention = message.mentions.members.first();
 
 		//To make our life easier for the future.

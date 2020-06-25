@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js"); 
 const package = require('./../../package.json');
 
-module.exports.cmd = function(message, client, args) {
+module.exports.cmd = function(message, SB_Client, args) {
 	var channelid = args.slice(0).join(' ').split(' ')[0];
 	var content = args.slice(1).join(' ');
 	var msg = channelid && " " && content;
@@ -19,7 +19,7 @@ module.exports.cmd = function(message, client, args) {
 		}
 		if (msg.length > 1) {
 			//yay it finally sends the fucking command
-			client.channels.get(channelid).send(content);
+			SB_Client.channels.get(channelid).send(content);
 
 			let evalEmbed = new Discord.RichEmbed()
 				.setColor('#90d190')

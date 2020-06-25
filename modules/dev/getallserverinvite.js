@@ -3,16 +3,16 @@ const { RichEmbed } = require("discord.js");
 const fs = require('fs');
 const package = require('./../../package.json');
 
-module.exports.cmd = function(message, client,prefix,command) {
+module.exports.cmd = function(message) {
 	if (message.author.id === package.ownerID){
 		message.channel.send("This might take a bit, sorry!")
 		var invites = ["I am required else it won't work"], ct = 0;
-		client.guilds.forEach(g => {
+		SB_Client.guilds.forEach(g => {
 			g.fetchInvites().then(guildInvites => {
 				invites[invites.length + 1] = (g + " - `Invites: " + guildInvites.array().join(", ") + "`");
 				ct++;
 
-				if(ct >= client.guilds.size) {
+				if(ct >= SB_Client.guilds.size) {
 					for(let i = 0; i < invites.length; i++) {
 						if(invites[i] == undefined) invites.splice(i, 1);
 					}
@@ -44,7 +44,7 @@ module.exports.cmd = function(message, client,prefix,command) {
 								if (err) {
 									 console.log(err);
 									 let errorEmbed = new Discord.RichEmbed()
-									 	.setTitle("`"+prefix+command+"`")
+									 	.setTitle("`"+message.content+"`")
 									 message.channel.send("An error as occoured, Please check the console log.");
 								}
 								const attachment = new MessageAttachment('./' + filename);
