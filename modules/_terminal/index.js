@@ -31,7 +31,15 @@ global.termcon = new Signale({
         },
         seeya: {
             label: "Quitting SeedBot",
-            color: 'yellow',
+            color: 'yellow'
+        },
+        warmingUp: {
+            label: "Warming Up",
+            color: 'blue'
+        },
+        info: {
+            label: "Info",
+            color: 'cyan'
         }
     }
 });
@@ -40,12 +48,16 @@ module.exports = function(a,b,c) {
     SB_Client = a;
     SB_TokenFunction = b;
     SB_Libraries = c;
-    SB_Client.on('ready', () => {
-        console.log("Waiting a tad bit before launching the Developer Console.");
-        setTimeout(function(a,b,c) {
-            termHandle(a,b,c);
-        }, 2500)
-    })
+
+    if(process.argv.indexOf("--debug") > -1){
+        SB_Client.on('ready', () => {
+            termcon.warmingUp("Waiting a tad bit before launching the Developer Console.");
+            setTimeout(function(a,b,c) {
+                termcon.info("Welcome to SeedBot Terminal v" + require("./manifest.json").version)
+                termHandle(a,b,c);
+            }, 2500)
+        })
+    }
 }
 
 async function termHandle() {
