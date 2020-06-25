@@ -34,7 +34,7 @@ module.exports.print = async function (data) {
             console.log(require("./../../package.json"));
             break;
         default:
-            con.invalidArgument()
+            termcon.invalidArgument()
             break;
     }
 }
