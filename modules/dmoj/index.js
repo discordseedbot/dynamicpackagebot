@@ -64,7 +64,7 @@ module.exports = function() {
 	})
 
 	SB_Client.on('ready', () => {
-		signale.info("DMOJ Module Loaded");
+		botModuleConsole.loaded("DMOJ")
 	})
 
 

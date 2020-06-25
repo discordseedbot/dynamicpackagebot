@@ -76,7 +76,7 @@ module.exports.mute = function(message, SB_Client, args, command) {
 */
 
 
-module.exports.hear = function(message,args, command) {
+module.exports.hear = function(message,args,command) {
 	var status = args[0];
 	let curGuild = SB_Client.guilds.get(message.guild.id).id;
 	let usrMention = message.mentions.members.first();

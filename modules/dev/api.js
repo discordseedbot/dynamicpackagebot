@@ -1,6 +1,6 @@
 const package = require("./../../package.json");
 
-module.exports.cmd = function(message, SB_Client, args) {
+module.exports.cmd = function(message, args) {
 	if (message.author.id === package.ownerID){
 		var request = args.slice(0).join(" ");
 		var apiFUNC = require("./../api/function.js");

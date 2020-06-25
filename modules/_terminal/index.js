@@ -1,17 +1,14 @@
 var inquirer = require("inquirer");
 const { Signale } = require("signale");
 
-module.exports = function(a,b,c) {
-    SB_Client = a;
-    SB_TokenFunction = b;
-    SB_Libraries = c;
+module.exports = function() {
 
     if(process.argv.indexOf("--debug") > -1){
         SB_Client.on('ready', () => {
             termcon.warmingUp("Waiting a tad bit before launching the Developer Console.");
-            setTimeout(function(a,b,c) {
+            setTimeout(function() {
                 termcon.info("Welcome to SeedBot Terminal v" + require("./manifest.json").version)
-                termHandle(a,b,c);
+                termHandle();
             }, 2500)
         })
     }

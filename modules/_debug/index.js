@@ -1,4 +1,4 @@
-module.exports = function(SB_Client,token,libr) {
+module.exports = function() {
 
     // Print all Libaries
     //console.log(libr);

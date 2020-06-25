@@ -23,7 +23,7 @@ module.exports = function() {
 	})
 
 	SB_Client.on('ready', () => {
-		signale.info("[BotModule] Loaded Screenshare");
+		botModuleConsole.loaded("Screenshare")
 	})
 
 

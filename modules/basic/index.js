@@ -53,7 +53,7 @@ module.exports = function() {
 	})
 
 	SB_Client.on('ready', () => {
-		signale.info("[BotModule] Loaded Basic Commands");
+		botModuleConsole.loaded("Basic")
 	})
 
 

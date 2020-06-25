@@ -1,4 +1,4 @@
-module.exports = function (SB_Client,token) {
+module.exports = function () {
     const signale = require("signale");
 	const package = require("./../../package.json");
 

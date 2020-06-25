@@ -18,28 +18,28 @@ module.exports = function() {
 					switch (command) {
 						case 'api':
 							if (token.api !== "seedbot-api-token") {
-								require('./api.js').cmd(message, SB_Client, args);
+								require('./api.js').cmd(message, args);
 							} else {
 								message.reply("API Token has not been changed, not executing.");
 							}
 							break;
 						case 'channelsend':
-							require('./channelsend.js').cmd(message, SB_Client, args);
+							require('./channelsend.js').cmd(message, args);
 							break;
 						case 'createinvitefromid':
-							require('./createinvitefromid.js').cmd(message, SB_Client, args);
+							require('./createinvitefromid.js').cmd(message, args);
 							break;
 						case 'getallserverinvite':
-							require('./getallserverinvite.js').cmd(message, SB_Client, prefix, command);
+							require('./getallserverinvite.js').cmd(message);
 							break;
 						case 'eval':
-							require('./eval.js').cmd(message, args, SB_Client);
+							require('./eval.js').cmd(message, args);
 							break;
 						case 'getip':
 							require('./getip.js').cmd(message, args);
 							break;
 						case 'rpc':
-							require('./rpc.js').cmd(message, SB_Client, args);
+							require('./rpc.js').cmd(message, args);
 							break;
 						case 'shell':
 							require('./shell.js').cmd(message, args);
@@ -48,13 +48,13 @@ module.exports = function() {
 							require('./role.js').list(message);
 							break;
 						case 'role_create':
-							require('./role.js').create(message,SB_Client,args);
+							require('./role.js').create(message,args);
 							break;
 						case 'role_give':
-							require('./role.js').give(message,SB_Client,args);
+							require('./role.js').give(message,args);
 							break;
 						case 'stats':
-							require('./stats.js').work(message,SB_Client,args);
+							require('./stats.js').work(message,args);
 							break;
 						case 'spam':
 							require('./spam.js').cmd(message,args);
@@ -63,22 +63,22 @@ module.exports = function() {
 							require("./pin.js").cmd(message,args);
 							break;
 						case 'mute':
-							require('./hear.js').mute(message,SB_Client,args,command);
+							require('./hear.js').mute(message,args);
 							break;
 						case 'defan':
-							require('./hear.js').defan(message,SB_Client,args,command);
+							require('./hear.js').defan(message);
 							break;
 						//case 'disconnect':
 						//	require('./voice_chat.js').disconnect(message,SB_Client,args,command);
 						//	break;
 						case 'kick':
-							require("./mod.js").kick(message,SB_Client,args)
+							require("./mod.js").kick(message,args)
 							break;
 						case 'ban':
-							require("./mod.js").ban(message,SB_Client,args)
+							require("./mod.js").ban(message,args)
 							break;
 						case 'purge':
-							require("./mod.js").purge(message,SB_Client,args)
+							require("./mod.js").purge(message,args)
 							break;
 						default:
 							sendNotif = false;
@@ -91,19 +91,19 @@ module.exports = function() {
 						.addField("Command Executed","```"+message.content+"```")
 						.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
 						.setTimestamp();
-					devAlert.developerNotifCustom(SB_Client,tmpNotifContent);
+					devAlert.developerNotifCustom(tmpNotifContent);
 				} catch (err) {
-					devAlert.developerError(SB_Client,message,err);
+					devAlert.developerError(message,err);
 					console.log("\n\n\n\n")
 					console.error(err)
 				}
 			} else {
-				devAlert.developerUnauthAccess(SB_Client,token,libraw);
+				devAlert.developerUnauthAccess();
 			}
 	})
 
 	SB_Client.on('ready', () => {
-		signale.info("[BotModule] Developer Commands and Utilities");
+		botModuleConsole.loaded("Developer Utilities");
 	})
 
 
