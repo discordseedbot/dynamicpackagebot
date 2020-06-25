@@ -132,6 +132,7 @@ client.login(token.discord()).catch(async function (e) {
 
 //			yay, we're finally at this point where if something fucks up its the module developers fault!
 global.SB_Client = client;
+global.SB_Package = require("./package.json");
 botModulesToLoad.forEach(async (m) => {
 	botModuleConsole.attemptLoad(m.name);
 	var runDiscordModule = require(`./${m.location}/${m.main}`)

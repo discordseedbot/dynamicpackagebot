@@ -2,8 +2,12 @@
   "name": "dynamicpackagebot",
   "version": "1.0.0",
   "build": [
-    "23.06.2020",
-    "37"
+    "25.06.2020",
+    "56"
+  ],
+  "ownerID": [
+    "317250979311386627",
+    "230485481773596672"
   ],
   "branch": "canary",
   "description": "A Discord Bot that Auto-Detects New Modules without editing any core files.",

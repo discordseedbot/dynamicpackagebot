@@ -2,10 +2,10 @@ const prefixJSON = require("./../../prefix.json");
 const errorDataJSON = require("./alert_handle_channels.json");
 const Discord = require("discord.js");
 
-module.exports.developerError = function (SB_Client,message,error) {
+module.exports.developerError = function (message,error) {
 		if (message.author.bot) return;
 		let devErrorSend = new Discord.RichEmbed()
-			.setColor(require("./../functions/main.js").randomhexcolor())
+			.setColor(Math.floor(Math.random()*16777215).toString(16))
 			.setTitle("Command Error")
 			.setFooter(message.content)
 			.setTimestamp()
@@ -15,10 +15,10 @@ module.exports.developerError = function (SB_Client,message,error) {
 			.addField("Message Info", "Content: `"+message.content+"`\n"+`Channel Name: ${message.channel.name}\nChannel ID: ${message.channel.id}`)
 		SB_Client.channels.get(errorDataJSON.developer.error).send(devErrorSend);
 }
-module.exports.userspaceError = function (SB_Client,message,error) {
+module.exports.userspaceError = function (message,error) {
 		if (message.author.bot) return;
 		let usrErrorSend = new Discord.RichEmbed()
-			.setColor(require("./../functions/main.js").randomhexcolor())
+			.setColor(Math.floor(Math.random()*16777215).toString(16))
 			.setTitle("Command Error")
 			.setFooter(message.content)
 			.setTimestamp()
@@ -32,9 +32,9 @@ module.exports.userspaceError = function (SB_Client,message,error) {
 module.exports.notifDeveloper = function(SB_Client,content) {
 		SB_Client.channels.get(errorDataJSON.developer.notifications).send(content);
 }
-module.exports.developerUnauthAccess = function(SB_Client,message) {
+module.exports.developerUnauthAccess = function(message) {
 	let developerUnauthAccessMSG = new Discord.RichEmbed()
-		.setColor(require("./../functions/main.js").randomhexcolor())
+		.setColor(Math.floor(Math.random()*16777215).toString(16))
 		.setTitle("Invalid User tried to access a Developer Command")
 		.setTimestamp()
 		.addField("Guild Info",`ID: ${message.member.guild.id}\nName: ${message.member.guild.name}`)

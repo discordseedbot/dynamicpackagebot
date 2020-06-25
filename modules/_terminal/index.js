@@ -1,5 +1,6 @@
 var inquirer = require("inquirer");
 const { Signale } = require("signale");
+const signale = require('signale')
 
 module.exports = function() {
 
@@ -22,7 +23,7 @@ async function termHandle() {
             name: 'termInput'
         }
     ]).then(ans => {
-        commandHandler(ans.termInput.split(" "));
+        return commandHandler(ans.termInput.split(" "));
     }).catch(error => {
         signale.error(new Error(error));
         process.exit();
@@ -64,7 +65,9 @@ function commandHandler(cmd) {
     } else {
         //command is invalid
         termcon.invalidCommand()
-        return false;
     }
+    setTimeout(function () {
+        termHandle()
+    },600)
 
 }

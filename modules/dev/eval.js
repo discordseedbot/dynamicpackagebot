@@ -9,16 +9,15 @@ function escapeRegExp(str) {
 function evaluate(input) {
 	let result = eval(input);
 	if (result)
-		result = result.toString().replace(new RegExp(escapeRegExp(token), 'g'), '<token removed>');
+		result = result.toString().replace(new RegExp(escapeRegExp(SB_Token.discord()), 'g'), '<token removed>');
 	return result;
 }
 
 module.exports.cmd = function(message, args) {
 	if (message.author.id === package.ownerID) {
 		const code = args.join(" ");
-		let evaled = evaluate(code);
 
-		evaled = require("util").inspect(evaled);
+		evaled = require("util").inspect(evaluate(code));
 		message.channel.send("```"+evaled+"```")
 	}
 }

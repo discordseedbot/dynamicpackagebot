@@ -5,36 +5,41 @@ module.exports = function() {
 }
 
 module.exports.print = async function (data) {
-    let commandArguments = data.shift()
-    console.log(commandArguments.length)
+    let commandArguments = data.splice(0);
     if (commandArguments[0] === undefined || commandArguments[1] === undefined) {
         console.error("Not Enough Arguments")
         return false;
     }
     var phunk = require("./functions.js")
-    switch (commandArguments[0]) {
+    switch (commandArguments[1]) {
         case "user":
         case "users":
-            phunk.user(commandArguments[1]);
+            phunk.user(commandArguments)
             break;
         case "channel":
         case "channels":
-            phunk.channel(commandArguments[1]);
+            phunk.channel(commandArguments)
             break;
         case "guild":
         case "server":
         case "guilds":
         case "servers":
-            phunk.guild(commandArguments[1]);
+            phunk.guild(commandArguments)
             break;
         case "bot":
-            phunk.bot(commandArguments[1]);
+            phunk.bot(commandArguments)
             break;
         case "package":
-            console.log(require("./../../package.json"));
+            termcon.returnValue(require("./../../package.json"));
             break;
         default:
             termcon.invalidArgument()
             break;
     }
+}
+
+module.exports.eval = async function(ca) {
+    delete(ca[0])
+    let command = ca.join(" ");
+    termcon.returnValue(eval(command))
 }

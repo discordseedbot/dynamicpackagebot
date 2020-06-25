@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
-const SB_Client = new Discord.Client();
 const package = require('./../../package.json');
 const prefix = require("./../../prefix.json").dev;
 const devAlert = require("./alert_handle.js");
@@ -12,7 +11,8 @@ module.exports = function() {
 		if (message.content.indexOf(prefix) !== 0) return;
 		var args = message.content.slice(prefix.length).trim().split( / +/g);
 		const command = args.shift().toLowerCase();
-			if (token.owners().indexOf(message.author.id) > -1){
+			console.log(package.ownerID.indexOf(message.author.id))
+			if (package.ownerID.indexOf(message.author.id) > -1){
 				try {
 					let sendNotif = true;
 					switch (command) {
@@ -86,19 +86,19 @@ module.exports = function() {
 					}
 					if (!sendNotif) return;
 					var tmpNotifContent = new Discord.RichEmbed()
-						.setColor(require("./../functions/main.js").randomhexcolor())
+						.setColor(Math.floor(Math.random()*16777215).toString(16))
 						.setTitle("Developer Used a Command")
 						.addField("Command Executed","```"+message.content+"```")
 						.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
 						.setTimestamp();
-					devAlert.developerNotifCustom(tmpNotifContent);
+					devAlert.notifDeveloper(tmpNotifContent);
 				} catch (err) {
 					devAlert.developerError(message,err);
 					console.log("\n\n\n\n")
 					console.error(err)
 				}
 			} else {
-				devAlert.developerUnauthAccess();
+				devAlert.developerUnauthAccess(message);
 			}
 	})
 
