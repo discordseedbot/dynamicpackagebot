@@ -3,7 +3,7 @@ module.exports.user = async function(ca) {
         case "":
             break;
         default:
-            con.invalidArgument()
+            termcon.invalidArgument()
             break;
     }
 }
@@ -12,7 +12,7 @@ module.exports.channel = async function(ca) {
         case "":
             break;
         default:
-            con.invalidArgument()
+            termcon.invalidArgument()
             break;
     }
 }
@@ -21,7 +21,7 @@ module.exports.guild = async function(ca) {
         case "":
             break;
         default:
-            con.invalidArgument()
+            termcon.invalidArgument()
             break;
     }
 }
@@ -30,7 +30,7 @@ module.exports.bot = async function(ca) {
         case "":
             break;
         default:
-            con.invalidArgument()
+            termcon.invalidArgument()
             break;
     }
 }
