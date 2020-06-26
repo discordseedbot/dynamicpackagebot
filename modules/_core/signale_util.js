@@ -38,7 +38,11 @@ module.exports = async function() {
             info: {
                 label: "Info",
                 color: 'cyan',
-                badge: ''
+				badge: ''
+            },
+            newGuild: {
+                label: "Bot Joined New Guild",
+                color: 'green'
             }
         }
     });
