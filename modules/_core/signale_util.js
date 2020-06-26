@@ -38,6 +38,10 @@ module.exports = async function() {
             info: {
                 label: "Info",
                 color: 'cyan'
+            },
+            newGuild: {
+                label: "Bot Joined New Guild",
+                color: 'green'
             }
         }
     });
