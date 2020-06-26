@@ -33,11 +33,12 @@ module.exports = async function() {
             },
             warmingUp: {
                 label: "Warming Up",
-                color: 'blue'
+                color: 'blueBright'
             },
             info: {
                 label: "Info",
-                color: 'cyan'
+                color: 'cyan',
+                badge: ''
             }
         }
     });
