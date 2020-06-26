@@ -2,6 +2,10 @@ module.exports = function () {
     const signale = require("signale");
 	const package = require("./../../package.json");
 
+    SB_Client.on('guildCreate', guild => {
+        termcon.newGuild(`Name: ${guild.name}  |  ID: ${guild.id}  |  ${guild.memberCount} members.`)
+    })
+
     SB_Client.on('ready', async () => {
 			signale.debug("Bot has started at " + new Date());
 			signale.debug(`Bot has started, with ` + SB_Client.users.size + ` users, in ` + SB_Client.channels.size + ` channels of ` + SB_Client.guilds.size + ` guilds.`);
