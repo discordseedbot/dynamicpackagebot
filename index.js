@@ -102,7 +102,7 @@ viableModules.forEach(async (m) => {
 
 
 
-//			Load Discord Bot Modules
+//			Set Global Variables.
 var token;
 libraries.forEach(async (m) => {
 	if (m.name === "core") {
