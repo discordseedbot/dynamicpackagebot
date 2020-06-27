@@ -67,8 +67,11 @@ viableModules.forEach(async (m) => {
 	try {
 		let jsontemp = require(`./${m}/manifest.json`);
 		let filepush = `${m}/${jsontemp.main}`;
-		if (m.includes("example") || m.includes("test")) {
+		//console.log(`[${m.indexOf('example') !== -1}] ${m}`)
+		if (m.indexOf('example') !== -1 || m.indexOf('test') !== -1) {
 			signale.warn("Example Module Detected, Not Loading.");
+			jsontemp.type = "example";
+			return;
 		}
 		switch (jsontemp.type) {
 			case "botmod":
