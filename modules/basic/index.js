@@ -11,44 +11,41 @@ module.exports = function() {
 		const command = args.shift().toLowerCase();
 
 		try {
-			var lib;
-			libr.forEach(async (g) => {
-				if (g.name === "core") {
-					lib = require(`./../../${g.location}/${g.main}`);
-				}
-			})
 			switch (command) {
 				case 'help':
-					require('./help.js').cmd(message,lib);
+					require('./help.js').cmd(message,SB_CoreLibrary);
 					break;
 				case 'invite':
-					require('./invite.js').cmd(message,lib);
+					require('./invite.js').cmd(message,SB_CoreLibrary);
 					break;
 				case 'ping':
-					require('./ping.js').cmd(message,lib);
+					require('./ping.js').cmd(message,SB_CoreLibrary);
 					break;
 				case 'patreon':
-					require('./patreon.js').cmd(message,lib);
+					require('./patreon.js').cmd(message,SB_CoreLibrary);
 					break;
 				case 'support':
-					require('./support.js').cmd(message,lib);
+					require('./support.js').cmd(message,SB_CoreLibrary);
 					break;
 				case 'roadmap':
-					require('./roadmap.js').cmd(message,lib);
+					require('./roadmap.js').cmd(message,SB_CoreLibrary);
 					break;
 				case 'guide':
-					require('./guide.js').cmd(message,lib);
+					require('./guide.js').cmd(message,SB_CoreLibrary);
 					break;
 				case 'avatar':
-					require('./avatar.js').cmd(message,lib);
+					require('./avatar.js').cmd(message,SB_CoreLibrary);
 					break;
 				case 'info':
-					require('./info.js').cmd(message,lib);
+					require('./info.js').cmd(message,SB_CoreLibrary);
 					break;
 			}
 		} catch(err) {
-			//require("./../functions/developer_alert_handle.js").userspaceError(SB_Client,message,err);
-			console.error(err)
+			SB_Libraries.forEach(async (m) => {
+				if (m.name === "developer_alerts") {
+					let tmpRequire = require(`./../../${m.location}/${m.main}`).userspaceError(message,err);
+				}
+			})
 		}
 	})
 

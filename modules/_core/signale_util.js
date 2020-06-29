@@ -54,11 +54,11 @@ module.exports = async function() {
         stream: process.stdout,
         types: {
             attemptLoad: {
-                label: "Loading Bot Module:",
+                label: "Loading:",
                 color: 'yellow'
             },
             loaded: {
-                label: "Loaded Bot Module:",
+                label: "Loaded:",
                 color: 'green'
             }
         }
@@ -71,11 +71,11 @@ module.exports = async function() {
         stream: process.stdout,
         types: {
             attemptLoad: {
-                label: "Loading Generic Module:",
+                label: "Loading:",
                 color: 'yellow'
             },
             loaded: {
-                label: "Loaded Generic Module:",
+                label: "Loaded:",
                 color: 'green'
             }
         }

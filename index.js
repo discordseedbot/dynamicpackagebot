@@ -113,6 +113,8 @@ viableModules.forEach(async (m) => {
 
 //			Set Global Variables.
 var token;
+global.SB_BotModules = botModulesToLoad;
+global.SB_GenericModules = genericModulesToLoad;
 libraries.forEach(async (m) => {
 	if (m.name === "core") {
 		// Setup the token varaible for the modules (if they are needed, in most cases they are.)
@@ -121,6 +123,7 @@ libraries.forEach(async (m) => {
 		global.SB_TokenFunction = corelib.tokenManager();
 		global.SB_Token = corelib.tokenManager();
 		global.SB_Libraries = libraries;
+		global.SB_CoreLibrary = corelib;
 		corelib.consoleInit()
 	}
 })
@@ -141,6 +144,8 @@ SB_Client.login(token.discord()).catch(async function (e) {
 			break;
 	}
 });
+
+//			Declar Global Varaibles For Easie-ness
 
 
 

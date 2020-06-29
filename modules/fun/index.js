@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
 const prefix = require("./../../prefix.json").default;
-const signale = require("signale");
 
 module.exports = function() {
 	SB_Client.on('message',async message => {
@@ -12,11 +11,23 @@ module.exports = function() {
 
 		try {
 			switch (command) {
-				case 'screenshare':
-					require("./screen.js").cmd(message)
+				case 'asciify':
+					require('./asciify.js').cmd(message, args);
+					break;
+				case 'punch':
+					require('./punch.js').cmd(message, args);
+					break;
+				case 'rps':
+					require('./rockpaper.js').cmd(message, args);
+					break;
+				case 'magic8ball':
+					require('./magic8ball/main.js').cmd(message);
+					break;
+				case 'copypasta':
+					require('./copypasta/main.js').cmd(message);
 					break;
 			}
-		} catch(err){
+		} catch (err) {
 			SB_Libraries.forEach(async (m) => {
 				if (m.name === "developer_alerts") {
 					let tmpRequire = require(`./../../${m.location}/${m.main}`).userspaceError(message,err);
@@ -26,9 +37,8 @@ module.exports = function() {
 	})
 
 	SB_Client.on('ready', () => {
-		botModuleConsole.loaded("Screenshare")
+		botModuleConsole.loaded("Fun");
 	})
-
 
 	SB_Client.login(SB_Token.discord());
 }

@@ -80,7 +80,9 @@ module.exports.bot = async function(ca) {
         return;
     }
     switch(ca[2]){
-        case "":
+        case "libraries":
+            termcon.returnValue(`\n${SB_Libraries}`);
+            return;
             break;
         default:
             termcon.invalidArgument()
