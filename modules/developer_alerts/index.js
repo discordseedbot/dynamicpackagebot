@@ -1,5 +1,5 @@
-const discord = require("discord.js");
-const channelJSON = require("./error_handle.json");
+const Discord = require("discord.js");
+const channelJSON = require("./config.json");
 
 
 // Stuff to make my life easy :)
@@ -9,7 +9,7 @@ function addMsgInfo(message) {
 }
 
 // Developer Error 
-module.exports.developerError = async function(SB_Client,message,error) {
+module.exports.developerError = async function(message,error) {
     if (message.author.bot) return;
     addMsgInfo(message)
     let tmp = content
@@ -20,7 +20,7 @@ module.exports.developerError = async function(SB_Client,message,error) {
     delete(tmp);
 }
 // Userspace Error 
-module.exports.userspaceError  = async function(SB_Client,message,error) {
+module.exports.userspaceError  = async function(message,error) {
     if (message.author.bot) return;
     addMsgInfo(message)
     let tmp = content.setTitle("Developer Error")
@@ -30,17 +30,17 @@ module.exports.userspaceError  = async function(SB_Client,message,error) {
 }
 
 // Custom Developer Notifications
-module.exports.developerNotif = async function (SB_Client,content) {
+module.exports.developerNotif = async function (content) {
     SB_Client.channels.get(channelJSON.developer.notifications).send(content)
 }
 
 // Custom Userspace Notifications
-module.exports.userspaceNotif = async function (SB_Client,content) {
+module.exports.userspaceNotif = async function (content) {
     SB_Client.channels.get(channelJSON.userspace.notifications).send(content)
 }
 
 // Developer Alert (e.g developer used command, bot joined server, bot kicked from server, etc...)
-module.exports.developerAlert = async function (SB_Client,message,error) {
+module.exports.developerAlert = async function (message,error) {
     if (message.author.bot) return;
     addMsgInfo(message)
     let tmp = content.setTitle("Developer Alert")
@@ -50,7 +50,7 @@ module.exports.developerAlert = async function (SB_Client,message,error) {
 }
 
 // Developer Unauthorized Access (user that is not in the config attempted to load a command.)
-module.exports.developerUnauth = async function (SB_Client,message,error) {
+module.exports.developerUnauth = async function (message,error) {
         // Tell the user they're a dumb cunt.
     SB_Client.on('message', async message => {
         let invalidAuthor = new Discord.RichEmbed()

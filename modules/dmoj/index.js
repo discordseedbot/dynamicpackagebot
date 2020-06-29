@@ -58,7 +58,11 @@ module.exports = function() {
 				}
 			};
 		} catch(err) {
-			require("./../functions/developer_alert_handle.js").userspaceError(SB_Client,message,err);
+			SB_Libraries.forEach(async (m) => {
+				if (m.name === "developer_alerts") {
+					let tmpRequire = require(`./../../${m.location}/${m.main}`).userspaceError(message,err);
+				}
+			})
 		}
 
 	})
