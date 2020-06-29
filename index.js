@@ -18,7 +18,7 @@ try {
 	global.signale = require("signale");
 } catch (e) {
 	console.error(e);
-	process.exit(69);
+	process.exit(1);
 }
 
 console.clear();
@@ -132,7 +132,7 @@ libraries.forEach(async (m) => {
 //			Discord Setup Stuff
 const Discord = require('discord.js');
 global.SB_Client = new Discord.Client();
-SB_Client.login(token.discord()).catch(async function (e) {
+SB_Client.login(SB_Token.discord()).catch(async function (e) {
 	switch(e.code) {
 		case "SELF_SIGNED_CERT_IN_CHAIN":
 			signale.error("Self-Signed certificate found in chain.");
