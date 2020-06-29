@@ -11,3 +11,7 @@ module.exports.consoleInit = function() {
 	tmp();
 	delete(tmp);
 }
+
+module.exports.prefrences = function() {
+	return require("./prefrences.js");
+}
