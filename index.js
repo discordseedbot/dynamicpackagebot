@@ -11,7 +11,16 @@ if (!fs.existsSync("node_modules/")) {
 	process.exit(1);
 }
 
-const signale = require("signale");
+//			Declare Global Static Varaibles and other miscelanious stuff.
+try {
+	require('events').EventEmitter.defaultMaxListeners = 255;
+	global.SB_Package = require("./package.json");
+	global.signale = require("signale");
+} catch (e) {
+	console.error(e);
+	process.exit(69);
+}
+
 console.clear();
 function getDirectories(path) {
   return fs.readdirSync(path).filter(function (file) {
@@ -116,12 +125,11 @@ libraries.forEach(async (m) => {
 	}
 })
 
-require('events').EventEmitter.defaultMaxListeners = 255
 
 //			Discord Setup Stuff
 const Discord = require('discord.js');
-const client = new Discord.Client();
-client.login(token.discord()).catch(async function (e) {
+global.SB_Client = new Discord.Client();
+SB_Client.login(token.discord()).catch(async function (e) {
 	switch(e.code) {
 		case "SELF_SIGNED_CERT_IN_CHAIN":
 			signale.error("Self-Signed certificate found in chain.");
@@ -137,8 +145,6 @@ client.login(token.discord()).catch(async function (e) {
 
 
 //			yay, we're finally at this point where if something fucks up its the module developers fault!
-global.SB_Client = client;
-global.SB_Package = require("./package.json");
 botModulesToLoad.forEach(async (m) => {
 	botModuleConsole.attemptLoad(m.name);
 	var runDiscordModule = require(`./${m.location}/${m.main}`)
