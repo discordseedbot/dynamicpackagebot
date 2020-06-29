@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
 const SB_Client = new Discord.Client();
-const prefix = require("./../../prefix.json").default;
+const prefix = SB_CoreLibrary.prefix().default;
 
 module.exports.cmd = function(message) {
 	if (message.member.voiceChannel === undefined) { message.reply("Plesae Join a Voice Channel.") } else {;

@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
 const package = require('./../../package.json');
-const prefix = require("./../../prefix.json").dev;
+const prefix = SB_CoreLibrary.prefix().dev;
 const devAlert = require("./alert_handle.js");
 const signale = require("signale");
 

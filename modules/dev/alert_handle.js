@@ -1,4 +1,4 @@
-const prefixJSON = require("./../../prefix.json");
+const prefixJSON = SB_CoreLibrary.prefix();
 const errorDataJSON = require("./alert_handle_channels.json");
 const Discord = require("discord.js");
 

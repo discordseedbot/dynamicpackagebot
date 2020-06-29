@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
 const client = new Discord.Client();
-const prefix = require("./../../prefix.json").default;
+const prefix = SB_CoreLibrary.prefix().default;
 
 module.exports.cmd = function(message, args) {
 	var choice = args.slice(0).join(' ');;

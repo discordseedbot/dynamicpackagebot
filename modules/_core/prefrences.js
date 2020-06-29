@@ -1,10 +1,10 @@
-module.exports = function() {
+module.exports.raw = function() {
     return require("./../../prefrences.json");
 }
 
 module.exports.prefix = function() {
     let prefJSON = require("./../../prefrences.json");
-    prefJSON.forEach(async (m) => {
+    prefJSON.forEach( (m) => {
         if (m.name === "prefix") {
             return m.data;
         }

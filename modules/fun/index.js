@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
-const prefix = require("./../../prefix.json").default;
+const prefix = SB_CoreLibrary.prefix().default;
 
 module.exports = function() {
 	SB_Client.on('message',async message => {
