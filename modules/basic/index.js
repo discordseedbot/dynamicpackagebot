@@ -12,7 +12,7 @@ module.exports = function() {
 
 		try {
 			var lib;
-			libr.forEach(async (g) => {
+			SB_Libraries.forEach(async (g) => {
 				if (g.name === "core") {
 					lib = require(`./../../${g.location}/${g.main}`);
 				}
