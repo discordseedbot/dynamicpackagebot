@@ -37,14 +37,14 @@ module.exports.kick = function(message, args) {
 	}});
 }
 
-module.exports.ban = function(message,args) {
+module.exports.members.ban = function(message,args) {
 	let reason = args.slice(1).join(' ');
 	let userToKick = message.mentions.users.first();
-	if (reason.length < 1) { message.reply('You must supply a reason for the ban.'); return false; }
+	if (reason.length < 1) { message.reply('You must supply a reason for the.members.ban.'); return false; }
 	if (userToKick === undefined) { message.reply('You must mention someone to kick them.'); return false; }
 
 	if (!message.guild.member(userToKick).kickable){ message.reply('I cannot kick that member'); return false; };
-	message.guild.member(userToKick).ban();
+	message.guild.member(userToKick).members.ban();
 
 	kickedUserID = message.mentions.users.first().id;
 
@@ -82,7 +82,7 @@ module.exports.purge = function(message,args) {
 	if (!amount) return message.reply('Must specify an amount to delete!');
 	if (!amount && !user) return message.reply('Must specify a user and amount, or just an amount, of messages to purge!');
 	// Fetch 100 messages (will be filtered and lowered up to max amount requested)
-	message.channel.fetchMessages({
+	message.channel.messages.fetch({
 		limit: arglimit,
 	}).then((messages) => {
 		if (user) {

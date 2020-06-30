@@ -5,7 +5,7 @@ module.exports = function() {
 
     SB_Client.on('ready', async () => {
         
-        //console.log(SB_Client.fetchUser('dhdgh'))
+        //console.log(client.users.fetch('dhdgh'))
     })
 
     SB_Client.on('message', async message => {

@@ -26,7 +26,7 @@ module.exports.give = function(message,args) {
 		const guild = SB_Client.guilds.get(message.guild.id);
 		let role = args.slice(1).join(' ');
 		let member = message.mentions.members.first();
-		member.addRole(role);
+		member.roles.add(role);
 	} catch (err) {
 		message.channel.send(err)
 	}

@@ -17,7 +17,7 @@ module.exports.user = async function(ca) {
             termcon.returnValue(SB_Client.users.size);
             break;
         default:
-            SB_Client.fetchUser(ca[2])
+            SB_Client.users.fetch(ca[2])
                 .then(info => termcon.returnValue(info) )
                 .catch(error => apiErrorCheck(error) )
             break;
