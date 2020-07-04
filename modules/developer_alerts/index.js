@@ -1,9 +1,10 @@
 const Discord = require("discord.js");
+const { RichEmbed } = require("discord.js");
 const channelJSON = require("./config.json");
 
 
 // Stuff to make my life easy :)
-var content = new Discord.RichEmbed().setColor(Math.floor(Math.random()*16777215).toString(16)).setTimestamp();
+var content = new Discord.MessageEmbed().setColor(Math.floor(Math.random()*16777215).toString(16)).setTimestamp();
 function addMsgInfo(message) {
     return content.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
 }
@@ -31,7 +32,7 @@ module.exports.userspaceError  = async function(message,error) {
 
 // Custom Developer Notifications
 module.exports.developerNotif = async function (content) {
-    SB_Client.channels.get(channelJSON.developer.notifications).send(content)
+    SB_Client.channels.cache.get(channelJSON.developer.notifications).send(content)
 }
 
 // Custom Userspace Notifications
@@ -53,7 +54,7 @@ module.exports.developerAlert = async function (message,error) {
 module.exports.developerUnauth = async function (message,error) {
         // Tell the user they're a dumb cunt.
     SB_Client.on('message', async message => {
-        let invalidAuthor = new Discord.RichEmbed()
+        let invalidAuthor = new Discord.MessageEmbed()
             .setColor('#ff0000')
             .setTitle('You are not a developer')
             .setTimestamp()
@@ -63,7 +64,7 @@ module.exports.developerUnauth = async function (message,error) {
     SB_Client.login(token.discord())
 
         // Tell the developers that someone is retarded.
-    let dumbCunt = new discord.RichEmbed()
+    let dumbCunt = new Discord.MessageEmbed()
         .setColor(Math.floor(Math.random()*16777215).toString(16))
         .setTitle("Unauthorised User Accessed Developer Command")
         .setTimestamp()
