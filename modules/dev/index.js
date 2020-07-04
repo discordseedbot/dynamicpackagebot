@@ -85,16 +85,25 @@ module.exports = function() {
 							break;
 					}
 					if (!sendNotif) return;
-					var tmpNotifContent = new Discord.RichEmbed()
+					var tmpNotifContent = new Discord.MessageEmbed()
 						.setColor(Math.floor(Math.random()*16777215).toString(16))
 						.setTitle("Developer Used a Command")
 						.addField("Command Executed","```"+message.content+"```")
 						.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
 						.setTimestamp();
-					devAlert.notifDeveloper(tmpNotifContent);
+					
+					SB_Libraries.forEach(async (m) => {
+						if (m.name === "developer_alerts") {
+							let tmpRequire = require(`./../../${m.location}/${m.main}`).developerNotif(tmpNotifContent);
+						}
+					})
 				} catch (err) {
-					devAlert.developerError(message,err);
-					console.log("\n\n\n\n")
+					SB_Libraries.forEach(async (m) => {
+						if (m.name === "developer_alerts") {
+							let tmpRequire = require(`./../../${m.location}/${m.main}`).developerError(message,err);
+						}
+					})
+					console.log("\n\n")
 					console.error(err)
 				}
 			} else {
