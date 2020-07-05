@@ -57,6 +57,9 @@ function commandHandler(cmd) {
                 termcon.seeya()
                 process.exit();
                 break;
+            case "uptime":
+                termcon.returnValue(`${SB_CoreLibrary.toHHMMSS(SB_Client.uptime / 1000)} since login.`)
+                break;
             default:
                 console.error(new Error());
                 process.exit(0);
