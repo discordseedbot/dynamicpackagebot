@@ -4,13 +4,22 @@ module.exports = function() {
     //console.log(libr);
 
     SB_Client.on('ready', async () => {
-        
-        //console.log(client.users.fetch('dhdgh'))
-    })
-    let totalSize=0;
-    SB_Client.guilds.cache.forEach(m => {
-        console.log(m)
-        console.log(m.memberCount)
+        /*
+        console.log(SB_Client.guilds.cache.map(m => m.name).join("\n"))
+        let totalSize = {
+            "members": 0,
+            "guilds": 0,
+            "channels": 0
+        };
+        SB_Client.guilds.cache.forEach(m => {
+            totalSize.members+=m.memberCount
+            totalSize.guilds+=1
+            totalSize.channels+=m.channels.cache.size
+        })
+        console.log(totalSize)
+        delete(totalSize)
+        */
+
     })
 
     SB_Client.on('message', async message => {
