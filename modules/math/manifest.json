@@ -1,0 +1,7 @@
+{
+	"name": "math",
+	"version": "1.0",
+	"author": "Unknown Contributer",
+	"type": "botmod",
+	"main": "index.js"
+}
