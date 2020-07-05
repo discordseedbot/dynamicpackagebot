@@ -17,7 +17,7 @@ module.exports.developerError = async function(message,error) {
         .setTitle("Developer Error")
         .setFooter(message.content)
         .setDescription(error)
-    SB_Client.channels.get(channelJSON.developer.error).send(tmp);
+    SB_Client.channels.cache.get(channelJSON.developer.error).send(tmp);
     delete(tmp);
 }
 // Userspace Error 
@@ -27,7 +27,7 @@ module.exports.userspaceError  = async function(message,error) {
     let tmp = content.setTitle("Developer Error")
         .setFooter(message.content)
         .setDescription(error)
-    SB_Client.channels.get(channelJSON.userspace.error).send(tmp);
+    SB_Client.channels.cache.get(channelJSON.userspace.error).send(tmp);
 }
 
 // Custom Developer Notifications
@@ -37,7 +37,7 @@ module.exports.developerNotif = async function (content) {
 
 // Custom Userspace Notifications
 module.exports.userspaceNotif = async function (content) {
-    SB_Client.channels.get(channelJSON.userspace.notifications).send(content)
+    SB_Client.channels.cache.get(channelJSON.userspace.notifications).send(content)
 }
 
 // Developer Alert (e.g developer used command, bot joined server, bot kicked from server, etc...)
@@ -47,7 +47,7 @@ module.exports.developerAlert = async function (message,error) {
     let tmp = content.setTitle("Developer Alert")
         .setFooter(message.content)
         .setDescription(error)
-    SB_Client.channels.get(channelJSON.developer.notifications).send(tmp);
+    SB_Client.channels.cache.get(channelJSON.developer.notifications).send(tmp);
 }
 
 // Developer Unauthorized Access (user that is not in the config attempted to load a command.)
@@ -61,7 +61,7 @@ module.exports.developerUnauth = async function (message,error) {
             .setDescription("Sorry, You cannot access this command because you are not the maintainer of this project or your ownerID has been setup incorrectly in token.json.");
         message.channel.send(invalidAuthor)
     })
-    SB_Client.login(token.discord())
+    SB_Client.login(SB_Token.discord())
 
         // Tell the developers that someone is retarded.
     let dumbCunt = new Discord.MessageEmbed()
@@ -69,5 +69,5 @@ module.exports.developerUnauth = async function (message,error) {
         .setTitle("Unauthorised User Accessed Developer Command")
         .setTimestamp()
         .setDescription("Invalid User tried to access a developer command (ID: "+message.author.id+", Username: <@"+message.author.id+"> or @"+message.author.username+"#"+message.author.discriminator+")")
-    SB_Client.channels.get(channelJSON.developer.unauthAccess).send(dumbCunt);
+    SB_Client.channels.cache.get(channelJSON.developer.unauthAccess).send(dumbCunt);
 }
