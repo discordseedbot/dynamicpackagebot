@@ -8,8 +8,8 @@ module.exports = function () {
 
     SB_Client.on('ready', async () => {
 			signale.debug("Bot has started at " + new Date());
-			signale.debug(`Bot has started, with ` + SB_Client.users.size + ` users, in ` + SB_Client.channels.size + ` channels of ` + SB_Client.guilds.size + ` guilds.`);
-			signale.debug(`Logged in as '${SB_Client.user.username}' ('@${SB_Client.user.username}#${SB_Client.user.discriminator}', ID: ${SB_Client.user.id})`)
+			signale.debug(`Bot has started, with ${SB_CoreLibrary.userCount()} users, in ${SB_CoreLibrary.channelCount()} channels of ${SB_CoreLibrary.guildCount()} guilds.`);
+			signale.debug(`Logged in as @${SB_Client.user.username}#${SB_Client.user.discriminator} (Snowflake: ${SB_Client.user.id})`)
 			signale.debug(`Invite Codes;\n		Full Admin:   https://seedbot.xyz/inv.php?br=${package.branch}&b=8\n		Normal Perms: https://seedbot.xyz/inv.php?br=${package.branch}&b=3329088\n`)
 
 
@@ -30,7 +30,7 @@ module.exports = function () {
             }
 
             //  Message
-            if (config.activity.message.length < 1 || config.activity.message !== undefined) {
+            if (config.activity.message.length > 1 || config.activity.message !== undefined) {
                 var msg = config.activity.message;
             } else {return;}
 
@@ -53,6 +53,7 @@ module.exports = function () {
                 } else {
                     typeurl = undefined;
                     console.error("Activity URL is invalid/unsupported in modules/startup/config.json");
+                    rpcTYPE = "PLAYING";
                 }
             }
 
@@ -79,10 +80,11 @@ module.exports = function () {
             }
 
 
-            SB_Client.user.setPresence({game: { name: msg, type: rpcTYPE, url: typeurl}});
-			SB_Client.user.setStatus(status);
+            let botStatus = status;
+            SB_Client.user.setPresence({activity: { name: msg, type: rpcTYPE, url: typeurl}, status: botStatus})
 
             // To avoid memory leaks in the future.
+            delete(botStatus)
             delete(msg);
             delete(rpcTYPE);
             delete(typeurl);
