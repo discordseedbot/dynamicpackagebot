@@ -54,6 +54,15 @@ module.exports = async function() {
         } catch (err) {
             //      If there is an error with the command that was executed it catches it
             //      and send the error message to a discord channel (that is if the bot is in it.)
+
+            //      If you have the developer alerts module installed and working you can use this;
+                /*
+			SB_Libraries.forEach(async (m) => {
+				if (m.name === "developer_alerts") {
+					let tmpRequire = require(`./../../${m.location}/${m.main}`).userspaceError(message, err);
+				}
+			})
+                */
         } 
 
     })
