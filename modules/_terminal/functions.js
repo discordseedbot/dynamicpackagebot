@@ -14,7 +14,7 @@ module.exports.user = async function(ca) {
     switch(ca[2]){
         case "count":
         case "size":
-            termcon.returnValue(SB_Client.users.size);
+            termcon.returnValue(SB_CoreLibrary.userCount());
             break;
         default:
             SB_Client.users.fetch(ca[2])
@@ -31,7 +31,7 @@ module.exports.channel = async function(ca) {
     switch(ca[2]){
         case "count":
         case "size":
-            termcon.returnValue(SB_Client.channels.size)
+            termcon.returnValue(SB_CoreLibrary.channelCount())
             break;
         default:
             termcon.invalidArgument()
@@ -53,7 +53,7 @@ module.exports.guild = async function(ca) {
     switch(ca[2]){
         case "count":
         case "size":
-            termcon.returnValue(SB_Client.guilds.size)
+            termcon.returnValue(SB_CoreLibrary.guildCount())
             break;
         case "list":
             termcon.returnValue(guildList().Promise);
