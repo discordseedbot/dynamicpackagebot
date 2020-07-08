@@ -7,73 +7,11 @@ const toolbox = require("./toolbox.js");
 //	https://discord.js.org/#/docs/main/v11/class/GuildMember
 //  https://discord.js.org/#/docs/main/v11/class/GuildMember?scrollTo=setDeaf
 //  https://discord.js.org/#/docs/main/v11/class/GuildMember?scrollTo=setMute
-// https://discord.js.org/#/docs/main/v11/class/GuildMember?scrollTo=setVoiceChannel
+// https://discord.js.org/#/docs/main/v11/class/GuildMember?scrollTo=setChannel
 
 // To make my life easier lmao
 
-/* Depricated and moved to "module.exports.hear"
 
-module.exports.defan = function(message, SB_Client, args, command) {
-	var status = args[0];
-	let curGuild = SB_Client.guilds.get(message.guild.id).id;
-	let usrmention = message.mentions.members.first();
-
-		//To make our life easier for the future.
-	let userid = usrmention.id;
-
-	if(message.member.voiceChannel === undefined) {
-		// User is not connected to voice channel
-		message.channel.send(require("./voice_chat.js").reply("notCon",userid));
-	} else {
-		// Check what the user wants to set their mute status to (true = deaf, false = not deaf)
-		switch (status){
-			case "true":
-				// Defan User
-					message.guild.member(userid).setDeaf(true);
-					message.channel.send(require("./voice_chat.js").reply("defanTrue",message.member.id));
-				break;
-			case "false":
-				// UnDefan User
-					message.guild.member(userid).setDeaf(false);
-					message.channel.send(require("./voice_chat.js").reply("defanFalse",message.member.id));
-				break;
-			default:
-				message.channel.send(require("./voice_chat.js").reply("invalidSetting",message.member.id));
-				break;
-		}
-	}
-}
-module.exports.mute = function(message, SB_Client, args, command) {
-	var status = args[0];
-	let curGuild = SB_Client.guilds.get(message.guild.id).id;
-	let usrmention = message.mentions.members.first();
-
-		//To make our life easier for the future.
-	let userid = usrmention.id;
-
-	if(message.member.voiceChannel === undefined) {
-		// User is not connected to voice channel
-		message.channel.send(require("./voice_chat.js").reply("notCon",userid));
-	} else {
-		// Check what the user wants to set their mute status to (true = muted, false = unmuted)
-		switch (status){
-			case "true":
-				// Mute User
-					message.guild.member(userid).setMute(true);
-					message.channel.send(require("./voice_chat.js").reply("muteTrue",message.member.id));
-				break;
-			case "false":
-				// Unmute User
-					message.guild.member(userid).setMute(false);
-					message.channel.send(require("./voice_chat.js").reply("muteFalse",message.member.id));
-				break;
-			default:
-				message.channel.send(require("./voice_chat.js").reply("invalidSetting",message.member.id));
-				break;
-		}
-	}
-}
-*/
 
 
 module.exports.hear = function(message,args,command) {
@@ -90,7 +28,7 @@ module.exports.hear = function(message,args,command) {
 		message.channel.send(toolbox.reply("boolNotSet",userID));
 	}
 
-	if (message.member.voiceChannel === undefined) {
+	if (message.member.voice.channel === undefined) {
 		// User is not connected to a Voice Channel.
 		message.channel.send(toolbox.reply("notCon",userID));
 	} else {
@@ -130,11 +68,11 @@ module.exports.disconnect = function(message) {
 
 		// Sets user to no channelID so they get disconnected
 
-	if(message.member.voiceChannel === undefined) {
+	if(message.member.voice.channel === undefined) {
 		// User is not connected to voice channel
 		message.channel.send(require("./voice_chat.js").reply("notCon",userid));
 	} else {
-			message.guild.member(userid).setVoiceChannel();
+			message.guild.member(userid).voice.setChannel();
 			message.channel.send(require("./voice_chat.js").reply(disconnect,userid));
 	}
 

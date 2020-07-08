@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 
 module.exports.developerError = function (message,error) {
 		if (message.author.bot) return;
-		let devErrorSend = new Discord.RichEmbed()
+		let devErrorSend = new Discord.MessageEmbed()
 			.setColor(Math.floor(Math.random()*16777215).toString(16))
 			.setTitle("Command Error")
 			.setFooter(message.content)
@@ -17,7 +17,7 @@ module.exports.developerError = function (message,error) {
 }
 module.exports.userspaceError = function (message,error) {
 		if (message.author.bot) return;
-		let usrErrorSend = new Discord.RichEmbed()
+		let usrErrorSend = new Discord.MessageEmbed()
 			.setColor(Math.floor(Math.random()*16777215).toString(16))
 			.setTitle("Command Error")
 			.setFooter(message.content)
@@ -30,10 +30,10 @@ module.exports.userspaceError = function (message,error) {
 }
 
 module.exports.notifDeveloper = function(SB_Client,content) {
-		SB_Client.channels.get(errorDataJSON.developer.notifications).send(content);
+		SB_Client.channels.cache.get(errorDataJSON.developer.notifications).send(content);
 }
 module.exports.developerUnauthAccess = function(message) {
-	let developerUnauthAccessMSG = new Discord.RichEmbed()
+	let developerUnauthAccessMSG = new Discord.MessageEmbed()
 		.setColor(Math.floor(Math.random()*16777215).toString(16))
 		.setTitle("Invalid User tried to access a Developer Command")
 		.setTimestamp()

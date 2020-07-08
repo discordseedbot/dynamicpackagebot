@@ -12,6 +12,8 @@
         "help",
 
         "exit",
-        "quit"
+        "quit",
+
+        "uptime"
     ]
 }

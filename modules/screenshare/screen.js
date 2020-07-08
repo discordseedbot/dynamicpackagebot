@@ -4,10 +4,10 @@ const SB_Client = new Discord.Client();
 const prefix = SB_CoreLibrary.prefix().default;
 
 module.exports.cmd = function(message) {
-	if (message.member.voiceChannel === undefined) { message.reply("Plesae Join a Voice Channel.") } else {;
+	if (message.member.voice.channel === undefined) { message.reply("Plesae Join a Voice Channel.") } else {;
 		var currentGuildID = message.guild.id;
-		var voiceChannelID = message.member.voiceChannel.id;
-		var screensharelink = "https://discordapp.com/channels/"+currentGuildID+"/"+voiceChannelID;
+		var.voice.channelID = message.member.voice.channel.id;
+		var screensharelink = "https://discordapp.com/channels/"+currentGuildID+"/".voice.channelID;
 		var response = new Discord.RichEmbed()
 			.setColor(require("./../functions/main.js").randomhexcolor())
 			.setTitle("Voice Chat Screen Share")

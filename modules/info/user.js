@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
+const prefix = SB_CoreLibrary.prefix().default;
 
 module.exports.cmd = function(message, args) {
 	var user;
@@ -13,7 +14,7 @@ module.exports.cmd = function(message, args) {
 	data.push(user.createdAt);
 	data.push(user.presence.status);
 	data.push(message.member.joinedAt);
-	data.push(user.avatarURL);
+	data.push(user.avatarURL());
 	var evalEmbed = new Discord.RichEmbed()
 		.setTitle(message.content)
 		.addField("User", data[0], true)

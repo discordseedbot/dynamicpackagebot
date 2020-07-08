@@ -9,13 +9,10 @@ module.exports = function() {
 		var args = message.content.slice(prefix.length).trim().split( / +/g);
 		const command = args.shift().toLowerCase();
 
-		try {
+		try{
 			switch (command) {
-				case 'userinfo':
-					require('./user.js').cmd(message,args);
-					break;
-				case 'serverinfo':
-					require('./server.js').cmd(message);
+				case 'stats':
+					require("./stats.js").cmd(message, args)
 					break;
 			}
 		} catch (err) {
@@ -28,8 +25,9 @@ module.exports = function() {
 	})
 
 	SB_Client.on('ready', () => {
-		botModuleConsole.loaded("Info");
+		botModuleConsole.loaded("Stats");
 	})
+
 
 	SB_Client.login(SB_Token.discord());
 }

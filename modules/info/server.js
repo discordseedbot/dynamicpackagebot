@@ -11,7 +11,7 @@ module.exports.cmd = function(message) {
 	data.push(guild.member(guild.owner) ? guild.owner.toString() : guild.owner.user.tag);
 	data.push(guild.roles.size);
 	data.push(guild.channels.size);
-	data.push(guild.iconURL)
+	data.push(guild.iconURL())
 	var evalEmbed = new Discord.RichEmbed()
 		.setTitle("Guild Info")
 		.addField("Guild Name", data[0], true)

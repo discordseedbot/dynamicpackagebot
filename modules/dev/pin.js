@@ -6,7 +6,7 @@ module.exports.cmd = function(message, args) {
 
 	message.delete()
 
-	message.channel.fetchMessages({around: msgId, limit: 1})
+	message.channel.messages.fetch({around: msgId, limit: 1})
 	    .then(msg => {
 	        const fetchedMsg = msg.first();
 	        fetchedMsg.pin();
