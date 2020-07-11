@@ -43,7 +43,4 @@ module.exports = function() {
 	SB_Client.on('ready', () => {
 		botModuleConsole.loaded("Math");
 	})
-
-
-	SB_Client.login(SB_Token.discord());
 }

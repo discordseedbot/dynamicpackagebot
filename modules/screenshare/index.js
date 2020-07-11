@@ -28,7 +28,4 @@ module.exports = function() {
 	SB_Client.on('ready', () => {
 		botModuleConsole.loaded("Screenshare")
 	})
-
-
-	SB_Client.login(SB_Token.discord());
 }

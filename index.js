@@ -150,13 +150,20 @@ SB_Client.login(SB_Token.discord()).catch(async function (e) {
 
 
 //			yay, we're finally at this point where if something fucks up its the module developers fault!
-botModulesToLoad.forEach(async (m) => {
-	botModuleConsole.attemptLoad(m.name);
-	var runDiscordModule = require(`./${m.location}/${m.main}`)
-	runDiscordModule();
+SB_Client.on('ready', function(){
+	console.clear()
+	console.log("## SeedBot Logged In!");
 });
-genericModulesToLoad.forEach(async (m) => {
-	genericModuleConsole.attemptLoad(m.name)
-    var runDiscordModule = require(`./${m.location}/${m.main}`);
-	runDiscordModule();
-});
+SB_Client.login(SB_Token.discord());
+setTimeout(async function() {
+	botModulesToLoad.forEach(async (m) => {
+		botModuleConsole.attemptLoad(m.name);
+		var runDiscordModule = require(`./${m.location}/${m.main}`)
+		runDiscordModule();
+	});
+	genericModulesToLoad.forEach(async (m) => {
+		genericModuleConsole.attemptLoad(m.name)
+	    var runDiscordModule = require(`./${m.location}/${m.main}`);
+		runDiscordModule();
+	});
+}, 600)
