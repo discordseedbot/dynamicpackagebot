@@ -76,7 +76,6 @@ viableModules.forEach(async (m) => {
 	try {
 		let jsontemp = require(`./${m}/manifest.json`);
 		let filepush = `${m}/${jsontemp.main}`;
-		//console.log(`[${m.indexOf('example') !== -1}] ${m}`)
 		if (m.indexOf('example') !== -1 || m.indexOf('test') !== -1) {
 			signale.warn("Example Module Detected, Not Loading.");
 			jsontemp.type = "example";
@@ -84,17 +83,16 @@ viableModules.forEach(async (m) => {
 		}
 		switch (jsontemp.type) {
 			case "botmod":
-				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
+				tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
 				botModulesToLoad.push(tmparr);
 				delete(tmparr);
 				break;
 			case "generic":
-				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
+				tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
 				genericModulesToLoad.push(tmparr);
 				delete(tmparr);
 				break;
 			case "library":
-				//libLoaded(m);
 				tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
 				libraries.push(tmparr);
 				delete(tmparr);
