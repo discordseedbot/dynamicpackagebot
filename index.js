@@ -111,22 +111,25 @@ viableModules.forEach(async (m) => {
 
 
 
-//			Set Global Variables.
-var token;
-global.SB_BotModules = botModulesToLoad;
-global.SB_GenericModules = genericModulesToLoad;
-libraries.forEach(async (m) => {
-	if (m.name === "core") {
-		// Setup the token varaible for the modules (if they are needed, in most cases they are.)
-		var corelib = require(`./${m.location}/${m.main}`)
-		token = corelib.tokenManager()
-		global.SB_TokenFunction = corelib.tokenManager();
-		global.SB_Token = corelib.tokenManager();
-		global.SB_Libraries = libraries;
-		global.SB_CoreLibrary = corelib;
-		corelib.consoleInit()
-	}
-})
+//			Set Global Functions and Varaibles, very important!
+try {
+	global.SB_BotModules = botModulesToLoad;
+	global.SB_GenericModules = genericModulesToLoad;
+	libraries.forEach(async (m) => {
+		if (m.name === "core") {
+			// Setup the token varaible for the modules (if they are needed, in most cases they are.)
+			var corelib = require(`./${m.location}/${m.main}`)
+			global.SB_TokenFunction = corelib.tokenManager();
+			global.SB_Token = corelib.tokenManager();
+			global.SB_Libraries = libraries;
+			global.SB_CoreLibrary = corelib;
+			corelib.consoleInit()
+		}
+	})
+} catch (e) {
+	console.error(`[Global Functions]\n${e}`);
+	process.exit(1);
+}
 
 
 //			Discord Setup Stuff
@@ -145,11 +148,9 @@ SB_Client.login(SB_Token.discord()).catch(async function (e) {
 	}
 });
 
-//			Declar Global Varaibles For Easie-ness
 
-
-
-//			yay, we're finally at this point where if something fucks up its the module developers fault!
+//			Modules are executed, if one crashes it does not take the entire program with it, because of asynchronous functions
+//				or some shit like that, i didn't go to uni.
 botModulesToLoad.forEach(async (m) => {
 	botModuleConsole.attemptLoad(m.name);
 	var runDiscordModule = require(`./${m.location}/${m.main}`)
