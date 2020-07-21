@@ -20,7 +20,6 @@ try {
 	console.error(e);
 	process.exit(1);
 }
-
 console.clear();
 function getDirectories(path) {
   return fs.readdirSync(path).filter(function (file) {
@@ -30,6 +29,7 @@ function getDirectories(path) {
 
 var moduleArray = getDirectories("modules/");
 var viableModules = [];
+
 
 //			Check each of the directories in "modules/" if they have a "manifest.json" file.
 moduleArray.forEach(async (m) => {
@@ -41,11 +41,13 @@ moduleArray.forEach(async (m) => {
 	}
 })
 
+
 //			If there are no valid modules quit process.
 if (viableModules.length < 1) {
 	signale.log("[modman] No valid modules found.");
 	process.exit(0);
 }
+
 
 //			Check if manifest for the module is valid
 viableModules.forEach(async (m) => {
@@ -69,6 +71,7 @@ viableModules.forEach(async (m) => {
 	delete(jsontemp);
 
 })
+
 
 //			Check if any of the modules are libraries and if they are, remove them from the viableModules array.
 var botModulesToLoad = [];var genericModulesToLoad = [];var libraries = []; let tmparr;
@@ -106,7 +109,6 @@ viableModules.forEach(async (m) => {
 		console.error(e);
 	}
 })
-
 
 
 //			Set Global Functions and Varaibles, very important!
