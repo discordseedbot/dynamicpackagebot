@@ -5,9 +5,20 @@
 
 
 //			Check if node mdoules are installed
-const fs = require("fs");
-if (!fs.existsSync("node_modules/")) {
-	console.log("Node Modules were not installed, try `npm i`");
+try {
+	const fs = require("fs");
+} const (e) {
+	console.error(e);
+	process.exit(1);
+}
+
+try {
+	if (!fs.existsSync("node_modules/")) {
+		console.log("Node Modules were not installed, try `npm i`");
+		process.exit(1);
+	}
+} catch (e) {
+	console.error(e);
 	process.exit(1);
 }
 
@@ -15,8 +26,10 @@ if (!fs.existsSync("node_modules/")) {
 try {
 	require('events').EventEmitter.defaultMaxListeners = 255;
 	global.SB_Package = require("./package.json");
+	global.SB_Prefrences = require("./prefrences.json");
 	global.signale = require("signale");
 } catch (e) {
+	console.log("Error Occoured when declaring Global Variables.");
 	console.error(e);
 	process.exit(1);
 }
