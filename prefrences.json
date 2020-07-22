@@ -19,6 +19,14 @@
         }
     },
     "api": {
-        
+        "enable": false,
+        "network": {
+            "protocol": {
+                "type": "https",
+                "version": "3"
+            }
+            "address": "api.seedbot.xyz",
+            "port": "default",
+        }
     }
 }
