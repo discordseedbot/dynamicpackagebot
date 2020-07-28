@@ -1,4 +1,4 @@
-var tokenJSON = require("./../../../token.json");
+var tokenJSON = require("./../../token.json");
 
 
 module.exports.ck = function(tokenToGet) {
