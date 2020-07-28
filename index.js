@@ -123,14 +123,12 @@ viableModules.forEach(async (m) => {
 
 
 //			Set Global Variables.
-var token;
 global.SB_BotModules = botModulesToLoad;
 global.SB_GenericModules = genericModulesToLoad;
 libraries.forEach(async (m) => {
 	if (m.name === "core") {
 		// Setup the token varaible for the modules (if they are needed, in most cases they are.)
 		var corelib = require(`./${m.location}/${m.main}`)
-		token = corelib.tokenManager()
 		global.SB_TokenFunction = corelib.tokenManager();
 		global.SB_Token = corelib.tokenManager();
 		global.SB_Libraries = libraries;
@@ -149,6 +147,10 @@ SB_Client.login(SB_Token.discord()).catch(async function (e) {
 			signale.error("Self-Signed certificate found in chain.");
 			process.exit(1);
 			break;
+		case "TOKEN_INVALID":
+			signale.error("Discord Token is Invalid.")
+			process.exit(1);
+			break;
 		default:
 			console.log(e);
 			process.exit(1);
@@ -156,16 +158,11 @@ SB_Client.login(SB_Token.discord()).catch(async function (e) {
 	}
 });
 
-//			Declar Global Varaibles For Easie-ness
-
-
-
 //			yay, we're finally at this point where if something fucks up its the module developers fault!
 SB_Client.on('ready', function(){
 	console.clear()
 	require("signale").complete("Discord Bot has Logged In");
 });
-SB_Client.login(SB_Token.discord());
 setTimeout(async function() {
 	botModulesToLoad.forEach(async (m) => {
 		botModuleConsole.attemptLoad(`${m.name}@${require("./"+m.location+"/manifest.json").version}`)
