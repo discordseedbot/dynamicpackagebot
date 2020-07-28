@@ -80,7 +80,7 @@ module.exports = async function() {
             },
             notLoad: {
                 label: "Not Loading:",
-                color: "lightBlue"
+                color: "cyan"
             }
         }
     })
