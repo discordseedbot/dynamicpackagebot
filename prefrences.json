@@ -23,10 +23,12 @@
         "network": {
             "protocol": {
                 "type": "https",
-                "version": "3"
-            }
+                "client": {
+                    "version": "3"
+                }
+            },
             "address": "api.seedbot.xyz",
-            "port": "default",
+            "port": "auto"
         }
     }
 }
