@@ -86,7 +86,7 @@ viableModules.forEach(async (m) => {
 		let filepush = `${m}/${jsontemp.main}`;
 		if (!SB_Debug) {
 			if (m.indexOf('example') !== -1 || m.indexOf('test') !== -1) {
-				genericModuleConsole.notLoad("Example Module was disabled [Not in Debug Mode]");
+				signale.error("Example Module was disabled [Not in Debug Mode]");
 				jsontemp.type = "example";
 				return;
 			}
@@ -105,17 +105,14 @@ viableModules.forEach(async (m) => {
 				signale.warn(`[modman] Unknown Module type at "${m}/manifest.json"`);
 				break;
 		}
+		global.SB_BotModules = botModulesToLoad;
+		global.SB_GenericModules = genericModulesToLoad;
 	} catch(e) {
 		signale.error("[modman] An Error Occoured while sorting modules.");
 		console.error(e);
 	}
 })
 
-
-
-//			Set Global Variables.
-global.SB_BotModules = botModulesToLoad;
-global.SB_GenericModules = genericModulesToLoad;
 var coreFound = false;
 libraries.forEach(async (m) => {
 	if (m.name === "core") {
@@ -125,7 +122,7 @@ libraries.forEach(async (m) => {
 		global.SB_Token = corelib.tokenManager();
 		global.SB_Libraries = libraries;
 		global.SB_CoreLibrary = corelib;
-		SB_CoreLibrary.consoleInit()
+		SB_CoreLibrary.consoleInit();
 		coreFound = true;
 	}
 })
@@ -134,7 +131,6 @@ if (!coreFound) {
 	delete(coreFound);
 	process.exit(1);
 }
-
 
 //			Discord.JS Login with Error Catching.
 const Discord = require('discord.js');
