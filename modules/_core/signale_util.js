@@ -60,7 +60,15 @@ module.exports = async function() {
             loaded: {
                 label: "Loaded:",
                 color: 'green'
-            }
+            },
+            notLoad: {
+                label: "Not Loading:",
+                color: "cyan"
+            },
+			prep: {
+				label: "Preparing ",
+				color: 'orange'
+			}
         }
     })
     global.genericModuleConsole = new Signale({
@@ -81,7 +89,11 @@ module.exports = async function() {
             notLoad: {
                 label: "Not Loading:",
                 color: "cyan"
-            }
+            },
+			prep: {
+				label: "Preparing ",
+				color: 'orange'
+			}
         }
     })
 }
