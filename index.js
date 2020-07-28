@@ -5,12 +5,7 @@
 
 
 //			Check if node mdoules are installed
-try {
-	const fs = require("fs");
-} const (e) {
-	console.error(e);
-	process.exit(1);
-}
+const fs = require("fs");
 
 try {
 	if (!fs.existsSync("node_modules/")) {
@@ -166,11 +161,9 @@ SB_Client.login(SB_Token.discord()).catch(async function (e) {
 //				or some shit like that, i didn't go to uni.
 botModulesToLoad.forEach(async (m) => {
 	botModuleConsole.attemptLoad(m.name);
-	var runDiscordModule = require(`./${m.location}/${m.main}`)
-	runDiscordModule();
+	var runDiscordModule = require(`./${m.location}/${m.main}`)();
 });
 genericModulesToLoad.forEach(async (m) => {
 	genericModuleConsole.attemptLoad(m.name)
-    var runDiscordModule = require(`./${m.location}/${m.main}`);
-	runDiscordModule();
+    var runDiscordModule = require(`./${m.location}/${m.main}`)();
 });
