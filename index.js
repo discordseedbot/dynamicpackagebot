@@ -21,6 +21,13 @@ try {
 	process.exit(1);
 }
 
+//			Check if SeedBot was launched in DebugMode
+if(process.argv.indexOf("--debug") > -1){
+	global.SB_Debug = true;
+} else {
+	global.SB_Debug = false;
+}
+
 console.clear();
 function getDirectories(path) {
   return fs.readdirSync(path).filter(function (file) {
@@ -72,15 +79,19 @@ viableModules.forEach(async (m) => {
 
 //			Check if any of the modules are libraries and if they are, remove them from the viableModules array.
 var botModulesToLoad = [];var genericModulesToLoad = [];var libraries = []; let tmparr;
+
+//			Run this function for every module found in the varaible viableModules
 viableModules.forEach(async (m) => {
 	try {
 		let jsontemp = require(`./${m}/manifest.json`);
 		let filepush = `${m}/${jsontemp.main}`;
 		//console.log(`[${m.indexOf('example') !== -1}] ${m}`)
-		if (m.indexOf('example') !== -1 || m.indexOf('test') !== -1) {
-			signale.warn("Example Module Detected, Not Loading.");
-			jsontemp.type = "example";
-			return;
+		if (!SB_Debug) {
+			if (m.indexOf('example') !== -1 || m.indexOf('test') !== -1) {
+				signale.warn("Example Module Detected, Not Loading.");
+				jsontemp.type = "example";
+				return;
+			}
 		}
 		switch (jsontemp.type) {
 			case "botmod":
@@ -152,17 +163,17 @@ SB_Client.login(SB_Token.discord()).catch(async function (e) {
 //			yay, we're finally at this point where if something fucks up its the module developers fault!
 SB_Client.on('ready', function(){
 	console.clear()
-	console.log("## SeedBot Logged In!");
+	require("signale").complete("Discord Bot has Logged In");
 });
 SB_Client.login(SB_Token.discord());
 setTimeout(async function() {
 	botModulesToLoad.forEach(async (m) => {
-		botModuleConsole.attemptLoad(m.name);
+		botModuleConsole.attemptLoad(`${m.name}@${require("./"+m.location+"/manifest.json").version}`)
 		var runDiscordModule = require(`./${m.location}/${m.main}`)
 		runDiscordModule();
 	});
 	genericModulesToLoad.forEach(async (m) => {
-		genericModuleConsole.attemptLoad(m.name)
+		genericModuleConsole.attemptLoad(`${m.name}@${require("./"+m.location+"/manifest.json").version}`)
 	    var runDiscordModule = require(`./${m.location}/${m.main}`);
 		runDiscordModule();
 	});
