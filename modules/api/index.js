@@ -13,32 +13,33 @@ module.exports = function() {
 				break;
 			default:
 				termcon.err("API Protocol Type is not supported.");
+				return;
 				break;
 		}
 
 
-		SB_Client.on('message',async message => {
-			if (message.author.bot) return;
+		SB_Client.on('ready',async () => {
+			/*if (message.author.bot) return;
 			if (message.content.indexOf(prefix) !== 0) return;
-			var args = message.content.slice(prefix.length).trim().split( / +/g);
+			var args = message.content.slice(prefix.length).trim().split( / +/g);*/
 
-			require("./function.js").online();
+			require("./function.js").goOnline();
 
+			var pk = require("./function.js")
 			setInterval(function() {
-				let phunk = require("./function.js")
-				phunk.apiReqSend("userCount", SB_CoreLibrary.userCount())
-				phunk.apiReqSend("guildCount", SB_CoreLibrary.guildCount())
-				phunk.apiReqSend("channelCount", SB_CoreLibrary.channelCount())
-				phunk.apiReqSend("botVersion", SB_Package.version)
-				phunk.apiReqSend("botBuild", SB_Package.build[0])
-				phunk.apiReqSend("botBuildDate", SB_Package.build[1])
-				phunk.apiReqSend("botBranch", SB_Package.branch)
-				phunk.apiReqSend("botOwnerID", SB_Package.ownerID)
-				phunk.apiReqSend("packageName", SB_Package.name)
-				phunk.apiReqSend("botLicense", SB_Package.license)
-				phunk.apiReqSend("packageDescription", SB_Package.description)
-				require('./../functions/console.js').apiSent();
-			}, 60000);
+				pk.sendRequest("userCount", SB_CoreLibrary.userCount())
+				pk.sendRequest("guildCount", SB_CoreLibrary.guildCount())
+				pk.sendRequest("channelCount", SB_CoreLibrary.channelCount())
+				pk.sendRequest("botVersion", SB_Package.version)
+				pk.sendRequest("botBuild", SB_Package.build[0])
+				pk.sendRequest("botBuildDate", SB_Package.build[1])
+				pk.sendRequest("botBranch", SB_Package.branch)
+				pk.sendRequest("botOwnerID", SB_Package.ownerID)
+				pk.sendRequest("packageName", SB_Package.name)
+				pk.sendRequest("botLicense", SB_Package.license)
+				pk.sendRequest("packageDescription", SB_Package.description)
+				termcon.apiSent(new Date());
+			}, (SB_Prefrences.api.timeout*1000));
 
 		});
 
