@@ -1,6 +1,6 @@
 {
 	"name": "api",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"author": "Jyles Coad-Ward [jyles@dariox.club]",
 	"type": "generic",
 	"main": "index.js",
