@@ -70,7 +70,4 @@ module.exports = function() {
 	SB_Client.on('ready', () => {
 		botModuleConsole.loaded("DMOJ")
 	})
-
-
-	SB_Client.login(SB_Token.discord());
 }

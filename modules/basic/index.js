@@ -13,31 +13,34 @@ module.exports = function() {
 		try {
 			switch (command) {
 				case 'help':
-					require('./help.js').cmd(message,SB_CoreLibrary);
+					require('./help.js').cmd(message);
 					break;
 				case 'invite':
-					require('./invite.js').cmd(message,SB_CoreLibrary);
+					require('./invite.js').cmd(message);
 					break;
 				case 'ping':
-					require('./ping.js').cmd(message,SB_CoreLibrary);
+					require('./ping.js').cmd(message);
 					break;
 				case 'patreon':
-					require('./patreon.js').cmd(message,SB_CoreLibrary);
+					require('./patreon.js').cmd(message);
 					break;
 				case 'support':
-					require('./support.js').cmd(message,SB_CoreLibrary);
+					require('./support.js').cmd(message);
 					break;
 				case 'roadmap':
-					require('./roadmap.js').cmd(message,SB_CoreLibrary);
+					require('./roadmap.js').cmd(message);
 					break;
 				case 'guide':
-					require('./guide.js').cmd(message,SB_CoreLibrary);
+					require('./guide.js').cmd(message);
 					break;
 				case 'avatar':
-					require('./avatar.js').cmd(message,SB_CoreLibrary);
+					require('./avatar.js').cmd(message);
 					break;
 				case 'info':
-					require('./info.js').cmd(message,SB_CoreLibrary);
+					require('./info.js').cmd(message);
+					break;
+				case 'github':
+					require('./contrib.js').github(message);
 					break;
 			}
 		} catch(err) {
@@ -52,7 +55,4 @@ module.exports = function() {
 	SB_Client.on('ready', () => {
 		botModuleConsole.loaded("Basic")
 	})
-
-
-	SB_Client.login(SB_Token.discord());
 }

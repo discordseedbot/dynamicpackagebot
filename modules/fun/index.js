@@ -39,6 +39,4 @@ module.exports = function() {
 	SB_Client.on('ready', () => {
 		botModuleConsole.loaded("Fun");
 	})
-
-	SB_Client.login(SB_Token.discord());
 }

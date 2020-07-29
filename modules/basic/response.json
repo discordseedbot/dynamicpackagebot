@@ -22,5 +22,9 @@
 	"guide": {
 		"title": "SeedBot Install Guide",
 		"desc": "If you want to install SeedBot with your own Bot Token and have your own bot then click [here!](https://seedbot.xyz?docs)"
+	},
+	"github": {
+		"title": "SeedBot Github",
+		"desc": "If you feel like helping with the creation and expansion of SeedBot you can help us with pull requests on our [github.](https://seedbot.xyz?github)"
 	}
 }

@@ -9,7 +9,7 @@ function addMsgInfo(message) {
     return content.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
 }
 
-// Developer Error 
+// Developer Error
 module.exports.developerError = async function(message,error) {
     if (message.author.bot) return;
     addMsgInfo(message)
@@ -20,7 +20,7 @@ module.exports.developerError = async function(message,error) {
     SB_Client.channels.cache.get(channelJSON.developer.error).send(tmp);
     delete(tmp);
 }
-// Userspace Error 
+// Userspace Error
 module.exports.userspaceError  = async function(message,error) {
     if (message.author.bot) return;
     addMsgInfo(message)
@@ -61,7 +61,6 @@ module.exports.developerUnauth = async function (message,error) {
             .setDescription("Sorry, You cannot access this command because you are not the maintainer of this project or your ownerID has been setup incorrectly in token.json.");
         message.channel.send(invalidAuthor)
     })
-    SB_Client.login(SB_Token.discord())
 
         // Tell the developers that someone is retarded.
     let dumbCunt = new Discord.MessageEmbed()

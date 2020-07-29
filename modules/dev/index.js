@@ -90,7 +90,7 @@ module.exports = function() {
 					.addField("Command Executed","```"+message.content+"```")
 					.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
 					.setTimestamp();
-				
+
 				SB_Libraries.forEach(async (m) => {
 					if (m.name === "developer_alerts") {
 						let tmpRequire = require(`./../../${m.location}/${m.main}`).developerNotif(tmpNotifContent);
@@ -113,7 +113,4 @@ module.exports = function() {
 	SB_Client.on('ready', () => {
 		botModuleConsole.loaded("Developer Utilities");
 	})
-
-
-	SB_Client.login(SB_Token.discord());
 }
