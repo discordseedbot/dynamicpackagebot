@@ -37,7 +37,7 @@ module.exports.kick = function(message, args) {
 	}});
 }
 
-module.exports.members.ban = function(message,args) {
+module.exports.ban = function(message,args) {
 	let reason = args.slice(1).join(' ');
 	let userToKick = message.mentions.users.first();
 	if (reason.length < 1) { message.reply('You must supply a reason for the.members.ban.'); return false; }
