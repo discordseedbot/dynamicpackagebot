@@ -43,6 +43,10 @@ module.exports = async function() {
             newGuild: {
                 label: "Bot Joined New Guild",
                 color: 'green'
+            },
+            apiSent: {
+                label: "API Update sent at",
+                color: 'yellow'
             }
         }
     });
