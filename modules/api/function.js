@@ -13,10 +13,26 @@ function validProtocolType() {
 }
 const pfx = validProtocolType();
 
-var base = `${SB_Prefrences.api.protocol.type}://${SB_Prefrences.api.address}`
+var base;
+
+switch (SB_Prefrences.api.protocol.port) {
+	case "auto":
+	case "default":
+	case "autodetect":
+		base = `${SB_Prefrences.api.protocol.type}://${SB_Prefrences.api.address}/`;
+		break;
+	default:
+		if (/^\d+$/.test(SB_Prefrences.api.port)) {
+			base = `${SB_Prefrences.api.protocol.type}://${SB_Prefrences.api.address}:${SB_Prefrences.api.port}/`;
+		} else {
+			base = `${SB_Prefrences.api.protocol.type}://${SB_Prefrences.api.address}/`;
+			termcon.err("Invalid Port given for API in `prefrences.json`, Must only contain numbers.");
+		}
+		break;
+}
 
 module.exports.checkConnection = function() {
-	https.get(curlRequest + "connectionTest", (res) => {
+	pfx.get(`${base}?req=checkConnection`, (res) => {
 		res.on('data', (d) => {
 			if (d === 'true') {
 					require('./../functions/console.js').info("Connection Established to API Server.");
@@ -26,42 +42,9 @@ module.exports.checkConnection = function() {
 		})
 	})
 }
-
-module.exports.apiReqSend = async function(type, data) {
-	var result;
-	var url = `${token.apiURL()}?token=${token.apiToken()}&req=${type}&data=${data}`;
-
-	https.get(url)
-}
-
-
-module.exports.offlineAPIRequest = function() {
-	console.log("Sending Offline Message to API Server")
-	var result;
-	var url = `${token.apiURL()}?token=${token.apiToken()}&req=isOnline&data=offline`;
-
-	https.get(url, (res) => {
-		console.log("Sent Offline Message to API Server");
-	});
-}
-module.exports.online = function() {
-	var result;
-	var url = `${token.apiURL()}?token=${token.apiToken()}&req=isOnline&data=online`;
-
-	https.get(url, (res) => {})
-}
-module.exports.offline = function SendOfflineStuff(){
-	if (token.apiToken() !== "seedbot-api-token"){
-		require("./function.js").offlineAPIRequest();
-		setTimeout(process.exit(), 20000);
-	} else {
-		process.exit();
-	}
-}
-
 async function sendRequest(r,d) {
 	if (!pfx) {
-		let url = `${base}?req=${r}&data=${d}&token=${SB_Token.api}`;
+		let url = `${base}?req=${r}&data=${d}&token=${SB_Token.apiToken()}`;
 		pfx.get(url, async (res) => {
 			res.on('data', (d) => {
 				return `${d}`;
@@ -70,14 +53,34 @@ async function sendRequest(r,d) {
 	}
 
 }
-async function getRequest(request) {
-
+async function getRequest(r) {
+	if (!pfx) {
+		let url = `${base}?req=${r}`;
+		pfx.get(url, async (res) => {
+			res.on('data', (d) => {
+				return `${d}`;
+			})
+		})
+	}
 }
 
 
 module.exports.goOnline = async function() {
+	var url = `${base}?token=${SB_Token.apiToken()}&req=isOnline&data=online`;
 
+	https.get(url)
 }
 module.exports.goOffline = async function() {
-
+	if (token.apiToken() !== "seedbot-api-token"){
+		if (!pfx) {
+			let url = `${base}?req=isOnline&data=offline&token=${SB_Token.apiToken()}`
+			pfx.get(url, async (res) => {
+				res.on('data', (d) => {
+					setTimeout(process.exit(),300);
+				})
+			})
+		}
+	} else {
+		process.exit();
+	}
 }
