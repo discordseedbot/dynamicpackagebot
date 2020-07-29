@@ -55,22 +55,32 @@ module.exports = async function() {
             //      If there is an error with the command that was executed it catches it
             //      and send the error message to a discord channel (that is if the bot is in it.)
 
-            //      If you have the developer alerts module installed and working you can use this;
-                /*
+            /*      If you have the developer alerts module installed and working you can use this;
+
 			SB_Libraries.forEach(async (m) => {
 				if (m.name === "developer_alerts") {
 					let tmpRequire = require(`./../../${m.location}/${m.main}`).userspaceError(message, err);
 				}
 			})
                 */
-        } 
+        }
 
     })
 
 
     SB_Client.on('ready', async () => {
         //      Tells the server hoster that the module has been loaded.
+
+        /*          For Bot Modules (commands and stuff like that)
+                        use this;
         botModuleConsole.loaded("Module Name Here");
+
+                    But for generic modules (an example of that is the startup module
+                                                    and the terminal module)
+
+        genericModuleConsole.loaded("Module Name Here");
+
+        */
         // Here goes your code!
     })
 }

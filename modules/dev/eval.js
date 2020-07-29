@@ -14,8 +14,9 @@ function evaluate(input) {
 }
 
 module.exports.cmd = function(message, args) {
-		const code = args.join(" ");
+	const code = args.join(" ");
+	console.log(code)
 
-		evaled = require("util").inspect(evaluate(code));
-		message.channel.send("```"+evaled+"```")
+	evaled = require("util").inspect(code);
+	message.channel.send("input: ```"+evaled+"```\noutput: ```"+eval(code)+"```")
 }

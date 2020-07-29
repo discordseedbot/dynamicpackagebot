@@ -15,17 +15,18 @@ if (!fs.existsSync("node_modules/")) {
 try {
 	require('events').EventEmitter.defaultMaxListeners = 255;
 	global.SB_Package = require("./package.json");
+	global.SB_Prefrences = require("./prefrences.json");
 	global.signale = require("signale");
 } catch (e) {
+	signale.error("An error Occoured when declaring [GlobalVariables]");
 	console.error(e);
 	process.exit(1);
 }
 
 //			Check if SeedBot was launched in DebugMode
+global.SB_Debug = false;
 if(process.argv.indexOf("--debug") > -1){
 	global.SB_Debug = true;
-} else {
-	global.SB_Debug = false;
 }
 
 console.clear();
@@ -73,8 +74,6 @@ viableModules.forEach(async (m) => {
 		}
 		console.error(e)
 	}
-	delete(jsontemp);
-
 })
 
 //			Check if any of the modules are libraries and if they are, remove them from the viableModules array.
@@ -85,46 +84,36 @@ viableModules.forEach(async (m) => {
 	try {
 		let jsontemp = require(`./${m}/manifest.json`);
 		let filepush = `${m}/${jsontemp.main}`;
-		//console.log(`[${m.indexOf('example') !== -1}] ${m}`)
 		if (!SB_Debug) {
 			if (m.indexOf('example') !== -1 || m.indexOf('test') !== -1) {
-				signale.warn("Example Module Detected, Not Loading.");
+				signale.error("Example Module was disabled [Not in Debug Mode]");
 				jsontemp.type = "example";
 				return;
 			}
 		}
 		switch (jsontemp.type) {
 			case "botmod":
-				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
-				botModulesToLoad.push(tmparr);
-				delete(tmparr);
+				botModulesToLoad.push(		JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`));
 				break;
 			case "generic":
-				 tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
-				genericModulesToLoad.push(tmparr);
-				delete(tmparr);
+				genericModulesToLoad.push(	JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`));
 				break;
 			case "library":
-				//libLoaded(m);
-				tmparr = JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`);
-				libraries.push(tmparr);
-				delete(tmparr);
+				libraries.push(				JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`));
 				break;
 			default:
 				signale.warn(`[modman] Unknown Module type at "${m}/manifest.json"`);
 				break;
 		}
+		global.SB_BotModules = botModulesToLoad;
+		global.SB_GenericModules = genericModulesToLoad;
 	} catch(e) {
 		signale.error("[modman] An Error Occoured while sorting modules.");
 		console.error(e);
 	}
 })
 
-
-
-//			Set Global Variables.
-global.SB_BotModules = botModulesToLoad;
-global.SB_GenericModules = genericModulesToLoad;
+var coreFound = false;
 libraries.forEach(async (m) => {
 	if (m.name === "core") {
 		// Setup the token varaible for the modules (if they are needed, in most cases they are.)
@@ -133,12 +122,17 @@ libraries.forEach(async (m) => {
 		global.SB_Token = corelib.tokenManager();
 		global.SB_Libraries = libraries;
 		global.SB_CoreLibrary = corelib;
-		corelib.consoleInit()
+		SB_CoreLibrary.consoleInit();
+		coreFound = true;
 	}
 })
+if (!coreFound) {
+	signale.error("Core Library was not found. Process Halted.");
+	delete(coreFound);
+	process.exit(1);
+}
 
-
-//			Discord Setup Stuff
+//			Discord.JS Login with Error Catching.
 const Discord = require('discord.js');
 global.SB_Client = new Discord.Client();
 SB_Client.login(SB_Token.discord()).catch(async function (e) {
@@ -158,20 +152,22 @@ SB_Client.login(SB_Token.discord()).catch(async function (e) {
 	}
 });
 
-//			yay, we're finally at this point where if something fucks up its the module developers fault!
+//			From this point all errors should be from the modules.
 SB_Client.on('ready', function(){
-	console.clear()
-	require("signale").complete("Discord Bot has Logged In");
+	if (!SB_Debug) {
+		console.clear()
+		signale.complete("Discord Bot has Logged In");
+	} else {
+		console.log(`- - - - - Discord Bot Logged In - - - - -`)
+	}
 });
 setTimeout(async function() {
 	botModulesToLoad.forEach(async (m) => {
 		botModuleConsole.attemptLoad(`${m.name}@${require("./"+m.location+"/manifest.json").version}`)
-		var runDiscordModule = require(`./${m.location}/${m.main}`)
-		runDiscordModule();
+		require(`./${m.location}/${m.main}`)();
 	});
 	genericModulesToLoad.forEach(async (m) => {
-		genericModuleConsole.attemptLoad(`${m.name}@${require("./"+m.location+"/manifest.json").version}`)
-	    var runDiscordModule = require(`./${m.location}/${m.main}`);
-		runDiscordModule();
+		genericModuleConsole.attemptLoad(`${m.name}@${require("./"+m.location+"/manifest.json").version}`);
+	    require(`./${m.location}/${m.main}`)();
 	});
-}, 600)
+}, 300)
