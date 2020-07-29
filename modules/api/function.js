@@ -44,8 +44,7 @@ module.exports.checkConnection = function() {
 }
 async function sendRequest(r,d) {
 	if (!pfx) {
-		let url = `${base}?req=${r}&data=${d}&token=${SB_Token.apiToken()}`;
-		pfx.get(url, async (res) => {
+		pfx.get(`${base}?req=${r}&data=${d}&token=${SB_Token.apiToken()}`, async (res) => {
 			res.on('data', (d) => {
 				return `${d}`;
 			})
@@ -66,9 +65,7 @@ async function getRequest(r) {
 
 
 module.exports.goOnline = async function() {
-	var url = `${base}?token=${SB_Token.apiToken()}&req=isOnline&data=online`;
-
-	https.get(url)
+	https.get(`${base}?token=${SB_Token.apiToken()}&req=isOnline&data=online`);
 }
 module.exports.goOffline = async function() {
 	if (token.apiToken() !== "seedbot-api-token"){
