@@ -24,11 +24,12 @@
             "protocol": {
                 "type": "https",
                 "client": {
-                    "version": "3"
+                    "version": 3
                 }
             },
             "address": "api.seedbot.xyz",
-            "port": "auto"
+            "port": "auto",
+            "timeout": 60
         }
     }
 }
