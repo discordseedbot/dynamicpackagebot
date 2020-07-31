@@ -16,7 +16,7 @@ module.exports = function() {
 				let sendNotif = true;
 				switch (command) {
 					case 'api':
-						if (token.api !== "seedbot-api-token") {
+						if (SB_Token.apiToken() !== "seedbot-api-token") {
 							require('./api.js').cmd(message, args);
 						} else {
 							message.reply("API Token has not been changed, not executing.");
