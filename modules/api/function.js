@@ -1,5 +1,5 @@
 function validProtocolType() {
-	switch (pref.api.network.protocol.type) {
+	switch (SB_Prefrences.api.network.protocol.type) {
 		case "https":
 			return require("https");
 			break;
@@ -15,21 +15,23 @@ const pfx = validProtocolType();
 
 var base;
 
-switch (SB_Prefrences.api.protocol.port) {
+switch (SB_Prefrences.api.network.port) {
 	case "auto":
 	case "default":
 	case "autodetect":
-		base = `${SB_Prefrences.api.protocol.type}://${SB_Prefrences.api.address}/`;
+		base = `${SB_Prefrences.api.network.protocol.type}://${SB_Prefrences.api.network.address}/`;
 		break;
 	default:
-		if (/^\d+$/.test(SB_Prefrences.api.port)) {
-			base = `${SB_Prefrences.api.protocol.type}://${SB_Prefrences.api.address}:${SB_Prefrences.api.port}/`;
+		if (/^\d+$/.test(SB_Prefrences.api.network.port)) {
+			base = `${SB_Prefrences.api.network.protocol.type}://${SB_Prefrences.api.network.address}:${SB_Prefrences.api.network.port}/`;
 		} else {
-			base = `${SB_Prefrences.api.protocol.type}://${SB_Prefrences.api.address}/`;
+			base = `${SB_Prefrences.api.network.protocol.type}://${SB_Prefrences.api.network.address}/`;
 			termcon.err("Invalid Port given for API in `prefrences.json`, Must only contain numbers.");
 		}
 		break;
 }
+
+console.log(base)
 
 module.exports.checkConnection = function() {
 	pfx.get(`${base}?req=checkConnection`, (res) => {
@@ -42,17 +44,18 @@ module.exports.checkConnection = function() {
 		})
 	})
 }
-async function sendRequest(r,d) {
+module.exports.sendRequest = async function (r,d) {
 	if (!pfx) {
 		pfx.get(`${base}?req=${r}&data=${d}&token=${SB_Token.apiToken()}`, async (res) => {
 			res.on('data', (d) => {
+				console.log(`sent [${r}] with the data of [${d}]`);
 				return `${d}`;
 			})
 		})
 	}
 
 }
-async function getRequest(r) {
+module.exports.getRequest = async function (r) {
 	if (!pfx) {
 		let url = `${base}?req=${r}`;
 		pfx.get(url, async (res) => {
