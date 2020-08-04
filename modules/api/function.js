@@ -34,6 +34,8 @@ switch (SB_Prefrences.api.network.port) {
 }
 if (SB_Debug) {apicon.debug(`Base Request Set to [${base}]`)};
 
+console.log(base)
+
 module.exports.checkConnection = function() {
 	pfx.get(`${base}?req=checkConnection`, (res) => {
 		res.on('data', (d) => {

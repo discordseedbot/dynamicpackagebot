@@ -3,23 +3,21 @@ const package = require("./../../package.json");
 module.exports.cmd = function(message, args) {
 	if (message.author.id === package.ownerID){
 		var request = args.slice(0).join(" ");
-		var apiFUNC = require("./../api/function.js");
+		var pk = require("./../api/function.js");
 		switch (request) {
 			case 'updateAll':
-				message.channel.send("Force Updated All API Fields");
-				apiFUNC.apiReqSend("userCount", SB_Client.users.size);
-				apiFUNC.apiReqSend("guildCount", SB_Client.guilds.size);
-				apiFUNC.apiReqSend("channelCount", SB_Client.channels.size);
-				apiFUNC.apiReqSend("botVersion", package.version);
-				apiFUNC.apiReqSend("botBuild", package.build[0]);
-				apiFUNC.apiReqSend("botBuildDate", package.build[1]);
-				apiFUNC.apiReqSend("botBranch", package.branch);
-				apiFUNC.apiReqSend("botOwnerID", package.ownerID);
-				apiFUNC.apiReqSend("packageName", package.name);
-				apiFUNC.apiReqSend("botLicense", package.license);
-				apiFUNC.apiReqSend("packageDescription", package.description);
-				require('./../functions/console.js').apiSent();
-				break;
+				pk.sendRequest("userCount", SB_CoreLibrary.userCount())
+				pk.sendRequest("guildCount", SB_CoreLibrary.guildCount())
+				pk.sendRequest("channelCount", SB_CoreLibrary.channelCount())
+				pk.sendRequest("botVersion", SB_Package.version)
+				pk.sendRequest("botBuild", SB_Package.build[0])
+				pk.sendRequest("botBuildDate", SB_Package.build[1])
+				pk.sendRequest("botBranch", SB_Package.branch)
+				pk.sendRequest("botOwnerID", SB_Package.ownerID)
+				pk.sendRequest("packageName", SB_Package.name)
+				pk.sendRequest("botLicense", SB_Package.license)
+				pk.sendRequest("packageDescription", SB_Package.description)
+				termcon.apiSent(new Date());
 			case 'update-userCount':
 				apiFUNC.apiReqSend("userCount", SB_Client.users.size);
 				break;
