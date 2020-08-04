@@ -19,17 +19,18 @@
         }
     },
     "api": {
-        "enable": false,
+        "enable": true,
         "network": {
             "protocol": {
-                "type": "https",
+                "type": "http",
                 "client": {
-                    "version": 3
+                    "version": 4,
+                    "schema": 2
                 }
             },
-            "address": "api.seedbot.xyz",
-            "port": "auto",
-            "timeout": 60
-        }
+            "address": "127.0.0.1",
+            "port": 8888
+        },
+        "timeout": 60
     }
 }
