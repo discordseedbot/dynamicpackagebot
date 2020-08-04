@@ -4,6 +4,59 @@ const prefix = SB_CoreLibrary.prefix().discord;
 
 module.exports = function() {
 
+	const { Signale } = require("signale");
+
+	global.apicon = new Signale({
+        disabled: false,
+        interactive: false,
+        logLevel: 'info',
+        scope: 'API',
+        stream: process.stdout,
+        types: {
+            err: {
+                label: "General Error",
+                color: 'red'
+            },
+            invalidCommand: {
+                label: "Invalid Command",
+                color: 'red'
+            },
+            invalidArgument: {
+                label: "Invalid Argument",
+                color: 'red'
+            },
+            succ: {
+                label: "Success",
+                color: 'green'
+            },
+            returnValue: {
+                label: 'Return Value',
+                color: 'yellow'
+            },
+            seeya: {
+                label: "Quitting SeedBot",
+                color: 'yellow'
+            },
+            warmingUp: {
+                label: "Warming Up",
+                color: 'blueBright'
+            },
+            info: {
+                label: "Info",
+                color: 'cyan',
+				badge: ''
+            },
+            apiSent: {
+                label: "API Update sent at",
+                color: 'yellow'
+            },
+			debug: {
+				label: "Debug",
+				color: "magenta"
+			}
+        }
+    });
+
 	if (!SB_Prefrences.api.enable) {
 		genericModuleConsole.notLoad("API Module was disabled from `prefrences.json`");
 	} else {
@@ -39,7 +92,7 @@ module.exports = function() {
 				pk.sendRequest("botLicense", SB_Package.license)
 				pk.sendRequest("packageDescription", SB_Package.description)
 				termcon.apiSent(new Date());
-			}, (SB_Prefrences.api.timeout*1000));
+			}, (SB_Prefrences.api.timeout * 1000));
 
 		});
 
