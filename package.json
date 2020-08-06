@@ -1,9 +1,9 @@
 {
   "name": "dynamicpackagebot",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "build": [
-    "2020.08.04",
-    "89"
+    "2020.08.06",
+    "90"
   ],
   "ownerID": [
     "317250979311386627",
@@ -31,7 +31,11 @@
     "fs": "0.0.1-security",
     "http": "0.0.1-security",
     "inquirer": "^7.2.0",
+    "opusscript": "0.0.7",
     "path": "^0.12.7",
-    "signale": "^1.4.0"
+    "signale": "^1.4.0",
+    "ytdl-core": "^3.2.0",
+    "ytpl": "^0.2.3",
+    "ytsearcher": "^1.2.2"
   }
 }
