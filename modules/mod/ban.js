@@ -4,21 +4,21 @@ const { RichEmbed } = require("discord.js");
 module.exports.cmd = function(message,args) {
 	let reason = args.slice(1).join(' ');
 	let userToKick = message.mentions.users.first();
-	if (reason.length < 1) { message.reply('You must supply a reason for the ban.'); return false; }
-	if (userToKick === undefined) { message.reply('You must mention someone to kick them.'); return false; }
+	if (reason.length < 1) { message.reply('You must supply a reason for the ban.'); }
+	if (userToKick === undefined) { message.reply('You must mention someone to kick them.'); }
 
-	if (!message.guild.member(userToKick).kickable){ message.reply('I cannot kick that member'); return false; };
-	if (!message.member.permissions.has('BAN_MEMBERS')) {message.reply('You do not have permissions to ban.'); return false;}
-	if (!SB_Client.guild.me.permissions.has('BAN_MEMBERS')) {message.reply("I don't have permission to ban!"); return false;}
-	message.guild.member(userToKick).ban();
+	if (!message.guild.member(userToKick).kickable){ message.reply('I cannot kick that member');};
+	if (!message.member.permissions.has('BAN_MEMBERS')) {message.reply('You do not have permissions to ban.');}
+	if (!SB_Client.guild.me.permissions.has('BAN_MEMBERS')) {message.reply("I don't have permission to ban.");}
+	message.guild.member(userToKick.id).ban();
 
-	kickedUserID = message.mentions.users.first().id;
+	bannedUserID = message.mentions.users.first().id;
 
 	message.channel.send({embed: {
 		color: 770000,
 		author: {name:'Banned User'},
 		fields: [{
-		name: 'Reason // ' + user + ' has been Banned',
+		name: `${userToKick.username} has been banned.`,
 		value: 'Reason:\n ' + reason
 		}],
 			timestamp: 'Banned at ' + new Date(),
@@ -26,7 +26,7 @@ module.exports.cmd = function(message,args) {
 			text: 'Banned by ' + message.author.username,
 		}
 	}});
-	SB_Client.channels.get(userToKick).send({embed: {
+	SB_Client.users.cache.get(bannedUserID).send({embed: {
 		color: 770000,
 		author: {name:'Banned User'},
 		fields: [{
