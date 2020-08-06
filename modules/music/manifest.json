@@ -1,0 +1,8 @@
+{
+	"name": "music",
+	"version": "13.9.10",
+	"author": "Jyles Coad-Ward [jyles@dariox.club]",
+	"type": "botmod",
+	"main": "index.js",
+	"issues": "https://github.com/discordseedbot/seedbot_addonmusic/issues"
+}
