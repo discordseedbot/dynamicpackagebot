@@ -1,8 +1,0 @@
-{
-	"name": "moderation",
-	"version": "1.0",
-	"author": "Jyles Coad-Ward [jyles@dariox.club]",
-	"type": "botmod",
-	"main": "index.js",
-	"issues": "https://discordseedbot.github.io/modules/api"
-}

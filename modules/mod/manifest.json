@@ -1,0 +1,7 @@
+{
+	"name": "moderation",
+	"version": "1.0.1",
+	"author": "Jyles Coad-Ward [jyles@dariox.club]",
+	"type": "botmod",
+	"main": "index.js"
+}

@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
+const prefix = SB_CoreLibrary.prefix().default;
 
 module.exports = function() {
 	SB_Client.on('message',async message => {
@@ -11,19 +12,16 @@ module.exports = function() {
 		try {
 			switch (command) {
 				case 'kick':
-					require('./kick.js').cmd(message,args);
-					break;
 				case 'ban':
-					require('./ban.js').cmd(message,args);
-					break;
 				case 'purge':
-					require('./purge.js').cmd(message,args);
+					require(`./${command.toLowerCase()}.js`)(message,args);
 					break;
 			}
 		} catch(err) {
 			SB_Libraries.forEach(async (m) => {
 				if (m.name === "developer_alerts") {
 					let tmpRequire = require(`./../../${m.location}/${m.main}`).userspaceError(message, err);
+					console.error(err)
 				}
 			})
 		}
