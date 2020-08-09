@@ -41,8 +41,6 @@ module.exports = async function(message,args) {
 		.addField("Description", info.videoDetails.shortDescription.substring(0, 1022),false)
 		.addField("Video Information", `**${commafy(info.videoDetails.viewCount)}** views\r\n**Duration** ${new Date(info.videoDetails.lengthSeconds * 1000).toISOString().substr(14, 5)}\r\n**Category** ${info.videoDetails.category}\r\n**Age Restricted** ${info.videoDetails.age_restricted}\r\n**Publish Date** ${info.videoDetails.publishDate}`,true)
 		.setTimestamp()
-
-		var downloads="";
 		info.formats.forEach(i => {
 			if (i.mimeType.includes("video/") && i.hasAudio && i.hasVideo) {
 				final.addField(`Download [${i.qualityLabel} ${i.width}x${i.height}@${i.fps}]`,`[${i.mimeType}](${i.url})`)
@@ -52,7 +50,6 @@ module.exports = async function(message,args) {
 				console.log()*/
 			}
 		})
-		console.log(final)
 	info.videoDetails.thumbnail.thumbnails.forEach(t => {
 		if (t.url.includes("maxresdefault.jpg")) {
 			final.setThumbnail(t.url);
