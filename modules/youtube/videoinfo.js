@@ -9,7 +9,7 @@ function commafy( num ) {
     if (str[1] && str[1].length >= 5) {
         str[1] = str[1].replace(/(\d{3})/g, '$1 ');
     }
-    return str.join('.');
+    return str.join(',');
 }
 
 module.exports = async function(message,args) {
@@ -22,34 +22,37 @@ module.exports = async function(message,args) {
 	}
 	var videoID = args[0];
 
-	if (!ytdl.validateURL(videoID) || !ytdl.validateID(videoID)) {
-		m.edit("Invalid Video ID/Video URL");
-		message.channel.stopTyping()
-		return;
+	if (!ytdl.validateURL(videoID)) {
+		if (!ytdl.validateID(videoID)) {
+			m.edit("Invalid Video ID/Video URL");
+			message.channel.stopTyping()
+			return;
+		}
 	}
 
 	var info = await ytdl.getInfo(videoID);
+
 
 	var final = new Discord.MessageEmbed()
 		.setColor(SB_CoreLibrary.misc_randHex())
 		.setTitle(info.videoDetails.title)
 		.setURL(`https://youtube.com/watch?v=${info.videoDetails.videoId}`)
 		.setAuthor(info.videoDetails.author.name, info.videoDetails.author.avatar, info.videoDetails.author.channel_url)
-		.addField("Description", info.videoDetails.shortDescription,false)
+		.addField("Description", info.videoDetails.shortDescription.substring(0, 1022),false)
 		.addField("Video Information", `**${commafy(info.videoDetails.viewCount)}** views\r\n**Duration** ${new Date(info.videoDetails.lengthSeconds * 1000).toISOString().substr(14, 5)}\r\n**Category** ${info.videoDetails.category}\r\n**Age Restricted** ${info.videoDetails.age_restricted}\r\n**Publish Date** ${info.videoDetails.publishDate}`,true)
 		.setTimestamp()
 
 		var downloads="";
 		info.formats.forEach(i => {
 			if (i.mimeType.includes("video/") && i.hasAudio && i.hasVideo) {
-				downloads+=`[${i.qualityLabel} ${i.width}x${i.height}@${i.fps}](${i.url})\r\n`
+				final.addField(`Download [${i.qualityLabel} ${i.width}x${i.height}@${i.fps}]`,`[${i.mimeType}](${i.url})`)
 				/*console.log(`[VIDEO] [${i.width}x${i.height}@${i.fps}] [${i.qualityLabel}]`)
 				console.log(`[AUDIO] [${i.audioBitrate} kb/s] [${i.audioQuality}]`)
 				console.log(`${i.url}`)
 				console.log()*/
 			}
 		})
-		final.addField("Downloads",downloads,true)
+		console.log(final)
 	info.videoDetails.thumbnail.thumbnails.forEach(t => {
 		if (t.url.includes("maxresdefault.jpg")) {
 			final.setThumbnail(t.url);
