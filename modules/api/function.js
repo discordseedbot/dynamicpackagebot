@@ -26,7 +26,7 @@ switch (SB_Prefrences.api.network.port) {
 		break;
 	default:
 		if (/^\d+$/.test(SB_Prefrences.api.network.port)) {
-			if (SB_Debug) {apicon.debug("Port is set to [${SB_Prefrences.api.network.port}]")}
+			if (SB_Debug) {apicon.debug(`Port is set to [${SB_Prefrences.api.network.port}]`)}
 			base = `${SB_Prefrences.api.network.protocol.type}://${SB_Prefrences.api.network.address}:${SB_Prefrences.api.network.port}/`;
 		} else {
 			if (SB_Debug) {apicon.debug("Port is set to [AutoDetect]")}
@@ -36,8 +36,6 @@ switch (SB_Prefrences.api.network.port) {
 		break;
 }
 if (SB_Debug) {apicon.debug(`Base Request Set to [${base}]`)};
-
-console.log(base)
 
 module.exports.checkConnection = async function() {
 	pfx.get(`${base}?req=checkConnection`, (res) => {

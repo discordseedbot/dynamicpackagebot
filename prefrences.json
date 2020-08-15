@@ -20,7 +20,7 @@
         }
     },
     "api": {
-        "enable": false,
+        "enable": true,
         "network": {
             "protocol": {
                 "type": "http",

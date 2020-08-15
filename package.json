@@ -1,16 +1,16 @@
 {
   "name": "dynamicpackagebot",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "build": [
-    "2020.08.08",
-    "105"
+    "2020.08.15",
+    "106"
   ],
   "ownerID": [
     "317250979311386627",
     "230485481773596672"
   ],
   "branch": "canary",
-  "description": "A Discord Bot that Auto-Detects New Modules without editing any core files.",
+  "description": "An Open Source General Purpose Discord Bot written in Node.JS",
   "main": "index.js",
   "scripts": {
     "start": "node .",
