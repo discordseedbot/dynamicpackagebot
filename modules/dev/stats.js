@@ -1,30 +1,24 @@
 const Discord = require("discord.js");
-const { RichEmbed } = require("discord.js");
 
 module.exports.work = function(message,args) {
-    args = args.slice(0).join(' ');
-    switch(args) {
-        case "usercount":
-            let evalEmbed1 = new Discord.MessageEmbed()
-                .setColor('#90d190')
-                .setTitle('User Count')
-                .setTimestamp()
-                .setDescription(SB_CoreLibrary.userCount());
-            message.channel.send(evalEmbed1); break;
-        case "serverlist":
-            let evalEmbed2 = new Discord.MessageEmbed()
-                .setColor('#90d190')
-                .setTitle('Server List')
-                .setAuthor("Number of Available Servers: " + SB_CoreLibrary.guildCount())
-                .setTimestamp()
-                .setDescription(SB_Client.guilds.cache.map(m => m.name).join("\n"));
-            message.channel.send(evalEmbed2); break;
-        case "channelcount":
-            let evalEmbed3 = new Discord.MessageEmbed()
-                .setColor('#90d190')
-                .setTitle('Channel Count')
-                .setTimestamp()
-                .setDescription(channelcount);
-            message.channel.send(evalEmbed3); break;
-    }
+	let msg2sd = new Discord.MessageEmbed() .setColor(SB_CoreLibrary.misc_randHex()) .setTimestamp()
+	switch(args.slice(0).join(' ')) {
+		case "usercount":
+			msg2sd.setTitle('User Count')
+			.setDescription(SB_CoreLibrary.userCount());
+			break;
+		case "serverlist":
+			msg2sd.setTitle('Server List')
+			.setAuthor("Number of Available Servers: " + SB_CoreLibrary.guildCount())
+			.setDescription(SB_Client.guilds.cache.map(m => m.name).join("\n"));
+			break;
+		case "channelcount":
+			msg2sd.setTitle('Channel Count')
+			.setDescription(channelcount);
+			break;
+		default:
+			return;
+			break;
+	}
+	message.channel.send(msg2sd);
 }
