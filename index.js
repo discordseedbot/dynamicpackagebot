@@ -114,7 +114,7 @@ viableModules.forEach(async (m) => {
 })
 
 var coreFound = false;
-libraries.forEach(async (m) => {
+libraries.forEach((m) => {
 	if (m.name === "core") {
 		// Setup the token varaible for the modules (if they are needed, in most cases they are.)
 		var corelib = require(`./${m.location}/${m.main}`)
@@ -136,6 +136,7 @@ if (!coreFound) {
 const Discord = require('discord.js');
 global.SB_Client = new Discord.Client();
 SB_Client.login(SB_Token.discord()).catch(async function (e) {
+	console.log(e);
 	switch(e.code) {
 		case "SELF_SIGNED_CERT_IN_CHAIN":
 			signale.error("Self-Signed certificate found in chain.");
