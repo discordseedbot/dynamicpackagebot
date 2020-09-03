@@ -14,7 +14,7 @@
 	"description": "An Open Source General Purpose Discord Bot written in Node.JS",
 	"main": "index.js",
 	"scripts": {
-		"start": "node .",
+		"seedbot": "node .",
 		"test": "node . --debug"
 	},
 	"repository": {
