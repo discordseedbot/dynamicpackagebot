@@ -1,41 +1,44 @@
 {
-  "name": "dynamicpackagebot",
-  "version": "1.0.7",
-  "build": [
-    "2020.08.15",
-    "106"
-  ],
-  "ownerID": [
-    "317250979311386627",
-    "230485481773596672"
-  ],
-  "branch": "canary",
-  "description": "An Open Source General Purpose Discord Bot written in Node.JS",
-  "main": "index.js",
-  "scripts": {
-    "start": "node .",
-    "test": "node . --debug"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/discordseedbot/dynamicpackagebot.git"
-  },
-  "author": "SeedBot Contributers [seedbot@cock.li]",
-  "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/discordseedbot/dynamicpackagebot/issues"
-  },
-  "homepage": "https://github.com/discordseedbot/dynamicpackagebot",
-  "dependencies": {
-    "discord.js": "^12.2.0",
-    "fs": "0.0.1-security",
-    "http": "0.0.1-security",
-    "inquirer": "^7.2.0",
-    "opusscript": "0.0.7",
-    "path": "^0.12.7",
-    "signale": "^1.4.0",
-    "ytdl-core": "^3.2.0",
-    "ytpl": "^0.2.3",
-    "ytsearcher": "^1.2.2"
-  }
+	"name": "dynamicpackagebot",
+	"version": "1.0.7",
+	"build": {
+		"number": 109,
+		"date": "2020_8_3",
+		"timestamp": 1599118340
+	},
+	"ownerID": [
+		"317250979311386627",
+		"230485481773596672"
+	],
+	"branch": "canary",
+	"description": "An Open Source General Purpose Discord Bot written in Node.JS",
+	"main": "index.js",
+	"scripts": {
+		"start": "node .",
+		"test": "node . --debug"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/discordseedbot/dynamicpackagebot.git"
+	},
+	"author": "SeedBot Contributers [seedbot@cock.li]",
+	"license": "GPL-3.0-or-later",
+	"bugs": {
+		"url": "https://github.com/discordseedbot/dynamicpackagebot/issues"
+	},
+	"homepage": "https://github.com/discordseedbot/dynamicpackagebot",
+	"dependencies": {
+		"discord.js": "^12.2.0",
+		"fs": "0.0.1-security",
+		"http": "0.0.1-security",
+		"inquirer": "^7.2.0",
+		"load-json-file": "^6.2.0",
+		"opusscript": "0.0.7",
+		"parse-json": "^5.1.0",
+		"path": "^0.12.7",
+		"signale": "^1.4.0",
+		"ytdl-core": "^3.2.0",
+		"ytpl": "^0.2.3",
+		"ytsearcher": "^1.2.2"
+	}
 }

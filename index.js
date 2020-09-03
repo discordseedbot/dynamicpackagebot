@@ -11,6 +11,14 @@ if (!fs.existsSync("node_modules/")) {
 	process.exit(1);
 }
 
+//			Increment Build Number before declaring package.json
+try {
+	require("./.icr.js")();
+} catch(e){
+	console.error(e)
+	process.exit(1);
+}
+
 //			Declare Global Static Varaibles and other miscelanious stuff.
 try {
 	require('events').EventEmitter.defaultMaxListeners = 255;
@@ -90,6 +98,10 @@ viableModules.forEach(async (m) => {
 				jsontemp.type = "example";
 				return;
 			}
+			if (m.index('debug') !== -1) {
+				signale.info("Disabed Debug Module");
+				jsontemp.type = "disabled";
+			}
 		}
 		switch (jsontemp.type) {
 			case "botmod":
@@ -100,6 +112,9 @@ viableModules.forEach(async (m) => {
 				break;
 			case "library":
 				libraries.push(				JSON.parse(`{"name": "${jsontemp.name}","main": "${jsontemp.main}","location":"${m}"}`));
+				break;
+			case "disabled":
+				signale.info(`${jsontemp.name}@${jsontemp.version} disabled`);
 				break;
 			default:
 				signale.warn(`[modman] Unknown Module type at "${m}/manifest.json"`);
