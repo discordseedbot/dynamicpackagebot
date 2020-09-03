@@ -11,9 +11,17 @@ if (!fs.existsSync("node_modules/")) {
 	process.exit(1);
 }
 
+//			Check if SeedBot was launched in DebugMode
+global.SB_Debug = false;
+if(process.argv.indexOf("--debug") > -1){
+	global.SB_Debug = true;
+}
+
 //			Increment Build Number before declaring package.json
 try {
-	require("./.icr.js")();
+	if (SB_Debug) {
+		require("./.icr.js")();
+	}
 } catch(e){
 	console.error(e)
 	process.exit(1);
@@ -29,12 +37,6 @@ try {
 	require("signale").error("An error Occoured when declaring [GlobalVariables]");
 	console.error(e);
 	process.exit(1);
-}
-
-//			Check if SeedBot was launched in DebugMode
-global.SB_Debug = false;
-if(process.argv.indexOf("--debug") > -1){
-	global.SB_Debug = true;
 }
 
 console.clear();
@@ -98,7 +100,7 @@ viableModules.forEach(async (m) => {
 				jsontemp.type = "example";
 				return;
 			}
-			if (m.index('debug') !== -1) {
+			if (m.indexOf('debug') !== -1) {
 				signale.info("Disabed Debug Module");
 				jsontemp.type = "disabled";
 			}
