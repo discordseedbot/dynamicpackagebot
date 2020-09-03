@@ -39,7 +39,7 @@ module.exports.cmd = function(message, args){
 			message.channel.send(botVerResponse);
 			break;
 		case 'botBuild':
-			var response = package.build[0];
+			var response = package.build.number;
 			var botBuildResponse = new Discord.MessageEmbed()
 				.setColor(SB_CoreLibrary.misc_randHex())
 				.setTitle("SeedBot Bot Build")
@@ -47,7 +47,7 @@ module.exports.cmd = function(message, args){
 			message.channel.send(botBuildResponse);
 			break;
 		case 'botBuildDate':
-			var response = package.build[1];
+			var response = package.build.date;
 			var buildDateResponse = new Discord.MessageEmbed()
 				.setColor(SB_CoreLibrary.misc_randHex())
 				.setTitle("SeedBot Build Date")

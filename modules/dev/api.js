@@ -10,8 +10,8 @@ module.exports.cmd = function(message, args) {
 				pk.sendRequest("guildCount", SB_CoreLibrary.guildCount())
 				pk.sendRequest("channelCount", SB_CoreLibrary.channelCount())
 				pk.sendRequest("botVersion", SB_Package.version)
-				pk.sendRequest("botBuild", SB_Package.build[0])
-				pk.sendRequest("botBuildDate", SB_Package.build[1])
+				pk.sendRequest("botBuild", SB_package.build.number)
+				pk.sendRequest("botBuildDate", SB_package.build.date)
 				pk.sendRequest("botBranch", SB_Package.branch)
 				pk.sendRequest("botOwnerID", SB_Package.ownerID)
 				pk.sendRequest("packageName", SB_Package.name)
@@ -31,10 +31,10 @@ module.exports.cmd = function(message, args) {
 				apiFUNC.apiReqSend("botVersion", package.version);
 				break;
 			case 'update-botBuild':
-				apiFUNC.apiReqSend("botBuild", package.build[0]);
+				apiFUNC.apiReqSend("botBuild", package.build.number);
 				break;
 			case 'update-botBuildDate':
-				apiFUNC.apiReqSend("botBuildDate", package.build[1]);
+				apiFUNC.apiReqSend("botBuildDate", package.build.date);
 				break;
 			case 'update-botBranch':
 				apiFUNC.apiReqSend("botBranch", package.branch);
