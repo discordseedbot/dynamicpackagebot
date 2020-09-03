@@ -1,3 +1,10 @@
+//Token file is below the root folder
+// e.g
+//			This files location
+//		/seedbot/dynamicPackageBot/modules/_core/token_manager.js
+//
+//			Token Locaiton
+//		/seedbot/token.json
 var tokenJSON = require("./../../../token.json");
 
 
@@ -33,6 +40,7 @@ module.exports.ck = function(tokenToGet) {
 				break;
 		}
 	} else {
+		// *NOT* running on heroku
 		switch (tokenToGet) {
 			case "discord":
 				return tokenJSON.discord;
