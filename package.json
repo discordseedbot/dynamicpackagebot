@@ -1,32 +1,40 @@
 {
-	"name": "dynamicpackagebot",
-	"version": "1.0.7",
+	"name": "seedbot-stable",
+	"license": "GPL-3.0-or-later",
+	"version": "1.5.1",
+	"branch": "stable",
+	"description": "An Open Source General Purpose Discord Bot written in Node.JS",
 	"build": {
-		"number": 125,
+		"number": 1067,
 		"date": "2020_8_3",
 		"timestamp": 1599120154
 	},
+	"main": "index.js",
+	"scripts": {
+		"seedbot": "node .",
+		"debug": "node . --debug",
+		"build": "node . --buildMode"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/discordseedbot/stable.git"
+	},
+	"bugs": {
+		"url": "https://github.com/discordseedbot/stable/issues"
+	},
+	"homepage": "https://seedbot.xyz",
+	"author": "SeedBot Contributers [seedbot@cock.li]",
+	"maintainers": [
+		{
+			"name": "Jyles Coad-Ward",
+			"contact": "jyles@dariox.club",
+			"homepage": "https://jyles.club"
+		}
+	],
 	"ownerID": [
 		"317250979311386627",
 		"230485481773596672"
 	],
-	"branch": "canary",
-	"description": "An Open Source General Purpose Discord Bot written in Node.JS",
-	"main": "index.js",
-	"scripts": {
-		"seedbot": "node .",
-		"test": "node . --debug"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/discordseedbot/dynamicpackagebot.git"
-	},
-	"author": "SeedBot Contributers [seedbot@cock.li]",
-	"license": "GPL-3.0-or-later",
-	"bugs": {
-		"url": "https://github.com/discordseedbot/dynamicpackagebot/issues"
-	},
-	"homepage": "https://github.com/discordseedbot/dynamicpackagebot",
 	"dependencies": {
 		"discord.js": "^12.2.0",
 		"fs": "0.0.1-security",
