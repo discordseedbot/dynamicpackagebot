@@ -18,7 +18,7 @@ if(process.argv.indexOf("--debug") > -1){
 	global.SB_Debug = true;
 }
 if(process.argv.indexOf("--buildMode") > -1){
-	globa.SB_Debug = true;
+	global.SB_Debug = true;
 	global.SB_BuildMode = true;
 }
 
