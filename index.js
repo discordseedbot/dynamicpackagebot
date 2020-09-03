@@ -12,13 +12,13 @@ if (!fs.existsSync("node_modules/")) {
 }
 
 //			Check if SeedBot was launched in DebugMode
-global.SB_Debug = false;
-global.SB_BuildMode = false;
+global.SB_Debug 		= false;
+global.SB_BuildMode 	= false;
 if(process.argv.indexOf("--debug") > -1){
-	global.SB_Debug = true;
+	global.SB_Debug 	= true;
 }
 if(process.argv.indexOf("--buildMode") > -1){
-	global.SB_Debug = true;
+	global.SB_Debug 	= true;
 	global.SB_BuildMode = true;
 }
 
