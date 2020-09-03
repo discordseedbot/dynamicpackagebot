@@ -42,6 +42,9 @@ module.exports = function() {
 				case 'github':
 					require('./contrib.js').github(message);
 					break;
+				case 'contributors':
+					require("./contrib.js").contributors(message);
+					break;
 			}
 		} catch(err) {
 			SB_Libraries.forEach(async (m) => {
