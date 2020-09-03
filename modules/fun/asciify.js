@@ -15,7 +15,7 @@ module.exports.cmd = function(message, args) {
 		else if (inputText.length > 0) {
 			message.channel.send("```" + data + "```");
 		} else {
-			let finalEmbedMessage = new Discord.RichEmbed
+			let finalEmbedMessage = new Discord.MessageEmbed
 				.setColor('#0099ff')
 				.addFeild('Syntax Error', 'No Text Specified');
 			message.channel.send(finalEmbedMessage);

@@ -38,12 +38,16 @@ switch (SB_Prefrences.api.network.port) {
 if (SB_Debug) {apicon.debug(`Base Request Set to [${base}]`)};
 
 module.exports.checkConnection = async function() {
-	pfx.get(`${base}?req=checkConnection`, (res) => {
+	pfx.get(`${base}?req=connectionTest`, (res) => {
+		var data="";
 		res.on('data', (d) => {
-			if (d === 'true') {
-					require('./../functions/console.js').info("Connection Established to API Server.");
+			data += d;
+		})
+		res.on('end',()=>{
+			if (data === 'true') {
+					apicon.info("Connection Established to API Server.");
 			} else {
-					require('./../functions/console.js').fatal("Connection failed to API Server, some commands may not work. Disable the API in modules/config.json");
+					apicon.err("Connection failed to API Server, some commands may not work. Disable the API in modules/config.json");
 			}
 		})
 	})
