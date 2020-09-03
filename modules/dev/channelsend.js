@@ -8,7 +8,7 @@ module.exports.cmd = function(message, args) {
 	var msg = channelid && " " && content;
 	if (msg.length < 1) {
 		//Send message with incorrect arguments error
-		let evalEmbed = new Discord.RichEmbed()
+		let evalEmbed = new Discord.MessageEmbed()
 			.setColor('#ff0000')
 			.setTitle('Message Fail!')
 			.setAuthor('Syntax Error')
@@ -20,7 +20,7 @@ module.exports.cmd = function(message, args) {
 		//yay it finally sends the fucking command
 		SB_Client.channels.get(channelid).send(content);
 
-		let evalEmbed = new Discord.RichEmbed()
+		let evalEmbed = new Discord.MessageEmbed()
 			.setColor('#90d190')
 			.setTitle('Message Sent!')
 			.setTimestamp()

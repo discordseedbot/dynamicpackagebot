@@ -3,7 +3,7 @@ const { RichEmbed } = require("discord.js");
 const response = require("./response.json");
 
 module.exports.cmd = function(message) {
-	let evalEmbed = new Discord.RichEmbed()
+	let evalEmbed = new Discord.MessageEmbed()
 		.setColor(SB_CoreLibrary.misc_randHex())
 		.setTitle(response.patreon.title)
 		.setDescription(response.patreon.desc)

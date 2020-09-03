@@ -8,7 +8,7 @@ module.exports.cmd = function(message) {
 		var currentGuildID = message.guild.id;
 		var.voice.channelID = message.member.voice.channel.id;
 		var screensharelink = "https://discordapp.com/channels/"+currentGuildID+"/".voice.channelID;
-		var response = new Discord.RichEmbed()
+		var response = new Discord.MessageEmbed()
 			.setColor(require("./../functions/main.js").randomhexcolor())
 			.setTitle("Voice Chat Screen Share")
 			.setDescription("To screenshare in your current voice chat channel then [click here]("+screensharelink+")")

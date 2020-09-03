@@ -12,7 +12,7 @@ module.exports.cmd = function(message) {
 	data.push(guild.roles.size);
 	data.push(guild.channels.size);
 	data.push(guild.iconURL())
-	var evalEmbed = new Discord.RichEmbed()
+	var evalEmbed = new Discord.MessageEmbed()
 		.setTitle("Guild Info")
 		.addField("Guild Name", data[0], true)
 		.addField("Guild ID", data[1], true)

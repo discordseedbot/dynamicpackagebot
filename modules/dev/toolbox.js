@@ -3,52 +3,52 @@ const { RichEmbed } = require("discord.js");
 
 module.exports.reply = function(type,userid) {
 
-	var notConError = new Discord.RichEmbed()
+	var notConError = new Discord.MessageEmbed()
 		.setColor('#ff0000')
 		.setTimestamp()
 		.setDescription("<@"+userid+"> is not conencted to Voice Channel, Unable to execute Command.");
 
 
-	var defanTrue = new Discord.RichEmbed()
+	var defanTrue = new Discord.MessageEmbed()
 		.setColor(require("./../functions/main.js").randomhexcolor())
 		.setTimestamp()
 		.setDescription("<@"+userid+"> is now deaf");
 
 
-	var defanFalse = new Discord.RichEmbed()
+	var defanFalse = new Discord.MessageEmbed()
 		.setColor(require("./../functions/main.js").randomhexcolor())
 		.setTimestamp()
 		.setDescription("<@"+userid+"> can now hear");
 
-	var muteTrue = new Discord.RichEmbed()
+	var muteTrue = new Discord.MessageEmbed()
 		.setColor(require("./../functions/main.js").randomhexcolor())
 		.setTimestamp()
 		.setDescription("<@"+userid+"> is now muted");
 
 
-	var muteFalse = new Discord.RichEmbed()
+	var muteFalse = new Discord.MessageEmbed()
 		.setColor(require("./../functions/main.js").randomhexcolor())
 		.setTimestamp()
 		.setDescription("<@"+userid+"> can now speak");
 
 
-	var disconnectMSG = new Discord.RichEmbed()
+	var disconnectMSG = new Discord.MessageEmbed()
 		.setColor(require("./../functions/main.js").randomhexcolor())
 		.setTimestamp()
 		.setDescription("<@"+userid+"> has been disconnected from Voice Channel");
 
 
-	var generalError = new Discord.RichEmbed()
+	var generalError = new Discord.MessageEmbed()
 		.setColor('#ff0000')
 		.setTimestamp()
 		.setDescription("Error:\nCan the owner of this bot check console log <3\nIt's either than you did something wrong.");
 
-	var invalidSetting = new Discord.RichEmbed()
+	var invalidSetting = new Discord.MessageEmbed()
 		.setColor('#ff0000')
 		.setTimestamp()
 		.setDescription("Invalid Setting, Try reading the code in `modules/dev/voice_chat.js` or read the commands list (https://seedbot.xyz?commands#dev)");
 
-	var boolNotSet = new Discord.RichEmbed()
+	var boolNotSet = new Discord.MessageEmbed()
 		.setColor('#ff0000')
 		.setTimestamp()
 		.setDescription("Boolean Not set. Have you looked at the commands page? (https://seedbot.xyz?commands#dev)");

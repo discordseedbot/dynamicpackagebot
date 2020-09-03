@@ -8,7 +8,7 @@ module.exports.cmd = async function(message, args) {
 		const util = require('util');
 		const exec = util.promisify(require('child_process').exec);
 		const { stdout, stderr } = await exec(script);
-		let evalEmbed = new Discord.RichEmbed()
+		let evalEmbed = new Discord.MessageEmbed()
 			.setColor('#0099ff')
 			.setTitle('Shell Execute Output')
 			.setTimestamp()
