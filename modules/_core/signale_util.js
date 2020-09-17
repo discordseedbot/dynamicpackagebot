@@ -1,6 +1,6 @@
-module.exports = async function() {
+try {
     const {Signale} = require("signale");
-    global.termcon = new Signale({
+    global.SB.con = new Signale({
         disabled: false,
         interactive: false,
         logLevel: 'info',
@@ -38,7 +38,7 @@ module.exports = async function() {
             info: {
                 label: "Info",
                 color: 'cyan',
-				badge: ''
+    			badge: ''
             },
             newGuild: {
                 label: "Bot Joined New Guild",
@@ -50,32 +50,7 @@ module.exports = async function() {
             }
         }
     });
-    global.botModuleConsole = new Signale({
-        disabled: false,
-        interactive: false,
-        logLevel: 'info',
-        scope: 'BotModule',
-        stream: process.stdout,
-        types: {
-            attemptLoad: {
-                label: "Loading:",
-                color: 'yellow'
-            },
-            loaded: {
-                label: "Loaded:",
-                color: 'green'
-            },
-            notLoad: {
-                label: "Not Loading:",
-                color: "cyan"
-            },
-			prep: {
-				label: "Preparing ",
-				color: 'orange'
-			}
-        }
-    })
-    global.genericModuleConsole = new Signale({
+    global.SB.con.module = new Signale({
         disabled: false,
         interactive: false,
         logLevel: 'info',
@@ -94,10 +69,38 @@ module.exports = async function() {
                 label: "Not Loading:",
                 color: "cyan"
             },
-			prep: {
-				label: "Preparing ",
-				color: 'orange'
-			}
+    		prep: {
+    			label: "Preparing ",
+    			color: 'orange'
+    		}
+        }
+    });
+    global.SB.con.module.bot = new Signale({
+        disabled: false,
+        interactive: false,
+        logLevel: 'info',
+        scope: 'BotModule',
+        stream: process.stdout,
+        types: {
+            attemptLoad: {
+                label: "Loading:",
+                color: 'yellow'
+            },
+            loaded: {
+                label: "Loaded:",
+                color: 'green'
+            },
+            notLoad: {
+                label: "Not Loading:",
+                color: "cyan"
+            },
+    		prep: {
+    			label: "Preparing ",
+    			color: 'orange'
+    		}
         }
     })
+} catch(e) {
+    console.error(e);
+    process.exit(12);
 }
