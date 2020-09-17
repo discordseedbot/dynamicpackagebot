@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const { MessageEmbed } = require("discord.js");
-const prefix = SB_CoreLibrary.prefix().default;
+const prefix = SB.prefix.default;
 
 module.exports = async function() {
     /*
@@ -11,9 +11,9 @@ module.exports = async function() {
 
     There are some custom varaibles that are given to everything (global varaible)
     so here is what they are
-    SB_Client is the Discord.JS Client
-    SB_Token is a function for the tokens, SB_Token.discord() is the discord token, etc...
-    SB_Libraries is a JSON with the installed libraries, you should try debug mode and use the command "print libraries"
+    SB.core is the Discord.JS Client
+    SB.token is a function for the tokens, SB.token.discord is the discord token, etc...
+    SB.libraries is a JSON with the installed libraries, you should try debug mode and use the command "print libraries"
 
 
     A great way to find out how the discord bot works is by going through the main "index.js" file
@@ -30,7 +30,7 @@ module.exports = async function() {
 
     */
 
-    SB_Client.on('message', async message => {
+    SB.client.on('message', async message => {
         //      Check if the message author is the bot, this prevents spam.
         if (message.author.bot) return;
 
@@ -57,7 +57,7 @@ module.exports = async function() {
 
             /*      If you have the developer alerts module installed and working you can use this;
 
-			SB_Libraries.forEach(async (m) => {
+			SB.libraries.forEach(async (m) => {
 				if (m.name === "developer_alerts") {
 					let tmpRequire = require(`./../../${m.location}/${m.main}`).userspaceError(message, err);
 				}
@@ -68,17 +68,17 @@ module.exports = async function() {
     })
 
 
-    SB_Client.on('ready', async () => {
+    Sb.core.on('ready', async () => {
         //      Tells the server hoster that the module has been loaded.
 
         /*          For Bot Modules (commands and stuff like that)
                         use this;
-        botModuleConsole.loaded("Module Name Here");
+        SB.con.module.loaded("Module Name Here");
 
                     But for generic modules (an example of that is the startup module
                                                     and the terminal module)
 
-        genericModuleConsole.loaded("Module Name Here");
+        SB.con.module.bot.loaded("Module Name Here");
 
         */
         // Here goes your code!
