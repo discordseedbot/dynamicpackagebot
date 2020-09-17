@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const { RichEmbed } = require("discord.js");
 const package = require('./../../package.json');
 const http = require("http")
 
@@ -19,7 +18,7 @@ module.exports.cmd = function(message, args) {
 					.setDescription('Global IP Address:\n```\n' + rawData + "\n```");
 				message.channel.send(evalEmbed);
             } catch (e) {
-				SB_Libraries.forEach(async (m) => {
+				SB.modules.libraries.forEach(async (m) => {
 					if (m.name === "developer_alerts") {
 						let tmpRequire = require(`./../../${m.location}/${m.main}`).developerNotif(tmpNotifContent);
 					}

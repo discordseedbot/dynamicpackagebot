@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
 const package = require('./../../package.json');
-const prefix = SB_CoreLibrary.prefix().dev;
+const prefix = SB.prefix.dev;
 const devAlert = require("./alert_handle.js");
 const signale = require("signale");
 
 module.exports = function() {
-	SB_Client.on('message',async message => {
+	SB.client.on('message',async message => {
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
 		var args = message.content.slice(prefix.length).trim().split( / +/g);
@@ -16,7 +16,7 @@ module.exports = function() {
 				let sendNotif = true;
 				switch (command) {
 					case 'api':
-						if (SB_Token.apiToken() !== "seedbot-api-token") {
+						if (SB.token.api !== "seedbot-api-token") {
 							require('./api.js').cmd(message, args);
 						} else {
 							message.reply("API Token has not been changed, not executing.");
@@ -91,13 +91,13 @@ module.exports = function() {
 					.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
 					.setTimestamp();
 
-				SB_Libraries.forEach(async (m) => {
+				SB.modules.libraries.forEach(async (m) => {
 					if (m.name === "developer_alerts") {
 						let tmpRequire = require(`./../../${m.location}/${m.main}`).developerNotif(tmpNotifContent);
 					}
 				})
 			} catch (err) {
-				SB_Libraries.forEach(async (m) => {
+				SB.modules.libraries.forEach(async (m) => {
 					if (m.name === "developer_alerts") {
 						let tmpRequire = require(`./../../${m.location}/${m.main}`).developerError(message,err);
 					}
@@ -111,6 +111,6 @@ module.exports = function() {
 	})
 
 	SB_Client.on('ready', () => {
-		botModuleConsole.loaded("Developer Utilities");
+		SB.con.module.bot.loaded("Developer Utilities");
 	})
 }

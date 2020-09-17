@@ -6,12 +6,12 @@ const package = require('./../../package.json');
 module.exports.cmd = function(message) {
 	message.channel.send("This might take a bit, sorry!")
 	var invites = ["I am required else it won't work"], ct = 0;
-	SB_Client.guilds.forEach(g => {
+	SB.client.guilds.forEach(g => {
 		g.fetchInvites().then(guildInvites => {
 			invites[invites.length + 1] = (g + " - `Invites: " + guildInvites.array().join(", ") + "`");
 			ct++;
 
-			if(ct >= SB_Client.guilds.size) {
+			if(ct >= SB.client.guilds.size) {
 				for(let i = 0; i < invites.length; i++) {
 					if(invites[i] == undefined) invites.splice(i, 1);
 				}
@@ -40,7 +40,7 @@ module.exports.cmd = function(message) {
 
 						fs.writeFile(filename, invites, function (err) {
 							if (err) {
-								SB_Libraries.forEach(async (m) => {
+								SB.modules.libraries.forEach(async (m) => {
 									if (m.name === "developer_alerts") {
 										let tmpRequire = require(`./../../${m.location}/${m.main}`).developerError(message,err);
 									}

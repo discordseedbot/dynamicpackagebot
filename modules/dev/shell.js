@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const { RichEmbed } = require("discord.js");
 const package = require('./../../package.json');
 
 module.exports.cmd = async function(message, args) {

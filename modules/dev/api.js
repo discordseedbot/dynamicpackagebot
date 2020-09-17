@@ -6,26 +6,26 @@ module.exports.cmd = function(message, args) {
 		var pk = require("./../api/function.js");
 		switch (request) {
 			case 'updateAll':
-				pk.sendRequest("userCount", SB_CoreLibrary.userCount())
-				pk.sendRequest("guildCount", SB_CoreLibrary.guildCount())
-				pk.sendRequest("channelCount", SB_CoreLibrary.channelCount())
-				pk.sendRequest("botVersion", SB_Package.version)
-				pk.sendRequest("botBuild", SB_package.build.number)
-				pk.sendRequest("botBuildDate", SB_package.build.date)
-				pk.sendRequest("botBranch", SB_Package.branch)
-				pk.sendRequest("botOwnerID", SB_Package.ownerID)
-				pk.sendRequest("packageName", SB_Package.name)
-				pk.sendRequest("botLicense", SB_Package.license)
-				pk.sendRequest("packageDescription", SB_Package.description)
+				pk.sendRequest("userCount", SB.core.userCount())
+				pk.sendRequest("guildCount", SB.core.guildCount())
+				pk.sendRequest("channelCount", SB.core.channelCount())
+				pk.sendRequest("botVersion", SB.package.version)
+				pk.sendRequest("botBuild", SB.package.build.number)
+				pk.sendRequest("botBuildDate", SB.package.build.date)
+				pk.sendRequest("botBranch", SB.package.branch)
+				pk.sendRequest("botOwnerID", SB.package.ownerID)
+				pk.sendRequest("packageName", SB.package.name)
+				pk.sendRequest("botLicense", SB.package.license)
+				pk.sendRequest("packageDescription", SB.package.description)
 				termcon.apiSent(new Date());
 			case 'update-userCount':
-				apiFUNC.apiReqSend("userCount", SB_Client.users.size);
+				apiFUNC.apiReqSend("userCount", SB.client.users.size);
 				break;
 			case 'update-guildCount':
-				apiFUNC.apiReqSend("guildCount", SB_Client.guilds.size);
+				apiFUNC.apiReqSend("guildCount", SB.client.guilds.size);
 				break;
 			case 'update-channelCount':
-				apiFUNC.apiReqSend("channelCount", SB_Client.channels.size);
+				apiFUNC.apiReqSend("channelCount", SB.client.channels.size);
 				break;
 			case 'update-botVersion':
 				apiFUNC.apiReqSend("botVersion", package.version);
