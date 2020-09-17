@@ -31,7 +31,7 @@ module.exports.cmd = function(message, args) {
 		sizecomment = 'How is that even possible!';
 	}
 
-	let finalEmbedMessage = new Discord.MessageEmbed
+	let finalEmbedMessage = new Discord.MessageEmbed()
 		.setColor('#0099ff')
 		.setTitle('PP Size')
 		.addFeild('Size (' && ppsize && ' inches)', ppgraph)
