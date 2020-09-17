@@ -57,7 +57,7 @@ module.exports = async function() {
 
             /*      If you have the developer alerts module installed and working you can use this;
 
-			SB.libraries.forEach(async (m) => {
+			SB.modules.libraries.forEach(async (m) => {
 				if (m.name === "developer_alerts") {
 					let tmpRequire = require(`./../../${m.location}/${m.main}`).userspaceError(message, err);
 				}
@@ -68,7 +68,7 @@ module.exports = async function() {
     })
 
 
-    Sb.core.on('ready', async () => {
+    SB.core.on('ready', async () => {
         //      Tells the server hoster that the module has been loaded.
 
         /*          For Bot Modules (commands and stuff like that)
