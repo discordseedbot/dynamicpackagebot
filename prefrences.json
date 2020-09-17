@@ -33,5 +33,9 @@
             "port": 443
         },
         "timeout": 900
+    },
+    "tokenManager": {
+        "enviromentVariable": false,
+        "tokenLocation": "aboveRoot"
     }
 }
