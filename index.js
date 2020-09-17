@@ -35,7 +35,6 @@ global.SB = {
 		debugMode: false,
 	},
 	prefrences: {},
-	libraries: {},
 	modules: {"node":{}},
 	client: () => {
 		return new Error("Client has not been, something has gone wrong with your module or the loader.");
