@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
-const prefix = SB_CoreLibrary.prefix().default;
+const prefix = SB.core.prefix.default;
 
 module.exports.cmd = function(message, args) {
 	var user;
