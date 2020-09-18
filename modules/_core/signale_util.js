@@ -100,6 +100,7 @@ try {
     		}
         }
     })
+    SB.log = SB.con;
 } catch(e) {
     console.error(e);
     process.exit(12);
