@@ -13,12 +13,14 @@ module.exports = function() {
 			switch (command) {
 				case 'kick':
 				case 'ban':
+					require("./bk.js")();
+					break;
 				case 'purge':
 					require(`./${command.toLowerCase()}.js`)(message,args);
 					break;
 			}
 		} catch(err) {
-			SB_Libraries.forEach(async (m) => {
+			SB.modules.libraries.forEach(async (m) => {
 				if (m.name === "developer_alerts") {
 					let tmpRequire = require(`./../../${m.location}/${m.main}`).userspaceError(message, err);
 					console.error(err)
@@ -28,6 +30,6 @@ module.exports = function() {
 	})
 
 	SB_Client.on('ready', () => {
-		botModuleConsole.loaded("Moderation");
+		SB.log.module.bot.loaded("Moderation");
 	})
 }
