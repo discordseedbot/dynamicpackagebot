@@ -84,15 +84,15 @@ module.exports = function() {
 						break;
 				}
 				if (!sendNotif) return;
-				var tmpNotifContent = new Discord.MessageEmbed()
-					.setColor(Math.floor(Math.random()*16777215).toString(16))
-					.setTitle("Developer Used a Command")
-					.addField("Command Executed","```"+message.content+"```")
-					.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
-					.setTimestamp();
 
 				SB.modules.libraries.forEach(async (m) => {
 					if (m.name === "developer_alerts") {
+						var tmpNotifContent = new Discord.MessageEmbed()
+							.setColor(Math.floor(Math.random()*16777215).toString(16))
+							.setTitle("Developer Used a Command")
+							.addField("Command Executed","```"+message.content+"```")
+							.addField("Message Info",`***Author's User Snowflake:*** ${message.author.id}\n***Author:*** <@${message.author.id}>\n***Guild Snowflake:*** ${message.guild.id}\n***Guild Name:*** ${message.guild.name}\n***Channel Name:*** ${message.channel.name}\n***Channel Snowflake:*** ${message.channel.id}`)
+							.setTimestamp();
 						let tmpRequire = require(`./../../${m.location}/${m.main}`).developerNotif(tmpNotifContent);
 					}
 				})
