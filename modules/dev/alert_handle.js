@@ -29,7 +29,7 @@ module.exports.userspaceError = function (message,error) {
 		SB.client.channels.get(errorDataJSON.userspaceError.error).send(usrErrorSend);
 }
 
-module.exports.notifDeveloper = function(SB.client,content) {
+module.exports.notifDeveloper = function(content) {
 		SB.client.channels.cache.get(errorDataJSON.developer.notifications).send(content);
 }
 module.exports.developerUnauthAccess = function(message) {
