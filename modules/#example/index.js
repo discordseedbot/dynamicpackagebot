@@ -68,7 +68,7 @@ module.exports = async function() {
     })
 
 
-    SB.core.on('ready', async () => {
+    SB.client.on('ready', async () => {
         //      Tells the server hoster that the module has been loaded.
 
         /*          For Bot Modules (commands and stuff like that)
