@@ -1,6 +1,4 @@
 var inquirer = require("inquirer");
-const { Signale } = require("signale");
-const signale = require('signale')
 
 module.exports = function() {
 
@@ -25,7 +23,7 @@ async function termHandle() {
     ]).then(ans => {
         return commandHandler(ans.termInput.split(" "));
     }).catch(error => {
-        SB.modules.node.signale.error(new Error(error));
+        SB.modules.node.signale.error(e);
         process.exit();
     })
 }
@@ -58,7 +56,7 @@ function commandHandler(cmd) {
                 process.exit();
                 break;
             case "uptime":
-                SB.con.returnValue(`${SB_CoreLibrary.toHHMMSS(SB_Client.uptime / 1000)} since login.`)
+                SB.con.returnValue(`${SB.core.toHHMMSS(SB.client.uptime / 1000)} since login.`)
                 break;
             default:
                 console.error(new Error());

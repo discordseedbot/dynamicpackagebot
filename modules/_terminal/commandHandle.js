@@ -33,7 +33,7 @@ module.exports.print = async function (data) {
             SB.con.returnValue(require("./../../package.json"));
             break;
         default:
-            SB.core.con.invalidArgument()
+            SB.con.invalidArgument()
             break;
     }
 }

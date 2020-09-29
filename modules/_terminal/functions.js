@@ -1,8 +1,8 @@
 async function apiErrorCheck(error) {
     if (error.name !== "DiscordAPIError") {
-        SB.core.con.invalidArgument()
+        SB.con.invalidArgument()
     } else {
-        SB.core.con.error(new Error(error))
+        SB.con.error(new Error(error))
     }
 }
 
@@ -14,7 +14,7 @@ module.exports.user = async function(ca) {
     switch(ca[2]){
         case "count":
         case "size":
-            SB.con.returnValue(SB.core.userCount());
+            SB.con.returnValue(SB_CoreLibrary.userCount());
             break;
         default:
             SB_Client.users.fetch(ca[2])
@@ -31,7 +31,7 @@ module.exports.channel = async function(ca) {
     switch(ca[2]){
         case "count":
         case "size":
-            SB.con.returnValue(SB.core.channelCount())
+            SB.con.returnValue(SB_CoreLibrary.channelCount())
             break;
         default:
             SB.con.invalidArgument()
@@ -41,7 +41,7 @@ module.exports.channel = async function(ca) {
 
 function guildList() {
     let tmplist;
-    SB.client.guilds.array().sort().toString().split(",").forEach(async (m) => {
+    SB_Client.guilds.array().sort().toString().split(",").forEach(async (m) => {
         tmplist+= `${m}`;
         if (m !== tmplist[tmplist.length - 1]) {
             tmplist+="\n";
@@ -53,7 +53,7 @@ module.exports.guild = async function(ca) {
     switch(ca[2]){
         case "count":
         case "size":
-            SB.con.returnValue(SB.core.guildCount())
+            SB.con.returnValue(SB_CoreLibrary.guildCount())
             break;
         case "list":
             SB.con.returnValue(guildList().Promise);
@@ -68,8 +68,8 @@ module.exports.guild = async function(ca) {
                     process.exit(1)
                 }
             }
-            SB.core.guilds.get(ca[2])
-                .then(info => SB.core.con.returnValue(info) )
+            SB_Client.guilds.get(ca[2])
+                .then(info => SB.con.returnValue(info) )
                 .catch(error => guildList(error) )
             break;
     }
@@ -81,7 +81,7 @@ module.exports.bot = async function(ca) {
     }
     switch(ca[2]){
         case "libraries":
-            SB.con.returnValue(`\n${Sb.libraries}`);
+            SB.con.returnValue(`\n${SB_Libraries}`);
             return;
             break;
         default:
