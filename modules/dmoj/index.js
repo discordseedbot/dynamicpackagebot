@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const prefix = SB.core.prefix.dmoj;
+const prefix = SB.prefrences.prefix.dmoj;
 
 module.exports = function() {
 	SB.client.on('message',async message => {
