@@ -11,7 +11,7 @@
 		"enable": true,
         "override": {
             "error": true
-        }
+        },
         "developer": {
             "error": "720187904705691689",
             "notifications": "720187664120152114",

@@ -5,15 +5,15 @@
 	"branch": "stable",
 	"description": "An Open Source General Purpose Discord Bot written in Node.JS",
 	"build": {
-		"number": 1112,
-		"date": "2020_8_18",
-		"timestamp": 1600432544
+		"number": 1116,
+		"date": "2020_8_29",
+		"timestamp": 1601389104
 	},
 	"main": "index.js",
 	"scripts": {
 		"seedbot": "node .",
 		"debug": "node . --debug",
-		"build": "node . --buildMode | tee \"log/$(date +%s).log\""
+		"build": "node . --buildMode"
 	},
 	"repository": {
 		"type": "git",
