@@ -1,9 +1,8 @@
 const Discord = require("discord.js");
-const { RichEmbed } = require("discord.js");
-const prefix = SB_CoreLibrary.prefix().default;
+const prefix = SB.prefrences.prefix.default;
 
 module.exports = function() {
-	SB_Client.on('message',async message => {
+	SB.client.on('message',async message => {
 		if (message.author.bot) return;
 		if (message.content.indexOf(prefix) !== 0) return;
 		var args = message.content.slice(prefix.length).trim().split( / +/g);
@@ -29,7 +28,7 @@ module.exports = function() {
 		}
 	})
 
-	SB_Client.on('ready', () => {
+	SB.client.on('ready', () => {
 		SB.log.module.bot.loaded("Moderation");
 	})
 }

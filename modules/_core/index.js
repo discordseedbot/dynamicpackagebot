@@ -9,7 +9,7 @@ module.exports.onLaunch = require("./onLaunch.js");
 
 module.exports.channelCount = function() {
 	let retval={"channels":0,"guilds":0,"members":0};
-	SB_Client.guilds.cache.forEach(m => {
+	SB.client.guilds.cache.forEach(m => {
 	  //retval.members+=m.memberCount
 	  //retval.guilds+=1
 	  retval.channels+=m.channels.cache.size
@@ -18,7 +18,7 @@ module.exports.channelCount = function() {
 }
 module.exports.guildCount = function() {
 	let retval={"channels":0,"guilds":0,"members":0};
-	SB_Client.guilds.cache.forEach(m => {
+	SB.client.guilds.cache.forEach(m => {
 	  //retval.members+=m.memberCount
 	  retval.guilds+=1
 	  //retval.channels+=m.channels.cache.size
@@ -27,7 +27,7 @@ module.exports.guildCount = function() {
 }
 module.exports.userCount = function() {
   let retval={"channels":0,"guilds":0,"members":0};
-  SB_Client.guilds.cache.forEach(m => {
+  SB.client.guilds.cache.forEach(m => {
     retval.members+=m.memberCount
     //retval.guilds+=1
     //retval.channels+=m.channels.cache.size

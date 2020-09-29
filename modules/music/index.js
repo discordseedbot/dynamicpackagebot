@@ -1,18 +1,18 @@
 module.exports = async function() {
 	const music = require('seedbot_addonmusic');
 	var errorCH;
-	if (SB_Prefrences.developer_notif.enable) {
-		errorCH = SB_Prefrences.developer_notif.userspaceError.error
+	if (SB.prefrences.developer_notif.enable) {
+		errorCH = SB.prefrences.developer_notif.userspaceError.error
 	}  else {
 		errorCH = undefined;
 	}
-	music.start(SB_Client, {
-	  youtubeKey: SB_Token.youtube(),
+	music.start(SB.client, {
+	  youtubeKey: SB.token.youtube,
 	  cooldown:{
 	    disabled:false,
 	    timer:10
 	  },
-	  botPrefix: SB_CoreLibrary.prefix().music,
+	  botPrefix: SB.prefrences.prefix.music,
 	  anyoneCanSkip: true,
 	  anyoneCanAdjust: true,
 	  inlineEmbeds: false,
@@ -20,7 +20,7 @@ module.exports = async function() {
 	  errorChannel: errorCH
 	});
 
-	SB_Client.on('ready', () => {
-		botModuleConsole.loaded("Music");
+	SB.client.on('ready', () => {
+		SB.con.module.bot.loaded("Music");
 	})
 }

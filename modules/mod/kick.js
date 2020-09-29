@@ -25,7 +25,7 @@ module.exports = function(message,args) {
 				text: `Kicked by; ${message.author.username}`
 			}
 		}});
-		SB_Client.users.cache.get(userToKick.id).send({embed: {
+		SB.client.users.cache.get(userToKick.id).send({embed: {
 			color: 770000,
 			author: {name:`You were Kicked from ${message.guild.name}`},
 			fields: [{

@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
-const { RichEmbed } = require("discord.js");
-const prefix = SB_CoreLibrary.prefix().default;
+const prefix = SB.prefrences.prefix.default;
 
 module.exports = function() {
 	SB.client.on('message',async message => {
@@ -36,7 +35,7 @@ module.exports = function() {
 		}
 	})
 
-	Sb.client.on('ready', () => {
+	SB.client.on('ready', () => {
 		SB.con.module.bot.loaded("Fun");
 	})
 }

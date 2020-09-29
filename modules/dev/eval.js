@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
-const { RichEmbed } = require("discord.js");
-const package = require('./../../package.json');
+const package = SB.package
 
 function escapeRegExp(str) {
 	return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
@@ -9,7 +8,7 @@ function escapeRegExp(str) {
 function evaluate(input) {
 	let result = eval(input);
 	if (result)
-		result = result.toString().replace(new RegExp(escapeRegExp(SB_Token.discord()), 'g'), '<token removed>');
+		result = result.toString().replace(new RegExp(escapeRegExp(SB.token.discord, 'g'), '<token removed>');
 	return result;
 }
 

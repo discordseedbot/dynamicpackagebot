@@ -110,7 +110,7 @@ module.exports = function() {
 		}
 	})
 
-	SB_Client.on('ready', () => {
+	SB.client.on('ready', () => {
 		SB.con.module.bot.loaded("Developer Utilities");
 	})
 }

@@ -4,7 +4,7 @@ const response = require("./response.json");
 
 module.exports.cmd = function(message) {
 	let evalEmbed = new Discord.MessageEmbed()
-		.setColor(SB_CoreLibrary.misc_randHex())
+		.setColor(SB.core.misc_randHex())
 		.setTitle(response.patreon.title)
 		.setDescription(response.patreon.desc)
 		.setTimestamp()

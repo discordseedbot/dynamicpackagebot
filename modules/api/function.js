@@ -1,11 +1,11 @@
 function validProtocolType() {
 	switch (SB.prefrences.api.network.protocol.type) {
 		case "https":
-			if (SB.parameters.debugMode) SB.con.api.debug(`Protocol Type Detected as "${SB_Prefrences.api.network.protocol.type}"`);
+			if (SB.parameters.debugMode) SB.con.api.debug(`Protocol Type Detected as "${SB.prefrences.api.network.protocol.type}"`);
 			return require("https");
 			break;
 		case "http":
-			if (SB.parameters.debugMode) SB.con.api.debug(`Protocol Type Detected as "${SB_Prefrences.api.network.protocol.type}"`);
+			if (SB.parameters.debugMode) SB.con.api.debug(`Protocol Type Detected as "${SB.prefrences.api.network.protocol.type}"`);
 			return require("http");
 			break;
 		default:
@@ -16,7 +16,6 @@ function validProtocolType() {
 const pfx = validProtocolType();
 
 var base;
-//if (SB_Debug) apicon.debug(``);
 switch (SB.prefrences.api.network.port) {
 	case "auto":
 	case "default":
@@ -29,8 +28,8 @@ switch (SB.prefrences.api.network.port) {
 			if (SB.parameters.debugMode) {SB.con.api.debug(`Port is set to [${SB.prefrences.api.network.port}]`)}
 			base = `${SB.prefrences.api.network.protocol.type}://${SB.prefrences.api.network.address}:${SB.prefrences.api.network.port}/`;
 		} else {
-			if (SB_Debug) {apicon.debug("Port is set to [AutoDetect]")}
-			base = `${SB.prefrences.api.network.protocol.type}://${SB_Prefrences.api.network.address}/`;
+			if (SB.parameters.debugMode) {apicon.debug("Port is set to [AutoDetect]")}
+			base = `${SB.prefrences.api.network.protocol.type}://${SB.prefrences.api.network.address}/`;
 			SB.con.api.err("Invalid Port given for API in `prefrences.json`, Must only contain numbers.");
 		}
 		break;
