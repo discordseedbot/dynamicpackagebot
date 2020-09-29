@@ -29,6 +29,6 @@ module.exports = function() {
 	})
 
 	SB.client.on('ready', () => {
-		SB.log.module.bot.loaded("Moderation");
+		SB.con.module.bot.loaded("Moderation");
 	})
 }
