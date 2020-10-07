@@ -1,9 +1,9 @@
 # Security Policy
 
-## Supported Versions
+## Supported Builds
 
-| Version | Supported          |
+| Build | Supported          |
 | ------- | ------------------ |
-| 1.5.x   | :white_check_mark: |
-| > 1.5 | :white_check_mark: |
-| < 1.3.9   | :x:                |
+| 1090 (latest)  | :white_check_mark: |
+| > 1090 | :white_check_mark: |
+| < 1080   | :x:                |
