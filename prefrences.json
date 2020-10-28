@@ -33,5 +33,21 @@
             "port": 443
         },
         "timeout": 900
-    }
+    },
+	"core": {
+		"stats": {
+			"timer": 600,
+			"loginRetryTimer": 1
+		},
+		"tokenManager": {
+			"enviromentVariable": false,
+			"tokenLocation": "aboveRoot"
+		},
+		"localization": {
+			"name": "SeedBot",
+			"website": "https://seedbot.xyz",
+			"contact": "contact@dariox.club"
+		}
+	}
+}
 }
