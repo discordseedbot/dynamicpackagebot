@@ -33,81 +33,82 @@ global.SB = {
 	parameters: {
 		buildMode: false,
 		debugMode: false,
+		safeMode: false
 	},
 	prefrences: {},
 	libraries: {},
 	modules: {"node":{}},
 	client: () => {
-		return new Error("Client has not been, something has gone wrong with your module or the loader.");
+		return new Error("Client has not been initialized, something has gone wrong with your module or the loader.");
 	},
 	core: () => {
-		return new Error("Core Module has not been. There might be something wrong with `/index.js` or with the core module itself.");
+		return new Error("Core Module has not been initialized. There might be something wrong with `/index.js` or with the core module itself.");
 	},
 	buildTools: () => {
-		return new Error("BuildMode is not enabled. Please read documentation for farther knowledge.")
+		return new Error("buildTools is not declared. Please read documentation for farther knowledge.")
 	},
 };
 //			Check if SeedBot was launched in DebugMode or buildMode,
 //				if it was then we set the debugMode parameter.
-if(process.argv.indexOf("--debug") > -1 || process.argv.indexOf("--buildMode") > -1){
+if(process.argv.indexOf("--debug") > -1){
 	global.SB.parameters.debugMode 	= true;
+	global.SB.parameters.safeMode 	= true;
 }
 if(process.argv.indexOf("--buildMode") > -1){
+	global.SB.parameters.debugMode 	= true;
 	global.SB.parameters.buildMode 	= true;
+	global.SB.parameters.safeMode 	= true;
 }
+if(process.argv.indexOf("--safe") > -1){
+	global.SB.parameters.safeMode 	= true;
+}
+if (!SB.parameters.safeMode) {
+	if (!fs.existsSync("logs")){ fs.mkdirSync("logs"); }
+	var botStartTime = Math.floor(+new Date() / 1000);
+	function dateFormat (date, fstr, utc) { utc = utc ? 'getUTC' : 'get'; return fstr.replace (/%[YmdHMS]/g, function (m) { switch (m) { case '%Y': return date[utc + 'FullYear'] (); case '%m': m = 1 + date[utc + 'Month'] (); break; case '%d': m = date[utc + 'Date'] (); break; case '%H': m = date[utc + 'Hours'] (); break; case '%M': m = date[utc + 'Minutes'] (); break; case '%S': m = date[utc + 'Seconds'] (); break; default: return m.slice (1); } return ('0' + m).slice (-2); }); }
+	function formatOutput(content,ptype) { var currentTime = new Date(); var currentUNIX = Math.floor(+currentTime / 1000); var currentFormattedTime = dateFormat(currentTime, "%Y/%m/%d - %H:%M:%S", true); var printType = ""; if (ptype === undefined) { ptype = "log"; } switch(ptype.toLowerCase()){ case "log":case "info":default: printType = "LOG"; break; case "info": printType = "INF"; break; case "error": printType = "ERR"; break; case "debug": printType = "DBG"; break; case "warn": printType = "WRN"; break; }; var z = `[${currentFormattedTime}]   ${printType}   ${content}`; fs.appendFileSync(`logs/${botStartTime}.log`,`${z}\r\n`); return z; }
+	global.console.log = function(){
+		for (i=0;i<arguments.length;i++){
+			try {
+				process.stdout.write(`${formatOutput(arguments[i])}\r\n`);
+			} catch (e){
+				throw e;
+			}
+		}
+	}
+	global.console.error = function(){
+		for (i=0;i<arguments.length;i++){
+			try {
+				process.stdout.write(`${formatOutput(arguments[i],"error")}\r\n`);
+			} catch (e){
+				throw e;
+			}
+		}
+	}
 
-
-
-if (!fs.existsSync("logs")){ fs.mkdirSync("logs"); } 
-var botStartTime = Math.floor(+new Date() / 1000);
-function dateFormat (date, fstr, utc) { utc = utc ? 'getUTC' : 'get'; return fstr.replace (/%[YmdHMS]/g, function (m) { switch (m) { case '%Y': return date[utc + 'FullYear'] (); case '%m': m = 1 + date[utc + 'Month'] (); break; case '%d': m = date[utc + 'Date'] (); break; case '%H': m = date[utc + 'Hours'] (); break; case '%M': m = date[utc + 'Minutes'] (); break; case '%S': m = date[utc + 'Seconds'] (); break; default: return m.slice (1); } return ('0' + m).slice (-2); }); } 
-function formatOutput(content,ptype) { var currentTime = new Date(); var currentUNIX = Math.floor(+currentTime / 1000); var currentFormattedTime = dateFormat(currentTime, "%Y/%m/%d - %H:%M:%S", true); var printType = ""; if (ptype === undefined) { ptype = "log"; } switch(ptype.toLowerCase()){ case "log":case "info":default: printType = "LOG"; break; case "info": printType = "INF"; break; case "error": printType = "ERR"; break; case "debug": printType = "DBG"; break; case "warn": printType = "WRN"; break; }; var z = `[${currentFormattedTime}]   ${printType}   ${content}`; fs.appendFileSync(`logs/${botStartTime}.log`,`${z}\r\n`); return z; }
-global.console.log = function(){
-	for (i=0;i<arguments.length;i++){
-		try {
-			process.stdout.write(`${formatOutput(arguments[i])}\r\n`);
-		} catch (e){
-			throw e;
+	// Disable debug output when not in debug mode
+	global.console.debug = function(){
+		return;
+	}
+	global.console.warn = function(){
+		for (i=0;i<arguments.length;i++){
+			try {
+				process.stdout.write(`${formatOutput(arguments[i],"warn")}\r\n`);
+			} catch (e){
+				throw e;
+			}
+		}
+	}
+	global.console.info = function(){
+		for (i=0;i<arguments.length;i++){
+			try {
+				process.stdout.write(`${formatOutput(arguments[i],"info")}\r\n`);
+			} catch (e){
+				throw e;
+			}
 		}
 	}
 }
-global.console.error = function(){
-	for (i=0;i<arguments.length;i++){
-		try {
-			process.stdout.write(`${formatOutput(arguments[i],"error")}\r\n`);
-		} catch (e){
-			throw e;
-		}
-	}
-}
-global.console.debug = function(){
-	for (i=0;i<arguments.length;i++){
-		try {
-			process.stdout.write(`${formatOutput(arguments[i],"debug")}\r\n`);
-		} catch (e){
-			throw e;
-		}
-	}
-}
-global.console.warn = function(){
-	for (i=0;i<arguments.length;i++){
-		try {
-			process.stdout.write(`${formatOutput(arguments[i],"warn")}\r\n`);
-		} catch (e){
-			throw e;
-		}
-	}
-}
-global.console.info = function(){
-	for (i=0;i<arguments.length;i++){
-		try {
-			process.stdout.write(`${formatOutput(arguments[i],"info")}\r\n`);
-		} catch (e){
-			throw e;
-		}
-	}
-}
-
 //			If buildTools was not found then we will disable it.
 if (!fs.existsSync("./.buildTools.js") && SB.parameters.buildMode) {
 	global.SB.parameters.buildMode 	= false;
@@ -116,14 +117,12 @@ if (!fs.existsSync("./.buildTools.js") && SB.parameters.buildMode) {
 	//			Set buildTools function so modules can use it.
 	if (SB.parameters.buildMode) {
 		try {
-			global.SB.buildTools = require("./.buildTools.js");
+			SB.buildTools = require("./.buildTools.js");
 		} catch(e) {
 			console.error(e);
-			process.exit(10);
 		}
 	}
 }
-
 
 //			Declare Global Static Varaibles and other (sorta) pre-launch stuff.
 try {
@@ -141,7 +140,7 @@ try {
 }
 
 //			Clear console if debugMode is not set.
-if (!SB.parameters.debugMode) {
+if (!SB.parameters.safeMode) {
 	console.clear();
 }
 function getDirectories(path) {
@@ -212,6 +211,8 @@ viableModules.forEach(async (m) => {
 			}
 		}
 		jsontemp.location = `${m}`;
+		jsontemp.f = require(`./${jsontemp.location}/${jsontemp.main}`);
+		jsontemp.storage = null;
 		switch (jsontemp.type) {
 			case "botmod":
 				botModulesToLoad.push(		jsontemp);
@@ -245,7 +246,7 @@ libraries.forEach((m) => {
 	}
 })
 if (!coreFound) {
-	signale.error("Core Library was not found. Process Halted.");
+	SB.modules.node.signale.error("Core Library was not found. Process Halted.");
 	delete(coreFound);
 	process.exit(12);
 } else {
@@ -256,6 +257,7 @@ if (!coreFound) {
 //			Discord.JS Login with Error Catching.
 SB.modules.node.discord = require("discord.js");
 global.SB.client = new SB.modules.node.discord.Client();
+
 setTimeout(()=>{
 	SB.client.login(SB.token.discord).catch((e)=>{
 		console.log(e);
@@ -280,17 +282,18 @@ setTimeout(()=>{
 		if (!SB.parameters.debugMode) {
 			console.clear()
 			SB.modules.node.signale.complete("Discord Bot connected at", new Date().toISOString());
+			SB.modules.node.signale.info(`Logged in as "${SB.client.user.username}"`)
 		} else {
-			console.log("- - - - - Discord Bot Logged In - - - - -");
+			console.log(`- - - - - Discord Bot Logged In as "${SB.client.user.username}" - - - - -`);
 			console.log("Logged in at", new Date().toISOString())
 		}
 	});
-	botModulesToLoad.forEach(async (m) => {
+	SB.modules.bot.forEach(async (m) => {
 		SB.con.module.bot.attemptLoad(`${m.name}@${require("./"+m.location+"/manifest.json").version}`)
-		require(`./${m.location}/${m.main}`)();
+		m.f();
 	});
-	genericModulesToLoad.forEach(async (m) => {
+	SB.modules.generic.forEach(async (m) => {
 		SB.con.module.attemptLoad(`${m.name}@${require("./"+m.location+"/manifest.json").version}`);
-		require(`./${m.location}/${m.main}`)();
+		m.f();
 	});
 },2000)
