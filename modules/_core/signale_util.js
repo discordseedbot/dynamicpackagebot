@@ -1,6 +1,8 @@
 try {
     const {Signale} = require("signale");
-	
+
+    // Please don't look here, its a pigs stye
+
 	var conn = {};
 	
 	conn.err = console.error
@@ -88,6 +90,7 @@ try {
 	global.SB.con = conn;
 	global.SB.con.module = connmod;
 	global.SB.con.module.bot = connmodbot;
+    global.SB.log = SB.con;
 	/*
     global.SB.con = new Signale({
         disabled: false,
