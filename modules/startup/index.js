@@ -8,7 +8,7 @@ module.exports = function () {
 
     SB.client.on('ready', async () => {
 			signale.debug("Bot has started at " + new Date());
-			signale.debug(`Bot has started, with ${SB.core.userCount()} users, in ${SB.core.channelCount()} channels of ${SB.core.guildCount()} guilds.`);
+			signale.debug(`Bot has started, with ${SB.core.stats.userCount} users, in ${SB.core.stats.channelCount} channels of ${SB.core.stats.guildCount} guilds.`);
 			signale.debug(`Logged in as @${SB.client.user.username}#${SB.client.user.discriminator} (Snowflake: ${SB.client.user.id})`)
 			signale.debug(`Invite Codes;\n		Full Admin:   https://seedbot.xyz/inv.php?br=${package.branch}&b=8\n		Normal Perms: https://seedbot.xyz/inv.php?br=${package.branch}&b=3329088\n`)
 

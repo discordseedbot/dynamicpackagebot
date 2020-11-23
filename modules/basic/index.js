@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const prefix = SB.prefix.default;
+const prefix = SB.prefrences.prefix.default;
 var response = require("./response.json")
 
 module.exports = function() {
