@@ -34,7 +34,7 @@ module.exports = async function(message,args) {
 
 
 	var final = new Discord.MessageEmbed()
-		.setColor(SB_CoreLibrary.misc_randHex())
+		.setColor(SB.core.misc_randHex())
 		.setTitle(info.videoDetails.title)
 		.setURL(`https://youtube.com/watch?v=${info.videoDetails.videoId}`)
 		.setAuthor(info.videoDetails.author.name, info.videoDetails.author.avatar, info.videoDetails.author.channel_url)

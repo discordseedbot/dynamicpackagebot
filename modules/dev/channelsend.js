@@ -1,5 +1,5 @@
-const Discord = require("discord.js"); 
-const { RichEmbed } = require("discord.js"); 
+const Discord = require("discord.js");
+const { RichEmbed } = require("discord.js");
 const package = require('./../../package.json');
 
 module.exports.cmd = function(message, args) {
@@ -18,7 +18,7 @@ module.exports.cmd = function(message, args) {
 	}
 	if (msg.length > 1) {
 		//yay it finally sends the fucking command
-		SB_Client.channels.get(channelid).send(content);
+		SB.client.channels.cache.get(channelid).send(content);
 
 		let evalEmbed = new Discord.MessageEmbed()
 			.setColor('#90d190')

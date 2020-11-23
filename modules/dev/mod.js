@@ -23,7 +23,7 @@ module.exports.kick = function(message, args) {
 			text: 'Kicked by ' + message.author.username,
 		}
 	}});
-	SB_Client.channels.get(userToKick).send({embed: {
+	SB.client.channels.get(userToKick).send({embed: {
 		color: 770000,
 		author: {name:'Kicked User'},
 		fields: [{
@@ -60,7 +60,7 @@ module.exports.ban = function(message,args) {
 			text: 'Banned by ' + message.author.username,
 		}
 	}});
-	SB_Client.channels.get(userToKick).send({embed: {
+	SB.client.channels.get(userToKick).send({embed: {
 		color: 770000,
 		author: {name:'Banned User'},
 		fields: [{

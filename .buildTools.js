@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports.buildIncrement = function() {
 	try {
 		const fs = require("fs");
 		const ljf = require('load-json-file')

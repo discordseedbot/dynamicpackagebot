@@ -2,14 +2,14 @@ module.exports = function () {
     const signale = require("signale");
 	const package = require("./../../package.json");
 
-    SB_Client.on('guildCreate', guild => {
+    SB.client.on('guildCreate', guild => {
         termcon.newGuild(`Name: ${guild.name}  |  ID: ${guild.id}  |  ${guild.memberCount} members.`)
     })
 
-    SB_Client.on('ready', async () => {
+    SB.client.on('ready', async () => {
 			signale.debug("Bot has started at " + new Date());
-			signale.debug(`Bot has started, with ${SB_CoreLibrary.userCount()} users, in ${SB_CoreLibrary.channelCount()} channels of ${SB_CoreLibrary.guildCount()} guilds.`);
-			signale.debug(`Logged in as @${SB_Client.user.username}#${SB_Client.user.discriminator} (Snowflake: ${SB_Client.user.id})`)
+			signale.debug(`Bot has started, with ${SB.core.userCount()} users, in ${SB.core.channelCount()} channels of ${SB.core.guildCount()} guilds.`);
+			signale.debug(`Logged in as @${SB.client.user.username}#${SB.client.user.discriminator} (Snowflake: ${SB.client.user.id})`)
 			signale.debug(`Invite Codes;\n		Full Admin:   https://seedbot.xyz/inv.php?br=${package.branch}&b=8\n		Normal Perms: https://seedbot.xyz/inv.php?br=${package.branch}&b=3329088\n`)
 
 
@@ -81,7 +81,7 @@ module.exports = function () {
 
 
             let botStatus = status;
-            SB_Client.user.setPresence({activity: { name: msg, type: rpcTYPE, url: typeurl}, status: botStatus})
+            SB.client.user.setPresence({activity: { name: msg, type: rpcTYPE, url: typeurl}, status: botStatus})
 
             // To avoid memory leaks in the future.
             delete(botStatus)

@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const { RichEmbed } = require("discord.js");
 
 module.exports.cmd = function(message) {
-	const guild = SB_Client.guilds.get(message.guild.id);
+	const guild = SB.client.guilds.cache.get(message.guild.id);
 	var data = [];
 	data.push(guild.name);
 	data.push(guild.id);

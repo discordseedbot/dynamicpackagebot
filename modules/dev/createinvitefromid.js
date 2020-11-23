@@ -2,7 +2,7 @@ const package = require('./../../package.json');
 
 module.exports.cmd = function(message,args) {
         let guildid = args.slice(0).join(' ');
-        let guild = SB_Client.guilds.get(guildid);
+        let guild = SB.client.guilds.cache.get(guildid);
         if (!guild) return message.reply("The bot isn't in the guild with this ID.");
 
         guild.fetchInvites()

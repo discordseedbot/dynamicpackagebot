@@ -5,9 +5,9 @@
 	"branch": "stable",
 	"description": "An Open Source General Purpose Discord Bot written in Node.JS",
 	"build": {
-		"number": 1090,
-		"date": "2020_8_3",
-		"timestamp": 1599126334
+		"number": 1116,
+		"date": "2020_8_29",
+		"timestamp": 1601389104
 	},
 	"main": "index.js",
 	"scripts": {
@@ -47,7 +47,7 @@
 		"path": "^0.12.7",
 		"sbpkg_music": "^13.9.19",
 		"signale": "^1.4.0",
-		"ytdl-core": "^4.0.5",
+		"ytdl-core": "^4.0.6",
 		"ytpl": "^0.2.3",
 		"ytsearcher": "^1.2.2"
 	}

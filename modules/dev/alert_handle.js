@@ -1,4 +1,4 @@
-const prefixJSON = SB_CoreLibrary.prefix();
+const prefixJSON = SB.prefix;
 const errorDataJSON = require("./alert_handle_channels.json");
 const Discord = require("discord.js");
 
@@ -13,7 +13,7 @@ module.exports.developerError = function (message,error) {
 			.addField("Guild Info",`ID: ${message.member.guild.id}\nName: ${message.member.guild.name}`)
 			.addField("User Info",`ID: ${message.author.id}\nUName: @${message.author.username}#${message.author.discriminator}`)
 			.addField("Message Info", "Content: `"+message.content+"`\n"+`Channel Name: ${message.channel.name}\nChannel ID: ${message.channel.id}`)
-		SB_Client.channels.get(errorDataJSON.developer.error).send(devErrorSend);
+		SB.client.channels.get(errorDataJSON.developer.error).send(devErrorSend);
 }
 module.exports.userspaceError = function (message,error) {
 		if (message.author.bot) return;
@@ -26,11 +26,11 @@ module.exports.userspaceError = function (message,error) {
 			.addField("Guild Info",`ID: ${message.member.guild.id}\nName: ${message.member.guild.name}`)
 			.addField("User Info",`ID: ${message.author.id}\nUName: @${message.author.username}#${message.author.discriminator}`)
 			.addField("Message Info", "Content: `"+message.content+"`\n"+`Channel Name: ${message.channel.name}\nChannel ID: ${message.channel.id}`)
-		SB_Client.channels.get(errorDataJSON.userspaceError.error).send(usrErrorSend);
+		SB.client.channels.get(errorDataJSON.userspaceError.error).send(usrErrorSend);
 }
 
-module.exports.notifDeveloper = function(SB_Client,content) {
-		SB_Client.channels.cache.get(errorDataJSON.developer.notifications).send(content);
+module.exports.notifDeveloper = function(content) {
+		SB.client.channels.cache.get(errorDataJSON.developer.notifications).send(content);
 }
 module.exports.developerUnauthAccess = function(message) {
 	let developerUnauthAccessMSG = new Discord.MessageEmbed()
@@ -41,5 +41,5 @@ module.exports.developerUnauthAccess = function(message) {
 		.addField("User Info",`ID: ${message.author.id}\nUName: @${message.author.username}#${message.author.discriminator}`)
 		.addField("Message Info", "Content: `"+message.content+"`\n"+`Channel Name: ${message.channel.name}\nChannel ID: ${message.channel.id}`)
 		.setAuthor(message.contents)
-	SB_Client.channels.get(errorDataJSON.developer.unauthAccess).send(developerUnauthAccessMSG);
+	SB.client.channels.get(errorDataJSON.developer.unauthAccess).send(developerUnauthAccessMSG);
 }

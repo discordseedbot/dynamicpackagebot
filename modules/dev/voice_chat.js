@@ -4,10 +4,10 @@ const { RichEmbed } = require("discord.js");
 const toolbox = require("./toolbox.js");
 
 // Extremely Useful Documentation;
-//	https://discord.js.org/#/docs/main/v11/class/GuildMember
-//  https://discord.js.org/#/docs/main/v11/class/GuildMember?scrollTo=setDeaf
-//  https://discord.js.org/#/docs/main/v11/class/GuildMember?scrollTo=setMute
-// https://discord.js.org/#/docs/main/v11/class/GuildMember?scrollTo=setChannel
+//	https://discord.js.org/#/docs/main/v12/class/GuildMember
+//  https://discord.js.org/#/docs/main/v12/class/GuildMember?scrollTo=setDeaf
+//  https://discord.js.org/#/docs/main/v12/class/GuildMember?scrollTo=setMute
+// https://discord.js.org/#/docs/main/v12/class/GuildMember?scrollTo=setChannel
 
 // To make my life easier lmao
 
@@ -16,7 +16,7 @@ const toolbox = require("./toolbox.js");
 
 module.exports.hear = function(message,args,command) {
 	var status = args[0];
-	let curGuild = SB_Client.guilds.get(message.guild.id).id;
+	let curGuild = SB.client.guilds.cache.get(message.guild.id).id;
 	let usrMention = message.mentions.members.first();
 
 		//To make our life easier for the future.
@@ -60,7 +60,7 @@ module.exports.hear = function(message,args,command) {
 }
 
 module.exports.disconnect = function(message) {
-	let curGuild = SB_Client.guilds.get(message.guild.id).id;
+	let curGuild = SB.client.guilds.cache.get(message.guild.id).id;
 	let usrmention = message.mentions.members.first();
 
 		//To make our life easier for the future.

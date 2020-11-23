@@ -10,30 +10,30 @@ module.exports.reply = function(type,userid) {
 
 
 	var defanTrue = new Discord.MessageEmbed()
-		.setColor(require("./../functions/main.js").randomhexcolor())
+		.setColor(SB.core.misc_randHex())
 		.setTimestamp()
 		.setDescription("<@"+userid+"> is now deaf");
 
 
 	var defanFalse = new Discord.MessageEmbed()
-		.setColor(require("./../functions/main.js").randomhexcolor())
+		.setColor(SB.core.misc_randHex())
 		.setTimestamp()
 		.setDescription("<@"+userid+"> can now hear");
 
 	var muteTrue = new Discord.MessageEmbed()
-		.setColor(require("./../functions/main.js").randomhexcolor())
+		.setColor(SB.core.misc_randHex())
 		.setTimestamp()
 		.setDescription("<@"+userid+"> is now muted");
 
 
 	var muteFalse = new Discord.MessageEmbed()
-		.setColor(require("./../functions/main.js").randomhexcolor())
+		.setColor(SB.core.misc_randHex())
 		.setTimestamp()
 		.setDescription("<@"+userid+"> can now speak");
 
 
 	var disconnectMSG = new Discord.MessageEmbed()
-		.setColor(require("./../functions/main.js").randomhexcolor())
+		.setColor(SB.core.misc_randHex())
 		.setTimestamp()
 		.setDescription("<@"+userid+"> has been disconnected from Voice Channel");
 

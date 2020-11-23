@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
-const { RichEmbed } = require("discord.js");
-const prefix = SB_CoreLibrary.prefix().dev;
+const prefix = SB.core.prefix.dev;
 
 module.exports.cmd = function(message,args) {
 	var game = args.slice(0).join(" ");
@@ -8,15 +7,15 @@ module.exports.cmd = function(message,args) {
 			switch (game) {
 				case "refresh":
 				case "reset":
-					SB_Client.user.setActivity(`you - seedbot.xyz`, { type: 'WATCHING'});
+					SB.client.user.setActivity(`you - seedbot.xyz`, { type: 'WATCHING'});
 					message.channel.send("***Rich Presence has been Refreshed***")
 					break;
 				case "clear":
-					SB_Client.user.setActivity(null);
+					SB.client.user.setActivity(null);
 					message.channel.send("Rich Presence has been set to `null` (nothing)")
 					break;
 				default:
-					SB_Client.user.setActivity(`${game} - seedbot.xyz`, { type: 'WATCHING'});
+					SB.client.user.setActivity(`${game} - seedbot.xyz`, { type: 'WATCHING'});
 					message.channel.send('***Rich Presence has been updated to:*** \n' + "`" + game + "`");
 					break;
 			}

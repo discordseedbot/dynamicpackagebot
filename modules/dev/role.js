@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
-const { RichEmbed } = require("discord.js");
-const prefix = SB_CoreLibrary.prefix().dev;
+const prefix = SB.prefrences.prefix.dev;
 
 module.exports.list = function(message) {
 	var msg;
@@ -21,7 +20,7 @@ module.exports.create = function(message,args) {
 }
 module.exports.give = function(message,args) {
 	try {
-		const guild = SB_Client.guilds.cache.get(message.guild.id);
+		const guild = SB.client.guilds.cache.get(message.guild.id);
 		let role = args.slice(1).join(' ');
 		let member = message.mentions.members.first();
 		member.roles.add(role);

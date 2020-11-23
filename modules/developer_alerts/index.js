@@ -11,55 +11,55 @@ function addMsgInfo(message) {
 
 // Developer Error
 module.exports.developerError = async function(message,error) {
-	if (!SB_Prefrences.developer_notif.enable) return;
+	if (!SB.prefrences.developer_notif.enable) return;
     if (message.author.bot) return;
     addMsgInfo(message)
     let tmp = content
         .setTitle("Developer Error")
         .setFooter(message.content)
         .setDescription(error)
-    SB_Client.channels.cache.get(channelJSON.developer.error).send(tmp);
+    SB.client.channels.cache.get(channelJSON.developer.error).send(tmp);
     delete(tmp);
 }
 // Userspace Error
 module.exports.userspaceError  = async function(message,error) {
-	if (!SB_Prefrences.developer_notif.enable) return;
+	if (!SB.prefrences.developer_notif.enable) return;
     if (message.author.bot) return;
     addMsgInfo(message)
     let tmp = content.setTitle("Developer Error")
         .setFooter(message.content)
         .setDescription(error)
-    SB_Client.channels.cache.get(channelJSON.userspace.error).send(tmp);
+    SB.client.channels.cache.get(channelJSON.userspace.error).send(tmp);
 }
 
 // Custom Developer Notifications
 module.exports.developerNotif = async function (content) {
-	if (!SB_Prefrences.developer_notif.enable) return;
-    SB_Client.channels.cache.get(channelJSON.developer.notifications).send(content)
+	if (!SB.prefrences.developer_notif.enable) return;
+    SB.client.channels.cache.get(channelJSON.developer.notifications).send(content)
 }
 
 // Custom Userspace Notifications
 module.exports.userspaceNotif = async function (content) {
-	if (!SB_Prefrences.developer_notif.enable) return;
-    SB_Client.channels.cache.get(channelJSON.userspace.notifications).send(content)
+	if (!SB.prefrences.developer_notif.enable) return;
+    SB.client.channels.cache.get(channelJSON.userspace.notifications).send(content)
 }
 
 // Developer Alert (e.g developer used command, bot joined server, bot kicked from server, etc...)
 module.exports.developerAlert = async function (message,error) {
-	if (!SB_Prefrences.developer_notif.enable) return;
+	if (!SB.prefrences.developer_notif.enable) return;
     if (message.author.bot) return;
     addMsgInfo(message)
     let tmp = content.setTitle("Developer Alert")
         .setFooter(message.content)
         .setDescription(error)
-    SB_Client.channels.cache.get(channelJSON.developer.notifications).send(tmp);
+    SB.client.channels.cache.get(channelJSON.developer.notifications).send(tmp);
 }
 
 // Developer Unauthorized Access (user that is not in the config attempted to load a command.)
 module.exports.developerUnauth = async function (message,error) {
-	if (!SB_Prefrences.developer_notif.enable) return;
+	if (!SB.prefrences.developer_notif.enable) return;
         // Tell the user they're a dumb cunt.
-    SB_Client.on('message', async message => {
+    SB.client.on('message', async message => {
         let invalidAuthor = new Discord.MessageEmbed()
             .setColor('#ff0000')
             .setTitle('You are not a developer')
@@ -74,5 +74,5 @@ module.exports.developerUnauth = async function (message,error) {
         .setTitle("Unauthorised User Accessed Developer Command")
         .setTimestamp()
         .setDescription("Invalid User tried to access a developer command (ID: "+message.author.id+", Username: <@"+message.author.id+"> or @"+message.author.username+"#"+message.author.discriminator+")")
-    SB_Client.channels.cache.get(channelJSON.developer.unauthAccess).send(dumbCunt);
+    SB.client.channels.cache.get(channelJSON.developer.unauthAccess).send(dumbCunt);
 }

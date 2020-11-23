@@ -1,14 +1,12 @@
 var inquirer = require("inquirer");
-const { Signale } = require("signale");
-const signale = require('signale')
 
 module.exports = function() {
 
-    if(process.argv.indexOf("--debug") > -1){
-        SB_Client.on('ready', () => {
-            termcon.warmingUp("Waiting a tad bit before launching the Developer Console.");
+    if(SB.parameters.debugMode){
+        SB.client.on('ready', () => {
+            SB.con.warmingUp("Waiting a tad bit before launching the Developer Console.");
             setTimeout(function() {
-                termcon.info("Welcome to SeedBot Terminal v" + require("./manifest.json").version)
+                SB.con.info("Welcome to SeedBot Terminal v" + require("./manifest.json").version)
                 termHandle();
             }, 2500)
         })
@@ -25,7 +23,7 @@ async function termHandle() {
     ]).then(ans => {
         return commandHandler(ans.termInput.split(" "));
     }).catch(error => {
-        signale.error(new Error(error));
+        SB.modules.node.signale.error(e);
         process.exit();
     })
 }
@@ -54,11 +52,11 @@ function commandHandler(cmd) {
                 break;
             case "exit":
             case "quit":
-                termcon.seeya()
+                SB.con.seeya()
                 process.exit();
                 break;
             case "uptime":
-                termcon.returnValue(`${SB_CoreLibrary.toHHMMSS(SB_Client.uptime / 1000)} since login.`)
+                SB.con.returnValue(`${SB.core.toHHMMSS(SB.client.uptime / 1000)} since login.`)
                 break;
             default:
                 console.error(new Error());
@@ -67,7 +65,7 @@ function commandHandler(cmd) {
         }
     } else {
         //command is invalid
-        termcon.invalidCommand()
+        SB.con.invalidCommand()
     }
     setTimeout(function () {
         termHandle()

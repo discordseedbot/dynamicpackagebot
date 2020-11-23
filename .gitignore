@@ -110,3 +110,4 @@ token.json
 *.original
 package-lock.json
 *-e
+log/

@@ -5,22 +5,11 @@ module.exports.misc_randHex = function() {
 	return Math.floor(Math.random()*16777215).toString(16);
 }
 
-module.exports.consoleInit = function() {
-	let tmp = require("./signale_util.js");
-	tmp();
-	delete(tmp);
-}
-
-module.exports.prefrences = function() {
-	return require("./../../prefrences.json")
-}
-module.exports.prefix = function() {
-	return require("./../../prefrences.json").prefix;
-}
+module.exports.onLaunch = require("./onLaunch.js");
 
 module.exports.channelCount = function() {
 	let retval={"channels":0,"guilds":0,"members":0};
-	SB_Client.guilds.cache.forEach(m => {
+	SB.client.guilds.cache.forEach(m => {
 	  //retval.members+=m.memberCount
 	  //retval.guilds+=1
 	  retval.channels+=m.channels.cache.size
@@ -29,7 +18,7 @@ module.exports.channelCount = function() {
 }
 module.exports.guildCount = function() {
 	let retval={"channels":0,"guilds":0,"members":0};
-	SB_Client.guilds.cache.forEach(m => {
+	SB.client.guilds.cache.forEach(m => {
 	  //retval.members+=m.memberCount
 	  retval.guilds+=1
 	  //retval.channels+=m.channels.cache.size
@@ -38,7 +27,7 @@ module.exports.guildCount = function() {
 }
 module.exports.userCount = function() {
   let retval={"channels":0,"guilds":0,"members":0};
-  SB_Client.guilds.cache.forEach(m => {
+  SB.client.guilds.cache.forEach(m => {
     retval.members+=m.memberCount
     //retval.guilds+=1
     //retval.channels+=m.channels.cache.size
