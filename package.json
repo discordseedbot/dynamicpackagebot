@@ -45,9 +45,9 @@
 		"opusscript": "0.0.7",
 		"parse-json": "^5.1.0",
 		"path": "^0.12.7",
-		"seedbot_addonmusic": "^13.9.11",
+		"sbpkg_music": "^13.9.19",
 		"signale": "^1.4.0",
-		"ytdl-core": "^3.2.0",
+		"ytdl-core": "^4.0.6",
 		"ytpl": "^0.2.3",
 		"ytsearcher": "^1.2.2"
 	}

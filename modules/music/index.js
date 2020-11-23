@@ -1,5 +1,5 @@
 module.exports = async function() {
-	const music = require('seedbot_addonmusic');
+	const music = require('sbpkg_music');
 	var errorCH;
 	if (SB.prefrences.developer_notif.enable) {
 		errorCH = SB.prefrences.developer_notif.userspaceError.error
