@@ -1,20 +1,19 @@
 {
 	"name": "seedbot-stable",
 	"license": "GPL-3.0-or-later",
-	"version": "1.5.3",
+	"version": "1.5.4",
 	"branch": "stable",
 	"description": "An Open Source General Purpose Discord Bot written in Node.JS",
 	"build": {
-		"number": 1116,
-		"date": "2020_8_29",
-		"timestamp": 1601389104
+		"number": 1148,
+		"date": "2020_10_26",
+		"timestamp": 1606387018
 	},
 	"main": "index.js",
 	"scripts": {
-		"seedbot": "node .",
-		"start": "node .",
-		"debug": "node . --debug",
-		"build": "node . --buildMode"
+		"start": "node index.js",
+		"debug": "node index.js --debug",
+		"build": "node index.js --buildMode"
 	},
 	"repository": {
 		"type": "git",
@@ -38,7 +37,7 @@
 		"230485481773596672"
 	],
 	"dependencies": {
-		"discord.js": "^12.2.0",
+		"discord.js": "^12.5.1",
 		"fs": "0.0.1-security",
 		"http": "0.0.1-security",
 		"inquirer": "^7.2.0",
