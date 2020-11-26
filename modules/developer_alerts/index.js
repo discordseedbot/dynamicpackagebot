@@ -11,7 +11,7 @@ function addMsgInfo(message) {
 
 // Developer Error
 module.exports.developerError = async function(message,error) {
-	if (!SB.prefrences.developer_notif.enable) return;
+	if (!SB.prefrences.core.developerAlerts.enable) return;
     if (message.author.bot) return;
     addMsgInfo(message)
     let tmp = content
@@ -23,7 +23,7 @@ module.exports.developerError = async function(message,error) {
 }
 // Userspace Error
 module.exports.userspaceError  = async function(message,error) {
-	if (!SB.prefrences.developer_notif.enable) return;
+	if (!SB.prefrences.core.developerAlerts.enable) return;
     if (message.author.bot) return;
     addMsgInfo(message)
     let tmp = content.setTitle("Developer Error")
@@ -34,19 +34,19 @@ module.exports.userspaceError  = async function(message,error) {
 
 // Custom Developer Notifications
 module.exports.developerNotif = async function (content) {
-	if (!SB.prefrences.developer_notif.enable) return;
+	if (!SB.prefrences.core.developerAlerts.enable) return;
     SB.client.channels.cache.get(channelJSON.developer.notifications).send(content)
 }
 
 // Custom Userspace Notifications
 module.exports.userspaceNotif = async function (content) {
-	if (!SB.prefrences.developer_notif.enable) return;
+	if (!SB.prefrences.core.developerAlerts.enable) return;
     SB.client.channels.cache.get(channelJSON.userspace.notifications).send(content)
 }
 
 // Developer Alert (e.g developer used command, bot joined server, bot kicked from server, etc...)
 module.exports.developerAlert = async function (message,error) {
-	if (!SB.prefrences.developer_notif.enable) return;
+	if (!SB.prefrences.core.developerAlerts.enable) return;
     if (message.author.bot) return;
     addMsgInfo(message)
     let tmp = content.setTitle("Developer Alert")
@@ -57,7 +57,7 @@ module.exports.developerAlert = async function (message,error) {
 
 // Developer Unauthorized Access (user that is not in the config attempted to load a command.)
 module.exports.developerUnauth = async function (message,error) {
-	if (!SB.prefrences.developer_notif.enable) return;
+	if (!SB.prefrences.core.developerAlerts.enable) return;
         // Tell the user they're a dumb cunt.
     SB.client.on('message', async message => {
         let invalidAuthor = new Discord.MessageEmbed()

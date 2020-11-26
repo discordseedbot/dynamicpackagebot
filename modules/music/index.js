@@ -1,8 +1,8 @@
 module.exports = async function() {
 	const music = require('sbpkg_music');
 	var errorCH;
-	if (SB.prefrences.developer_notif.enable) {
-		errorCH = SB.prefrences.developer_notif.userspaceError.error
+	if (SB.prefrences.core.developerAlerts.enable) {
+		errorCH = SB.prefrences.core.developerAlerts.userspaceError.error
 	}  else {
 		errorCH = undefined;
 	}
