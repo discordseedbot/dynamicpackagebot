@@ -1,5 +1,5 @@
 module.exports = function(pfx) {
-    let prefJSON = require("./../../prefrences.json");
+    let prefJSON = require("./../../prefrences.js");
     let pfxData;
     prefJSON.forEach(async (m) => {
         if (m.name === "prefix") {
