@@ -59,7 +59,7 @@ module.exports = function() {
 	const API = require("./function.js");
 
 	if (!SB.prefrences.api.enable) {
-		SB.con.module.notLoad("API Module was disabled from `prefrences.json`");
+		SB.con.module.notLoad("API Module was disabled from `prefrences.js`");
 	} else {
 		//		Determine the protocol that is going to be used
 		switch (SB.prefrences.api.network.protocol.type) {

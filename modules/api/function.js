@@ -30,7 +30,7 @@ switch (SB.prefrences.api.network.port) {
 		} else {
 			if (SB.parameters.debugMode) {apicon.debug("Port is set to [AutoDetect]")}
 			base = `${SB.prefrences.api.network.protocol.type}://${SB.prefrences.api.network.address}/`;
-			SB.con.api.err("Invalid Port given for API in `prefrences.json`, Must only contain numbers.");
+			SB.con.api.err("Invalid Port given for API in `prefrences.js`, Must only contain numbers.");
 		}
 		break;
 }
