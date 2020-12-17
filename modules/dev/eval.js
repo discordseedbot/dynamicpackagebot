@@ -8,7 +8,7 @@ function escapeRegExp(str) {
 function evaluate(input) {
 	let result = eval(input);
 	if (result)
-		result = result.toString().replace(new RegExp(escapeRegExp(SB.token.discord, 'g'), '<token removed>');
+		result = result.toString().replace(new RegExp(escapeRegExp(SB.token.discord, 'g'), '<token removed>'));
 	return result;
 }
 
