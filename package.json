@@ -1,7 +1,7 @@
 {
 	"name": "seedbot-stable",
 	"license": "GPL-3.0-or-later",
-	"version": "1.5.4",
+	"version": "1.5.5",
 	"branch": "stable",
 	"description": "An Open Source General Purpose Discord Bot written in Node.JS",
 	"build": {

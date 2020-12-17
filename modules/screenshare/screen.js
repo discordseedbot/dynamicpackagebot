@@ -5,7 +5,7 @@ module.exports.cmd = function(message) {
 	if (message.member.voice.channel === undefined) { message.reply("Plesae Join a Voice Channel.") } else {;
 		var currentGuildID = message.guild.id;
 		var.voice.channelID = message.member.voice.channel.id;
-		var screensharelink = "https://discordapp.com/channels/"+currentGuildID+"/".voice.channelID;
+		var screensharelink = "https://discordapp.com/channels/"+currentGuildID+"/"+voice.channelID;
 		var response = new Discord.MessageEmbed()
 			.setColor(SB.core.randomhexcolor())
 			.setTitle("Voice Chat Screen Share")

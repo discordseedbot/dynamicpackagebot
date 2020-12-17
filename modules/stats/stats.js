@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
-const prefix = SB.core.prefix().default;
+const prefix = SB.prefrences.prefix.default
 const package = SB.package;
 
 module.exports.cmd = function(message, args){
 	var request = args.slice(0).join(" ");
 	switch (request) {
 		case 'userCount':
-			var response = SB.core.userCount();
+			var response = SB.core.stats.memberCount;
 			var userCountResponse = new Discord.MessageEmbed()
 				.setColor(SB.core.misc_randHex())
 				.setTitle("SeedBot User Count")
@@ -14,7 +14,7 @@ module.exports.cmd = function(message, args){
 			message.channel.send(userCountResponse);
 			break;
 		case 'guildCount':
-			var response = SB.core.guildCount();
+			var response = SB.core.stats.guildCount;
 			var gulidCountResponse = new Discord.MessageEmbed()
 				.setColor(SB.core.misc_randHex())
 				.setTitle("SeedBot Guild Count")
@@ -22,7 +22,7 @@ module.exports.cmd = function(message, args){
 			message.channel.send(gulidCountResponse);
 			break;
 		case 'channelCount':
-			var response = SB.core.channelCount();
+			var response = SB.core.stats.channelCount;
 			var channelCountResponse = new Discord.MessageEmbed()
 				.setColor(SB.core.misc_randHex())
 				.setTitle("SeedBot Channel Count")
