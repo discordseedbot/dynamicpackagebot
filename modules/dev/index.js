@@ -96,11 +96,7 @@ module.exports = function() {
 					}
 				})
 			} catch (err) {
-				SB.modules.libraries.forEach(async (m) => {
-					if (m.name === "developer_alerts") {
-						let tmpRequire = require(`./../../${m.location}/${m.main}`).developerError(message,err);
-					}
-				})
+				SB.core.notification.developerError(message,err)
 				console.log("\n\n")
 				console.error(err)
 			}
