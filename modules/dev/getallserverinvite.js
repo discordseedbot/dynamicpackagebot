@@ -6,12 +6,12 @@ const package = require('./../../package.json');
 module.exports.cmd = function(message) {
 	message.channel.send("This might take a bit, sorry!")
 	var invites = ["I am required else it won't work"], ct = 0;
-	SB.client.guilds.forEach(g => {
+	SB.client.guilds.cache.array().forEach(g => {
 		g.fetchInvites().then(guildInvites => {
 			invites[invites.length + 1] = (g + " - `Invites: " + guildInvites.array().join(", ") + "`");
 			ct++;
 
-			if(ct >= SB.client.guilds.size) {
+			if(ct >= SB.client.guilds.cache.size) {
 				for(let i = 0; i < invites.length; i++) {
 					if(invites[i] == undefined) invites.splice(i, 1);
 				}
@@ -28,8 +28,8 @@ module.exports.cmd = function(message) {
 					message.channel.send(embed);
 				} else {
 					if (msgcount <= 2) {
-						message.channel.send(invites.substr(0,2047));
-						message.channel.send(invites.substr(2048,invitelength))
+						message.channel.send(invites.substr(0,2000));
+						message.channel.send(invites.substr(2001,invitelength))
 					} else {
 						var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 						var retVal = "";
@@ -40,11 +40,7 @@ module.exports.cmd = function(message) {
 
 						fs.writeFile(filename, invites, function (err) {
 							if (err) {
-								SB.modules.libraries.forEach(async (m) => {
-									if (m.name === "developer_alerts") {
-										let tmpRequire = require(`./../../${m.location}/${m.main}`).developerError(message,err);
-									}
-								})
+								SB.core.notification.developerError(message,err)
 							}
 							const attachment = new MessageAttachment('./' + filename);
 							message.channel.send("Server List cannot fit in less than two messages, but here is an attachment!", attachment)
@@ -54,6 +50,6 @@ module.exports.cmd = function(message) {
 				}
 
 			}
-		}).catch(err => { ct++; });
+		})
 	});
 }

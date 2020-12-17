@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const prefix = SB.core.prefix.dev;
+const prefix = SB.prefrences.prefix.dev;
 
 module.exports.cmd = function(message,args) {
 	var game = args.slice(0).join(" ");

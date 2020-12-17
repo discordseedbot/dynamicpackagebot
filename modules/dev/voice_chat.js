@@ -22,9 +22,7 @@ module.exports.hear = function(message,args,command) {
 		//To make our life easier for the future.
 	let userID = usrMention.id;
 
-	if (status==="true"){status=true;}
-	if (status==="false"){status=false;}
-	if (status!==true||status!==false){
+	if (status != 'true' && status != 'false'){
 		message.channel.send(toolbox.reply("boolNotSet",userID));
 	}
 
@@ -35,7 +33,7 @@ module.exports.hear = function(message,args,command) {
 		switch (command) {
 			case "defan":
 					// Defan User
-				message.guild.member(userid).setDeaf(status);
+				message.guild.members.cache.get(userID).voice.setDeaf(status);
 				if (status) {
 					message.channel.send(toolbox.reply("defanTrue",message.member.id));
 				} else {
@@ -44,7 +42,7 @@ module.exports.hear = function(message,args,command) {
 				break;
 			case "mute":
 				// Mute user
-					message.guild.member(userid).setMute(status);
+					message.guild.members.cache.get(userID).voice.setMute(status);
 				if (status) {
 					message.channel.send(toolbox.reply("muteTrue",message.member.id));
 				} else {
@@ -53,7 +51,6 @@ module.exports.hear = function(message,args,command) {
 				break;
 			default:
 				message.channel.send(toolbox.reply("invalidSetting",userID));
-				return false;
 				break;
 		}
 	}

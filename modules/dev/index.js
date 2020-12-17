@@ -61,10 +61,10 @@ module.exports = function() {
 						require("./pin.js").cmd(message,args);
 						break;
 					case 'mute':
-						require('./hear.js').mute(message,args);
+						require('./voice_chat.js').hear(message,args,command);
 						break;
 					case 'defan':
-						require('./hear.js').defan(message);
+						require('./voice_chat.js').hear(message,args,command);
 						break;
 					//case 'disconnect':
 					//	require('./voice_chat.js').disconnect(message,SB_Client,args,command);
