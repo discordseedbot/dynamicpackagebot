@@ -2,6 +2,7 @@
 ## Quick Links
 - [SB](#global-sb-variable)
 - [SB.modules.example](#module-json-example)
+- [store.json Schema](#store-json-schema)
 - [Tree Creation Refrence Table](#tree-refrence-charaters)
 - [Loader Breakdown](#loader-breakdown)
 
@@ -10,11 +11,13 @@
 SB [global JSON]
 ├ parameters 		[json]
 │	├ buildMode		[bolean]
+│	├ safeMode		[bolean]
+│	├ inspect		[bolean]	if 'inspect' was found in 'process.argv'
 │	└ DebugMode		[bolean]
 │
 │
 ├ prefrences [json]
-│	└ contents of "[root]/prefrences.json"
+│	└ contents of "[root]/prefrences.(js|json)"
 │
 ├ libraries			[json=>arr]		aliased from SB.modules.libraries
 │
@@ -39,8 +42,11 @@ SB [global JSON]
 │		├ channelCount	[int]
 │		├ guildCount	[int]
 │		├ userCount		[int]
+│		├ users			[arr]	each object of users, channels and guilds is the respsective
+│		├ channels		[arr]		object of each thing, just use the eval command to teach
+│		├ guilds		[arr]		yourself. or just look in modules/_core/statsTimer.js
 │		├ update		[json/f]
-│			└ force		[f]
+│		│	└ force		[f]
 │		├ startup		[f]
 │		└ timerLoop		[f]
 │
@@ -49,6 +55,9 @@ SB [global JSON]
 │
 ├ package [json]
 │	└ contents of "[root]/package.json"
+│
+├ dist [json]
+│	└ contents of "[root]/seedbot.config.json"
 │
 ├ store		[json]		Used for storing temporary things.
 │
@@ -81,6 +90,54 @@ SB [global JSON]
 	├ discord	[string]
 	├ youtube	[string]
 	└ api		[string]
+```
+
+### SeedBot Config Schema
+Location: ./seedbot.config.json
+```
+seedbot.config.json
+│
+├ name				[string]
+│
+├ version			[string]
+│
+├ build				[json]
+│	├ number		[int]
+│	├ date			[string]
+│	└ timestamp		[int]
+│
+├ repository 		[json]	exact same as the repository schema in package.json
+│	├ type			[string]
+│	└ url			[string]
+│
+├ bugs
+│	└ url			[string]
+│
+├ contributers		[json->array]
+│	└ 				[string] example: "Name [email] (website)"
+│
+└ base
+	├ version		[string]
+	├ repository 		[json]	exact same as the repository schema in package.json
+	│	├ type			[string]
+	│	└ url			[string]
+	├ build			[json]
+	│	├ number	[int]
+	│	├ date		[string]
+	│	└ timestamp	[int]
+	└ dependencies	[json]	exact same schema as the node.js package.json dependencies
+```
+
+### Store JSON Schema
+Location: ./store.json
+```
+store.json
+└ [array]
+	└ [arrayObject]
+		├ label		-> Name of the module in manifest.json
+		├ createdAt	-> UNIX Timestamp (seconds) of when that object was created
+		├ modifiedAt-> UNIX Timestamp (seconds) of when that object was last modifiyed
+		└ data		-> Supported JSON Object Types can be set here.
 ```
 
 ### Module JSON Example

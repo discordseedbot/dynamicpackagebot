@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const { constants } = require("fs");
 
 function msgGen(embed,content,title,message) {
 	var tEmbed = embed
@@ -60,7 +59,7 @@ function genNotif(content,type) {
 }
 
 module.exports = (content,type,message)=>{
-	if (error == undefined) return;
+	if (content == undefined) return;
 	var genParam = {
 		message: false,
 		type: false,

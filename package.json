@@ -5,15 +5,16 @@
 	"branch": "stable",
 	"description": "An Open Source General Purpose Discord Bot written in Node.JS",
 	"build": {
-		"number": 1148,
-		"date": "2020_10_26",
-		"timestamp": 1606387018
+		"number": 1154,
+		"date": "2020_11_17",
+		"timestamp": 1608188734
 	},
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
 		"debug": "node index.js --debug",
-		"build": "node index.js --buildMode"
+		"build": "node index.js --buildMode",
+		"inspect": "node inspect index.js --inspect"
 	},
 	"repository": {
 		"type": "git",

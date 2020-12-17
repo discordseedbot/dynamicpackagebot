@@ -8,6 +8,9 @@ module.exports = {
 		youtube: "s!yt"
 	},
 	core: {
+		admins: [
+			'230485481773596672', '@seed#0001'
+		],
 		stats: {
 			timer: 600,
 			loginRetryTimer: 1
@@ -44,6 +47,10 @@ module.exports = {
 			name: "SeedBot",
 			website: "https://seedbot.xyz",
 			contact: "contact@dariox.club"
+		},
+		storage: {
+			location: `${__dirname}/store.json`,
+			cacheTimerInterval: 2000,
 		}
 	},
     "api": {

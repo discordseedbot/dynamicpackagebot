@@ -50,18 +50,44 @@ global.SB = {
 };
 //			Check if SeedBot was launched in DebugMode or buildMode,
 //				if it was then we set the debugMode parameter.
-if(process.argv.indexOf("--debug") > -1){
-	global.SB.parameters.debugMode 	= true;
-	global.SB.parameters.safeMode 	= true;
+function paramChange(bMB,dMB,sMB) {
+	switch (bMB) {
+		case 0: case 1:
+			SB.parameters.buildMode = Boolean(bMB);
+			break;
+		default: break;
+	}
+	switch (dMB) {
+		case 0: case 1:
+			SB.parameters.debugMode = Boolean(dMB);
+			break;
+		default: break;
+	}
+	switch (sMB) {
+		case 0: case 1:
+			SB.parameters.safeMode = Boolean(sMB);
+			break;
+		default: break;
+	}
 }
-if(process.argv.indexOf("--buildMode") > -1){
-	global.SB.parameters.debugMode 	= true;
-	global.SB.parameters.buildMode 	= true;
-	global.SB.parameters.safeMode 	= true;
+function populateParameters() {
+	if(process.argv.indexOf("--debug") > -1){
+		paramChange(null,1,1)
+	}
+	if(process.argv.indexOf("--inspect") > -1) {
+		paramChange(null,1,1)
+		SB.parameters.inspect = true;
+	}
+	if(process.argv.indexOf("--buildMode") > -1){
+		paramChange(1,1,1)
+	}
+	if(process.argv.indexOf("--safe") > -1){
+		paramChange(null,null,1);
+	}
 }
-if(process.argv.indexOf("--safe") > -1){
-	global.SB.parameters.safeMode 	= true;
-}
+populateParameters();
+
+// Custom logging output if SB.parameters.safeMode is false.
 if (!SB.parameters.safeMode) {
 	if (!fs.existsSync("logs")){ fs.mkdirSync("logs"); }
 	var botStartTime = Math.floor(+new Date() / 1000);
@@ -109,7 +135,9 @@ if (!SB.parameters.safeMode) {
 		}
 	}
 }
-//			If buildTools was not found then we will disable it.
+// If the buildTools javascript file is found and SB.parameters.buildMode
+//		is set to true we'll increment the build numbers and
+//		change the timestamp/date.
 if (!fs.existsSync("./.buildTools.js") && SB.parameters.buildMode) {
 	global.SB.parameters.buildMode 	= false;
 	throw new Error("BuildTools could not be found. Disabling.");
@@ -124,7 +152,7 @@ if (!fs.existsSync("./.buildTools.js") && SB.parameters.buildMode) {
 	}
 }
 
-//			Declare Global Static Varaibles and other (sorta) pre-launch stuff.
+// Sorta pre-login setup, defining stuff that is required for modules to work.
 try {
 	require('events').EventEmitter.defaultMaxListeners = 255;
 	if (SB.parameters.buildMode) {
@@ -132,6 +160,7 @@ try {
 	}
 	SB.package = require("./package.json");
 	SB.prefrences = require("./prefrences");
+	SB.dist = require("./seedbot.config.json") || {};
 	SB.modules.node.signale = require("signale");
 } catch (e) {
 	require("signale").error("An error Occoured when declaring [GlobalVariables]");
@@ -139,7 +168,7 @@ try {
 	process.exit(11);
 }
 
-//			Clear console if debugMode is not set.
+// Clear console if safeMode is false
 if (!SB.parameters.safeMode) {
 	console.clear();
 }
@@ -149,7 +178,7 @@ function getDirectories(path) {
   });
 }
 
-//			Check each of the directories in "modules/" if they have a "manifest.json" file.
+// Check if each module folder has a manifest.
 var moduleArray = getDirectories("modules/");
 var viableModules = [];
 moduleArray.forEach(async (m) => {
@@ -161,13 +190,13 @@ moduleArray.forEach(async (m) => {
 	}
 })
 
-//			If there are no valid modules quit process.
+// Quit of no valid modules were found.
 if (viableModules.length < 1) {
 	signale.log("[modman] No valid modules found.");
 	process.exit(1);
 }
 
-//			Check if manifest for the module is valid
+// Check manifest of all detected modules that have a manifest.
 viableModules.forEach(async (m) => {
 	try {
 		var json = require(`./${m}/manifest.json`).name;
@@ -193,6 +222,8 @@ var botModulesToLoad = [];
 var genericModulesToLoad = [];
 var libraries = [];
 var temparr = [];
+SB.modules.node.discord = require("discord.js");
+global.SB.client = new SB.modules.node.discord.Client();
 
 //			Run this function for every module found in the varaible viableModules
 viableModules.forEach(async (m) => {
@@ -257,26 +288,18 @@ if (!coreFound) {
 }
 
 //			Discord.JS Login with Error Catching.
-SB.modules.node.discord = require("discord.js");
-global.SB.client = new SB.modules.node.discord.Client();
-
 setTimeout(()=>{
 	SB.client.login(SB.token.discord).catch((e)=>{
-		console.log(e);
 		switch(e.code) {
 			case "SELF_SIGNED_CERT_IN_CHAIN":
 				SB.modules.node.signale.error("Self-Signed certificate found in chain.");
-				process.exit(1);
 				break;
 			case "TOKEN_INVALID":
 				SB.modules.node.signale.error("Discord Token is Invalid.")
-				process.exit(1);
-				break;
-			default:
-				console.log(e);
-				process.exit(1);
 				break;
 		}
+		console.log(e);
+		process.exit(1);
 	});
 
 	//			From this point all errors should be from the modules.
